@@ -87,6 +87,57 @@ body{ background: radial-gradient(circle at 10% 0%,rgba(168,255,0,.05),transpare
 .btn-blue { background: rgba(85, 184, 255, 0.1) !important; color: var(--blue) !important; }
 .btn-small { padding: 5px 7px; font-size: 9.5px; border-radius: 7px; }
 
+/* ULTRA LUXURY ANIMATED GLOW BUTTONS FOR SETTINGS */
+.lux-action-btn {
+  position: relative;
+  background: linear-gradient(135deg, rgba(13, 23, 25, 0.9), rgba(8, 16, 18, 0.95)) !important;
+  color: var(--text);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-weight: 800;
+  font-size: 11.5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+  width: 100%;
+}
+.lux-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(168, 255, 0, 0.15);
+}
+.lux-action-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, transparent, rgba(168, 255, 0, 0.15), transparent);
+  transform: rotate(30deg) translateX(-100%);
+  transition: transform 0.7s ease-in-out;
+}
+.lux-action-btn:hover::after {
+  transform: rotate(30deg) translateX(100%);
+}
+.lux-btn-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--lime);
+  font-size: 13px;
+  font-weight: 900;
+}
+.lux-btn-sub {
+  color: var(--muted);
+  font-size: 9.5px;
+  font-weight: normal;
+}
+
 /* STATS */ 
 .stats{ display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; margin-bottom:14px; width: 100%; } 
 .stat{ background:linear-gradient(145deg,#0b1517,#071012); border-radius:12px; padding:12px; position:relative; overflow:hidden; } 
@@ -107,7 +158,7 @@ body{ background: radial-gradient(circle at 10% 0%,rgba(168,255,0,.05),transpare
 .table-wrap{ overflow-x:auto; width:100%; -webkit-overflow-scrolling: touch; } 
 table{ width:100%; border-collapse:collapse; min-width:100%; } 
 th{ color:var(--muted); font-size:9px; text-transform:uppercase; letter-spacing:.4px; text-align:left; padding:8px 8px; } 
-td{ padding:9px 8px; font-size:11px; vertical-align:middle; } 
+td{ padding:9px 8px; font-size:11.5px; vertical-align:middle; } 
 tr:hover td{ background:rgba(168,255,0,.015); } 
 
 .client-detail-table { min-width: 100% !important; font-size: 10px !important; }
@@ -175,7 +226,7 @@ select {
 
 .modal{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); backdrop-filter:blur(6px); z-index:3000; align-items:center; justify-content:center; padding:8px; } 
 .modal.show{ display:flex; } 
-.modal-box{ width:100%; max-width:380px; max-height:92vh; overflow-y:auto; background:#091214; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.6); } 
+.modal-box{ width:100%; max-width:400px; max-height:92vh; overflow-y:auto; background:#091214; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.6); } 
 .modal-head{ padding:10px 12px; display:flex; justify-content:space-between; align-items:center; } 
 .modal-head h3{ font-size:12px; } 
 .close{ background:#111c1e; color:var(--muted); width:22px; height:22px; border-radius:6px; cursor:pointer; font-size:13px; display:flex; align-items:center; justify-content:center; } 
@@ -186,150 +237,137 @@ select {
 .toast.show{ transform:translateY(0); opacity:1; } 
 .empty{ padding:25px 10px; text-align:center; color:var(--muted); font-size:11px; } 
 
-/* SOFIANE SHOP INVOICE - GLASSMORPHIC 100% BORDER NONE */
+/* SOFIANE SHOP EXACT MATCH INVOICE STYLING (WITHOUT BORDER) */
 .sofiane-invoice { 
-  background: linear-gradient(135deg, rgba(248, 251, 255, 0.95), rgba(237, 244, 255, 0.9)); 
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  color: #0b1c3d; 
-  padding: 12px; 
-  border-radius: 14px; 
+  background: #ffffff; 
+  color: #1e3a8a; 
+  padding: 14px; 
+  border-radius: 12px; 
   font-family: Arial, sans-serif; 
   box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15); 
   width: 100%;
-  max-width: 360px;
+  max-width: 380px;
   box-sizing: border-box;
   margin: 0 auto;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+  border: none !important;
 }
-.sofiane-header { 
-  display: flex; 
-  position: relative;
-  align-items: center; 
-  justify-content: center;
-  text-align: center;
-  padding-bottom: 8px; 
-  gap: 6px; 
-}
-.sofiane-logo-area { display: flex; flex-direction: column; align-items: center; gap: 4px; justify-content: center; }
-
-/* BRAND LOGO TOP LEFT: INCREASED SIZE (LARGER & CLEARER) & CIRCULAR GLASS EFFECT */
-.sofiane-brand-logo-container {
-  position: absolute;
-  top: -2px;
-  left: 0;
-  width: 58px;
-  height: 58px;
-  border-radius: 100% !important;
-  padding: 3px;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+.sofiane-top-section {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2px;
 }
+.sofiane-logo-area { display: flex; align-items: center; gap: 8px; }
 .sofiane-brand-logo-img {
-  width: 100%;
-  height: 100%;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
-  border-radius: 100% !important;
-  background: transparent;
+  border-radius: 10px;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+}
+.sofiane-brand-main { font-size: 15px; font-weight: 900; color: #1e40af; line-height: 1.1; }
+.sofiane-brand-main span { color: #f59e0b; }
+.sofiane-brand-sub { font-size: 7.5px; color: #64748b; font-style: italic; font-weight: bold; }
+
+.sofiane-contacts-stack { display: flex; flex-direction: column; gap: 3px; align-items: flex-end; }
+.sofiane-contact-pill { background: #2563eb; color: #fff; font-size: 7.5px; padding: 3px 8px; border-radius: 12px; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 2px 4px rgba(37,99,235,0.2); }
+
+.sofiane-title-bar { background: #2563eb; color: #fff; text-align: center; padding: 6px; font-size: 11.5px; font-weight: 900; border-radius: 6px; letter-spacing: 0.5px; margin: 4px 0; }
+
+.sofiane-meta-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 4px;
+  margin-bottom: 4px;
+}
+.sofiane-meta-table td {
+  background: #f8fafc;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 8.5px;
+  border: none !important;
+  color: #334155;
+  vertical-align: middle;
+}
+.sofiane-meta-table td.label-cell {
+  font-weight: bold;
+  color: #1e40af;
+  width: 22%;
+}
+.sofiane-meta-table td.val-cell {
+  font-weight: 600;
+  color: #0f172a;
+  width: 28%;
 }
 
-.sofiane-brand-main { font-size: 14px; font-weight: 900; color: #1e40af; line-height: 1.1; letter-spacing: 0.3px; }
-.sofiane-brand-main span { color: #f59e0b; }
-.sofiane-brand-sub { font-size: 7.5px; color: #1e40af; font-style: italic; font-weight: bold; }
-.sofiane-contacts-stack { display: flex; flex-direction: column; gap: 3px; width: 100%; align-items: center; margin-top: 4px; }
-.sofiane-contact-pill { background: linear-gradient(135deg, rgba(30, 64, 175, 0.9), rgba(37, 99, 235, 0.9)); color: #fff; font-size: 7.5px; padding: 3px 8px; border-radius: 15px; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 2px 5px rgba(37,99,235,0.15); width: fit-content; }
-.sofiane-title-bar { background: linear-gradient(90deg, #2563eb, #1d4ed8); color: #fff; text-align: center; padding: 5px; font-size: 11px; font-weight: 900; border-radius: 6px; letter-spacing: 0.5px; box-shadow: 0 3px 8px rgba(37, 99, 235, 0.2); }
-.sofiane-meta-grid { display: flex; flex-direction: column; gap: 5px; font-size: 8.5px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); padding: 8px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-.sofiane-meta-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-.sofiane-meta-row strong { color: #1e40af; }
-.sofiane-meta-row span:last-child { background: #f8fafc; padding: 1.5px 5px; border-radius: 4px; font-weight: 600; }
-
-.sofiane-table { width: 100% !important; border-collapse: collapse; background: rgba(255, 255, 255, 0.8); border-radius: 6px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-.sofiane-table th { background: #2563eb; color: #fff; font-size: 8px; padding: 6px 3px; text-align: center; text-transform: uppercase; }
-.sofiane-table td { padding: 6px 4px; font-size: 8.5px; text-align: center; color: #0f172a; word-break: break-word; }
-.sofiane-table th:nth-child(1), .sofiane-table td:nth-child(1) { width: 46%; text-align: left; padding-left: 6px; }
-.sofiane-table th:nth-child(2), .sofiane-table td:nth-child(2) { width: 12%; }
+.sofiane-table { width: 100% !important; border-collapse: collapse; background: #f8fafc; border-radius: 6px; overflow: hidden; border: none !important; margin-top: 2px; }
+.sofiane-table th { background: #2563eb; color: #fff; font-size: 8px; padding: 6px 4px; text-align: center; text-transform: uppercase; }
+.sofiane-table td { padding: 6px 4px; font-size: 8.5px; text-align: center; color: #0f172a; word-break: break-word; border: none !important; }
+.sofiane-table th:nth-child(1), .sofiane-table td:nth-child(1) { width: 44%; text-align: left; padding-left: 6px; }
+.sofiane-table th:nth-child(2), .sofiane-table td:nth-child(2) { width: 14%; }
 .sofiane-table th:nth-child(3), .sofiane-table td:nth-child(3) { width: 21%; }
 .sofiane-table th:nth-child(4), .sofiane-table td:nth-child(4) { width: 21%; }
 
 .invoice-app-cell { display: flex; align-items: center; gap: 5px; text-align: left; }
-.invoice-app-logo { width: 18px; height: 18px; object-fit: contain; border-radius: 4px; background: #fff; padding: 1px; flex-shrink: 0; }
+.invoice-app-logo { width: 16px; height: 16px; object-fit: contain; border-radius: 3px; background: #fff; padding: 1px; flex-shrink: 0; }
 
-.sofiane-bottom-cards-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  width: 100%;
-}
-.sofiane-box-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(6px); border-radius: 7px; padding: 7px; font-size: 8.5px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-.sofiane-box-title { font-weight: bold; color: #1e40af; margin-bottom: 4px; padding-bottom: 2px; }
-
-/* GARANTI 100% LUXURY BADGE (BOTTOM RIGHT) */
-.sofiane-warranty-box {
-  background: linear-gradient(135deg, #1e40af, #2563eb);
-  border-radius: 8px;
-  padding: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
-  position: relative;
-  overflow: hidden;
-}
-.sofiane-warranty-box::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(0deg, transparent, rgba(255,255,255,0.1), transparent);
-  transform: rotate(30deg);
-}
-.sofiane-warranty-shield {
-  font-size: 16px;
-  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
-}
-.sofiane-warranty-texts {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-  text-align: left;
-}
-.sofiane-warranty-title {
-  color: #fef08a;
+.sofiane-payment-box {
+  background: #f8fafc;
+  border: none !important;
+  border-radius: 6px;
+  padding: 6px 8px;
   font-size: 8.5px;
+  margin-top: 2px;
+}
+.sofiane-payment-title {
+  color: #1e40af;
+  font-weight: bold;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.sofiane-payment-val {
+  color: #334155;
+  font-weight: 600;
+}
+
+.sofiane-summary-box {
+  background: #f8fafc;
+  border: none !important;
+  border-radius: 6px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 8.5px;
+}
+.sofiane-sum-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #334155;
+  font-weight: 600;
+}
+.sofiane-sum-highlight {
+  background: #fef08a !important;
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: #0f172a;
   font-weight: 900;
-  letter-spacing: 0.3px;
-}
-.sofiane-warranty-sub {
-  color: #fff;
-  font-size: 6.5px;
-  font-weight: 700;
-  opacity: 0.9;
 }
 
-.sofiane-total-row { display: flex; justify-content: space-between; padding: 3px 0; font-size: 8.5px; align-items: center; }
-.sofiane-total-highlight { background: #fef08a !important; padding: 3px 6px; border-radius: 4px; font-weight: bold; color: #0f172a; }
-
-/* CENTERED & ORGANIZED FOOTER IN INVOICE */
 .sofiane-invoice-footer {
-  padding-top: 8px;
-  margin-top: 4px;
+  padding-top: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 3px;
   text-align: center;
 }
 .sofiane-footer-msg {
@@ -337,31 +375,6 @@ select {
   color: #1e40af;
   font-size: 8px;
   letter-spacing: 0.3px;
-  text-align: center;
-  width: 100%;
-}
-.sofiane-footer-bottom-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  text-align: center;
-}
-.sofiane-rights-text {
-  font-size: 7.5px;
-  color: #475569;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-}
-.sofiane-year-badge {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: #fff;
-  font-size: 7px;
-  padding: 2px 7px;
-  border-radius: 12px;
-  font-weight: 800;
-  box-shadow: 0 2px 4px rgba(37,99,235,0.2);
 }
 
 /* MOBILE OVERRIDE */
@@ -620,10 +633,15 @@ select {
       <div class="card">
         <div class="card-head"><h3>Données du panel — بيانات اللوحة</h3></div>
         <div class="card-body">
-          <div class="quick-actions">
-            <button class="quick" onclick="exportData()"><div class="quick-icon">⬇</div><strong>Exporter les données</strong><span>تصدير جميع البيانات</span></button>
-            <button class="quick" onclick="document.getElementById('importFile').click()"><div class="quick-icon">⬆</div><strong>Importer les données</strong><span>استيراد البيانات</span></button>
-            <button class="quick" onclick="clearAllData()"><div class="quick-icon" style="color:#ff5b67">🗑</div><strong>Effacer les données</strong><span>حذف جميع البيانات</span></button>
+          <div class="quick-actions" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+            <button class="lux-action-btn" onclick="exportData()">
+              <div class="lux-btn-top">📥 Exporter les données</div>
+              <span class="lux-btn-sub">تصدير وحفظ نسخة الاحتياطية للبيانات</span>
+            </button>
+            <button class="lux-action-btn" onclick="document.getElementById('importFile').click()">
+              <div class="lux-btn-top" style="color:var(--blue);">📤 Importer les données</div>
+              <span class="lux-btn-sub">استيراد البيانات من ملف سابق</span>
+            </button>
           </div>
           <input type="file" id="importFile" accept=".json" style="display:none">
         </div>
@@ -635,7 +653,7 @@ select {
 <!-- MODALS -->
 <div class="modal" id="clientModal"><div class="modal-box"><div class="modal-head"><h3 id="clientModalTitle">Nouveau client — عميل جديد</h3><button class="close" onclick="closeModal('clientModal')">×</button></div><div class="modal-body"><input type="hidden" id="editClientId"><div class="form-grid"><div class="form-group full"><label>Nom / Prénom — الاسم</label><input class="input" id="clientName" placeholder="Nom du client"></div><div class="form-group"><label>WhatsApp / رقم الواتساب</label><input class="input" id="clientPhone" placeholder="+212 6XXXXXXXX"></div><div class="form-group"><label>Année / عام الدخول</label><input class="input" id="clientYear" value="2026"></div><div class="form-group full"><label>Username / Compte</label><input class="input" id="clientAccount" placeholder="Username"></div></div></div><div class="modal-foot"><button class="btn btn-dark" onclick="closeModal('clientModal')">Annuler</button><button class="btn btn-danger" id="deleteClientModalBtn" onclick="deleteCurrentClient()" style="display:none">Supprimer</button><button class="btn btn-lime" onclick="saveClient()">Enregistrer — حفظ</button></div></div></div>
 
-<!-- DEBT / ADD AMOUNT MODAL WITH PRODUCT FIELD -->
+<!-- DEBT / ADD AMOUNT MODAL -->
 <div class="modal" id="debtModal">
   <div class="modal-box">
     <div class="modal-head">
@@ -696,13 +714,13 @@ select {
     </div>
     <div class="modal-foot">
       <button class="btn btn-dark" onclick="closeModal('paymentModal')">Annuler</button>
-      <button class="btn btn-lime" onclick="savePayment()">Enregistrer — حفظ وإصدار الفاتورة</button>
+      <button class="btn btn-lime" onclick="savePayment()">Enregistrer & Facturer — حفظ وإصدار الفاتورة</button>
     </div>
   </div>
 </div>
 
 <div class="modal" id="detailModal"><div class="modal-box" style="max-width:380px;"><div class="modal-head"><h3 id="clientDetailTitle">Dossier Client — ملف العميل</h3><button class="close" onclick="closeModal('detailModal')">×</button></div><div class="modal-body" id="detailBody"></div></div></div>
-<div class="modal" id="receiptModal"><div class="modal-box" style="max-width:360px;"><div class="modal-head"><h3>Reçu / Facture — فاتورة</h3><button class="close" onclick="closeModal('receiptModal')">×</button></div><div class="modal-body" id="receiptBody"></div><div class="modal-foot"><button class="btn btn-dark" onclick="closeModal('receiptModal')">Fermer</button><button class="btn btn-lime" onclick="window.print()">🖨 Imprimer</button></div></div></div>
+<div class="modal" id="receiptModal"><div class="modal-box" style="max-width:380px;"><div class="modal-head"><h3>Reçu / Facture — فاتورة</h3><button class="close" onclick="closeModal('receiptModal')">×</button></div><div class="modal-body" id="receiptBody"></div><div class="modal-foot"><button class="btn btn-dark" onclick="closeModal('receiptModal')">Fermer</button><button class="btn btn-lime" onclick="window.print()">🖨 Imprimer</button></div></div></div>
 
 <div class="toast" id="toast"></div>
 
@@ -974,7 +992,6 @@ function saveDebt(){
   renderAll(); 
   toast("Montant ajouté & Facturé"); 
   
-  // فتح الفاتورة الخاصة بعملية إضافة المبلغ تلقائياً
   openDebtReceipt(transObj.id);
 } 
 
@@ -1295,54 +1312,106 @@ function deleteActivation(id){
 } 
 
 function generateInvoiceHTML(itemType, itemData, clientData, priceVal) {
-  let designationText = "";
-  // استخدام المنتج المحدد بدقة في كل عملية دون تداخل
-  let productName = itemData.product || itemData.app || itemData.productName || "Paiement / Versement";
-  let logoUrl = appLogos[productName] || "https://i.ibb.co/8gTWpVC2/IMG-20261028-WA0040.webp";
+  let targetClientId = itemData.clientId || clientData.id;
+  let clientName = itemData.name || clientData.name || 'Test';
+  let clientPhone = itemData.phone || clientData.phone || '0650443149';
+  let invoiceId = "#" + (itemData.id || '9KPN0A').slice(-6).toUpperCase();
+  let invoiceDate = escapeHtml(itemData.startDate || itemData.date || dateOnly());
 
-  if(itemType === 'activation') {
-    designationText = `Activation ${escapeHtml(productName)} (${escapeHtml(itemData.mac || 'N/A')}) - ${escapeHtml(itemData.duration || '')}`;
-  } else if(itemType === 'abonnement') {
-    designationText = `Abonnement ${escapeHtml(productName)} (${escapeHtml(itemData.username || '')}) - ${escapeHtml(itemData.duration || '')}`;
-  } else if(itemType === 'payment' || itemType === 'debt') {
-    designationText = `Produit / Service: ${escapeHtml(productName)}`;
+  let clientTransactions = targetClientId ? transactions.filter(t => t.clientId === targetClientId) : [];
+  let clientObj = targetClientId ? getClient(targetClientId) : null;
+
+  let totalDueVal = clientObj ? Number(clientObj.totalDue || 0) : Number(priceVal || 0);
+  let totalPaidVal = clientObj ? Number(clientObj.totalPaid || 0) : 0;
+  let resteVal = Math.max(0, totalDueVal - totalPaidVal);
+
+  let rowsHTML = "";
+  if(clientTransactions.length > 0) {
+    clientTransactions.forEach((t) => {
+      let pName = t.product || t.type || 'Service';
+      let logoUrl = appLogos[pName] || "https://i.ibb.co/8gTWpVC2/IMG-20261028-WA0040.webp";
+      let amt = Number(t.amount || 0);
+      let noteSub = t.note ? `<div style="font-size:7px; color:#64748b; font-style:italic;">📝 ${escapeHtml(t.note)}</div>` : '';
+      let dateSub = `<div style="font-size:7px; color:#2563eb;">📅 ${escapeHtml(t.date)}</div>`;
+
+      rowsHTML += `
+        <tr>
+          <td>
+            <div class="invoice-app-cell">
+              <img src="${logoUrl}" alt="Logo" class="invoice-app-logo">
+              <div>
+                <span>${escapeHtml(pName)} (${escapeHtml(t.type || 'Opération')})</span>
+                ${dateSub}
+                ${noteSub}
+              </div>
+            </div>
+          </td>
+          <td>1</td>
+          <td>${amt > 0 ? money(amt) : '-'}</td>
+          <td>${amt > 0 ? money(amt) : '-'}</td>
+        </tr>
+      `;
+    });
   } else {
-    designationText = `Dossier Client: ${escapeHtml(clientData.name||'-')} (Année: ${escapeHtml(clientData.year||currentYear())})`;
-  }
+    let productName = itemData.product || itemData.app || itemData.productName || "Compte: -";
+    let logoUrl = appLogos[productName] || "https://i.ibb.co/8gTWpVC2/IMG-20261028-WA0040.webp";
+    let noteHtml = itemData.note && itemData.note.trim() !== "" ? `<div style="font-size:7.5px; color:#64748b; margin-top:2px; font-style:italic;">📝 Note: ${escapeHtml(itemData.note)}</div>` : "";
 
-  // إضافة الملاحظة (Note) إلى الفاتورة إذا وجدت
-  let noteHtml = "";
-  if(itemData.note && itemData.note.trim() !== "") {
-    noteHtml = `<div style="font-size:7.5px; color:#475569; margin-top:3px; font-style:italic;">📝 Note: ${escapeHtml(itemData.note)}</div>`;
+    rowsHTML += `
+      <tr>
+        <td>
+          <div class="invoice-app-cell">
+            <img src="${logoUrl}" alt="App Logo" class="invoice-app-logo">
+            <div>
+              <span>${escapeHtml(productName)} (Année: ${escapeHtml(clientData.year || currentYear())})</span>
+              ${noteHtml}
+            </div>
+          </div>
+        </td>
+        <td>1</td>
+        <td>${priceVal > 0 ? money(priceVal) : '-'}</td>
+        <td>${priceVal > 0 ? money(priceVal) : '-'}</td>
+      </tr>
+    `;
   }
-
-  const currentInvoiceYear = new Date().getFullYear();
 
   return `
     <div class="sofiane-invoice">
-      <div class="sofiane-header">
-        <div class="sofiane-brand-logo-container">
-          <img src="https://i.ibb.co/8gTWpVC2/IMG-20261028-WA0040.webp" alt="Logo Brand" class="sofiane-brand-logo-img">
-        </div>
+      <div class="sofiane-top-section">
         <div class="sofiane-logo-area">
+          <img src="https://i.ibb.co/LXWzbssm/IMG-20261104-145706.jpg" alt="Logo" class="sofiane-brand-logo-img">
           <div>
             <div class="sofiane-brand-main">Sofiane<span>-shop</span></div>
             <div class="sofiane-brand-sub">Toujours à votre service</div>
           </div>
-          <div class="sofiane-contacts-stack">
-            <div class="sofiane-contact-pill">✉️ soufianshop65@gmail.com</div>
-            <div class="sofiane-contact-pill">📍 حي المدرسي 310 تطوان</div>
-            <div class="sofiane-contact-pill">📞 06 58 50 05 55</div>
-          </div>
+        </div>
+        <div class="sofiane-contacts-stack">
+          <div class="sofiane-contact-pill">✉️ soufianshop65@gmail.com</div>
+          <div class="sofiane-contact-pill">📍 حي المدرسي 310 تطوان</div>
+          <div class="sofiane-contact-pill">📞 06 58 50 05 55</div>
+          <div class="sofiane-contact-pill">📞 06 66 22 70 60</div>
         </div>
       </div>
+
       <div class="sofiane-title-bar">📄 FACTURE / فاتورة</div>
-      <div class="sofiane-meta-grid">
-        <div class="sofiane-meta-row"><span><strong>N° :</strong></span> <span>#${(itemData.id || '000000').slice(-6).toUpperCase()}</span></div>
-        <div class="sofiane-meta-row"><span><strong>Date :</strong></span> <span>${escapeHtml(itemData.startDate || itemData.date || dateOnly())}</span></div>
-        <div class="sofiane-meta-row"><span><strong>Client :</strong></span> <span>${escapeHtml(itemData.name || clientData.name || 'Client')}</span></div>
-        <div class="sofiane-meta-row"><span><strong>Tel :</strong></span> <span>${escapeHtml(itemData.phone || clientData.phone || "-")}</span></div>
-      </div>
+
+      <table class="sofiane-meta-table">
+        <tr>
+          <td class="label-cell">N° facture :</td>
+          <td class="val-cell">${invoiceId}</td>
+          <td class="label-cell">Client :</td>
+          <td class="val-cell">${escapeHtml(clientName)}</td>
+        </tr>
+        <tr>
+          <td class="label-cell">Date :</td>
+          <td class="val-cell">${invoiceDate}</td>
+          <td class="label-cell">WhatsApp :</td>
+          <td class="val-cell">${escapeHtml(clientPhone)}</td>
+        </tr>
+      </table>
+
+      <div class="sofiane-title-bar" style="background:#1e40af; font-size:10.5px;">DÉSIGNATION / الوصف</div>
+
       <table class="sofiane-table">
         <thead>
           <tr>
@@ -1353,48 +1422,25 @@ function generateInvoiceHTML(itemType, itemData, clientData, priceVal) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div class="invoice-app-cell">
-                <img src="${logoUrl}" alt="App Logo" class="invoice-app-logo">
-                <div>
-                  <span>${designationText}</span>
-                  ${noteHtml}
-                </div>
-              </div>
-            </td>
-            <td>1</td>
-            <td>${priceVal>0?money(priceVal):'-'}</td>
-            <td>${priceVal>0?money(priceVal):'-'}</td>
-          </tr>
+          ${rowsHTML}
         </tbody>
       </table>
-      <div class="sofiane-bottom-cards-wrapper">
-        <div class="sofiane-box-card">
-          <div class="sofiane-box-title">💳 Paiement</div>
-          <div>Espèces / Virement</div>
-        </div>
-        <div class="sofiane-warranty-box">
-          <div class="sofiane-warranty-shield">🛡️</div>
-          <div class="sofiane-warranty-texts">
-            <span class="sofiane-warranty-title">GARANTI 100%</span>
-            <span class="sofiane-warranty-sub">Service Premium</span>
-          </div>
-        </div>
+
+      <div class="sofiane-payment-box">
+        <div class="sofiane-payment-title">💳 Paiement</div>
+        <div class="sofiane-payment-val">Espèces / Virement</div>
       </div>
-      <div class="sofiane-bottom-grid" style="margin-top:2px;">
-        <div class="sofiane-box-card">
-          <div class="sofiane-total-row"><span>Total :</span> <span>${priceVal>0?money(priceVal):'-'}</span></div>
-          <div class="sofiane-total-row sofiane-total-highlight"><span>Montant :</span> <span>${priceVal>0?money(priceVal):'-'}</span></div>
-        </div>
+
+      <div class="sofiane-summary-box">
+        <div class="sofiane-sum-row"><span>Sous-total :</span> <span>${money(totalDueVal)}</span></div>
+        <div class="sofiane-sum-row sofiane-sum-highlight"><span>Total (DH) :</span> <span>${money(totalDueVal)}</span></div>
+        <div class="sofiane-sum-row"><span>Payé :</span> <span>${money(totalPaidVal)}</span></div>
+        <div class="sofiane-sum-row"><span>Reste :</span> <span>${money(resteVal)}</span></div>
       </div>
+
       <div class="sofiane-invoice-footer">
         <div class="sofiane-footer-msg">
           Merci pour votre confiance — شكرا لكم على ثقتكم
-        </div>
-        <div class="sofiane-footer-bottom-row">
-          <span class="sofiane-rights-text">© ${currentInvoiceYear} Sofiane-Shop. Tous droits réservés.</span>
-          <span class="sofiane-year-badge">${currentInvoiceYear}</span>
         </div>
       </div>
     </div>
@@ -1421,7 +1467,7 @@ function openPaymentReceipt(id){
   const p=payments.find(x=>x.id===id); 
   if(!p) return; 
   const priceVal = Number(p.amount||0);
-  document.getElementById("receiptBody").innerHTML = generateInvoiceHTML('payment', p, {name: p.name}, priceVal);
+  document.getElementById("receiptBody").innerHTML = generateInvoiceHTML('payment', p, {name: p.name, id: p.clientId}, priceVal);
   openModal("receiptModal"); 
 }
 
@@ -1429,7 +1475,7 @@ function openDebtReceipt(id){
   const t=transactions.find(x=>x.id===id); 
   if(!t) return; 
   const priceVal = Number(t.amount||0);
-  document.getElementById("receiptBody").innerHTML = generateInvoiceHTML('debt', t, {name: t.name}, priceVal);
+  document.getElementById("receiptBody").innerHTML = generateInvoiceHTML('debt', t, {name: t.name, id: t.clientId}, priceVal);
   openModal("receiptModal"); 
 }
 
@@ -1490,14 +1536,6 @@ document.getElementById("importFile").addEventListener("change",function(){
   reader.readAsText(file); 
   this.value=""; 
 }); 
-
-function clearAllData(){ 
-  if(!confirm("Supprimer toutes les données ?\n\nتأكيد مسح جميع البيانات؟")) return; 
-  clients=[]; payments=[]; historyData=[]; transactions=[]; activations=[]; abonnements=[]; 
-  saveData(); 
-  renderAll(); 
-  toast("Données supprimées"); 
-} 
 
 const def_search = document.getElementById("clientSearch");
 if(def_search) def_search.addEventListener("input",renderClients); 
