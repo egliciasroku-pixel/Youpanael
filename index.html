@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CREDITS PANEL PRO - SOFIANE SHOP</title>
+<!-- مكتبة HLS لتشغيل القنوات المباشرة -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<style>
+*{ box-sizing:border-box; margin:0; padding:0; font-family:Arial,Helvetica,sans-serif; } 
+:root{ --bg:#030607; --panel:#081012; --panel2:#0d1719; --panel3:#111d20; --line:#1d2c2f; --lime:#a8ff00; --lime2:#c4ff52; --text:#f4f7f5; --muted:#91a19f; --danger:#ff5b67; --blue:#55b8ff; --orange:#ffb84d; --green:#37e39a; --shadow:0 20px 60px rgba(0,0,0,.45); } 
+body{ background: radial-gradient(circle at 10% 0%,rgba(168,255,0,.07),transparent 25%), radial-gradient(circle at 90% 100%,rgba(0,255,180,.04),transparent 30%), var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; } 
+
+.app{ display:flex; min-height:100vh; position:relative; } 
+
+/* SIDEBAR RESPONSIVE */ 
+.sidebar{ width:270px; min-width:270px; background:rgba(5,10,11,.98); border-right:1px solid var(--line); padding:20px 15px; display:flex; flex-direction:column; position:fixed; top:0; bottom:0; left:0; z-index:1000; transition:transform 0.3s ease; } 
+.brand{ display:flex; align-items:center; gap:12px; padding:5px 8px 22px; border-bottom:1px solid var(--line); } 
+.logo{ width:43px; height:43px; border-radius:13px; display:flex; align-items:center; justify-content:center; background:var(--lime); color:#050807; font-size:22px; font-weight:900; box-shadow:0 0 25px rgba(168,255,0,.25); overflow:hidden; } 
+.logo img { width: 100%; height: 100%; object-fit: cover; }
+.brand-text{ font-weight:900; letter-spacing:.8px; font-size:15px; } 
+.brand-text span{ display:block; color:var(--lime); font-size:11px; margin-top:4px; letter-spacing:2px; } 
+.admin-box{ margin:18px 4px; padding:12px; background:linear-gradient(135deg,#101b1d,#081012); border:1px solid var(--line); border-radius:14px; display:flex; align-items:center; gap:10px; }
+.admin-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1px solid var(--lime); }
+.admin-info { flex: 1; overflow: hidden; }
+.admin-info small{ color:var(--muted); display:block; font-size:9px; margin-bottom:2px; } 
+.admin-info strong{ font-size:12px; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--lime); } 
+
+.status-dot{ display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--lime); box-shadow:0 0 10px var(--lime); margin-right:4px; } 
+.nav{ display:flex; flex-direction:column; gap:7px; overflow-y:auto; max-height:calc(100vh - 250px); padding-right:5px; } 
+.nav::-webkit-scrollbar{ width:4px; }
+.nav::-webkit-scrollbar-thumb{ background:var(--line); border-radius:4px; }
+.nav-item{ width:100%; border:0; background:transparent; color:var(--muted); display:flex; align-items:center; gap:12px; padding:13px 12px; border-radius:13px; cursor:pointer; text-align:left; transition:.25s; position:relative; } 
+.nav-item:hover{ color:var(--text); background:#10191b; } 
+.nav-item.active{ background:linear-gradient(90deg,rgba(168,255,0,.15),rgba(168,255,0,.035)); color:var(--lime); border:1px solid rgba(168,255,0,.12); } 
+.nav-icon{ width:38px; height:38px; min-width:38px; border-radius:11px; display:flex; align-items:center; justify-content:center; background:#101a1c; transition:.25s; } 
+.nav-item.active .nav-icon{ background:rgba(168,255,0,.12); color:var(--lime); } 
+.nav-icon svg{ width:20px; height:20px; } 
+@keyframes iconSpin{ 0%{transform:rotate(0deg) scale(1)} 50%{transform:rotate(180deg) scale(1.18)} 100%{transform:rotate(360deg) scale(1)} } 
+.nav-item.icon-spin .nav-icon{ animation:iconSpin .55s ease; } 
+.nav-label{ display:flex; flex-direction:column; line-height:1.15; } 
+.nav-fr{ font-size:13px; font-weight:800; } 
+.nav-ar{ font-size:11px; margin-top:3px; direction:rtl; opacity:.75; } 
+.sidebar-bottom{ margin-top:auto; border-top:1px solid var(--line); padding-top:15px; color:var(--muted); font-size:10px; text-align:center; } 
+
+/* MAIN */ 
+.main{ margin-left:270px; width:calc(100% - 270px); min-height:100vh; transition:all 0.3s ease; } 
+.topbar{ height:76px; border-bottom:1px solid var(--line); background:rgba(5,10,11,.85); backdrop-filter:blur(15px); display:flex; align-items:center; justify-content:space-between; padding:0 28px; position:sticky; top:0; z-index:500; } 
+.top-left{ display:flex; align-items:center; gap:15px; } 
+.menu-btn{ display:none; border:1px solid var(--line); background:var(--panel); color:var(--lime); width:42px; height:42px; border-radius:12px; cursor:pointer; font-size:20px; align-items:center; justify-content:center; } 
+.page-title h1{ font-size:20px; } 
+.page-title p{ color:var(--muted); font-size:11px; margin-top:4px; } 
+.top-right{ display:flex; align-items:center; gap:10px; } 
+.live-clock{ background:var(--panel); border:1px solid var(--line); padding:10px 14px; border-radius:12px; color:var(--lime); font-size:12px; font-weight:bold; } 
+.online{ padding:10px 13px; border-radius:12px; background:rgba(55,227,154,.08); border:1px solid rgba(55,227,154,.18); color:var(--green); font-size:11px; font-weight:bold; } 
+
+/* PAGE */ 
+.page{ display:none; padding:28px; animation:pageIn .3s ease; } 
+.page.active{ display:block; } 
+@keyframes pageIn{ from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} } 
+.section-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:15px; margin-bottom:22px; flex-wrap:wrap; } 
+.section-head h2{ font-size:20px; } 
+.section-head p{ color:var(--muted); font-size:12px; margin-top:5px; } 
+
+/* GLASSMORPHISM BUTTONS */
+.btn {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 11px 15px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: 0.5s;
+}
+.btn:hover::before { left: 100%; }
+.btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5); }
+.btn:active { transform: translateY(-1px) scale(0.98); }
+
+.btn-lime { background: rgba(168, 255, 0, 0.12) !important; border: 1px solid rgba(168, 255, 0, 0.35) !important; color: var(--lime2) !important; box-shadow: 0 8px 25px rgba(168, 255, 0, 0.15); }
+.btn-lime:hover { background: rgba(168, 255, 0, 0.25) !important; border-color: rgba(168, 255, 0, 0.6) !important; color: #fff !important; }
+.btn-dark { background: rgba(20, 30, 33, 0.5) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; color: var(--text) !important; }
+.btn-dark:hover { background: rgba(30, 45, 50, 0.7) !important; border-color: rgba(255, 255, 255, 0.25) !important; }
+.btn-danger { background: rgba(255, 91, 103, 0.12) !important; border: 1px solid rgba(255, 91, 103, 0.3) !important; color: var(--danger) !important; }
+.btn-danger:hover { background: rgba(255, 91, 103, 0.25) !important; border-color: rgba(255, 91, 103, 0.6) !important; color: #fff !important; }
+.btn-blue { background: rgba(85, 184, 255, 0.12) !important; border: 1px solid rgba(85, 184, 255, 0.3) !important; color: var(--blue) !important; }
+.btn-blue:hover { background: rgba(85, 184, 255, 0.25) !important; border-color: rgba(85, 184, 255, 0.6) !important; color: #fff !important; }
+.btn-small { padding: 8px 10px; font-size: 10px; }
+
+/* STATS */ 
+.stats{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:15px; margin-bottom:20px; } 
+.stat{ background:linear-gradient(145deg,#0b1517,#071012); border:1px solid var(--line); border-radius:18px; padding:19px; position:relative; overflow:hidden; } 
+.stat:after{ content:""; position:absolute; width:90px; height:90px; border-radius:50%; background:rgba(168,255,0,.05); right:-30px; top:-30px; } 
+.stat-top{ display:flex; justify-content:space-between; align-items:center; } 
+.stat-icon{ width:38px; height:38px; border-radius:11px; background:#111c1e; display:flex; align-items:center; justify-content:center; color:var(--lime); } 
+.stat-label{ color:var(--muted); font-size:11px; } 
+.stat-value{ font-size:22px; font-weight:900; margin-top:15px; } 
+.stat-sub{ color:var(--muted); font-size:10px; margin-top:5px; } 
+
+/* CARDS */ 
+.card{ background:linear-gradient(145deg,#0a1416,#071012); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); margin-bottom:20px; } 
+.card-head{ padding:17px 18px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; } 
+.card-head h3{ font-size:14px; } 
+.card-body{ padding:18px; } 
+
+/* TABLE */ 
+.table-wrap{ overflow-x:auto; width:100%; } 
+table{ width:100%; border-collapse:collapse; min-width:720px; } 
+th{ color:var(--muted); font-size:10px; text-transform:uppercase; letter-spacing:.5px; text-align:left; padding:12px; border-bottom:1px solid var(--line); } 
+td{ padding:13px 12px; border-bottom:1px solid rgba(29,44,47,.7); font-size:12px; } 
+tr:hover td{ background:rgba(168,255,0,.018); } 
+.avatar{ width:34px; height:34px; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; background:rgba(168,255,0,.1); color:var(--lime); font-weight:900; margin-right:9px; overflow:hidden; } 
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.client-cell{ display:flex; align-items:center; } 
+.badge{ display:inline-flex; padding:6px 9px; border-radius:8px; font-size:10px; font-weight:800; } 
+.badge-green{ color:var(--green); background:rgba(55,227,154,.08); } 
+.badge-lime{ color:var(--lime); background:rgba(168,255,0,.08); } 
+.badge-orange{ color:var(--orange); background:rgba(255,184,77,.08); } 
+.badge-red{ color:var(--danger); background:rgba(255,91,103,.08); } 
+.badge-blue{ color:var(--blue); background:rgba(85,184,255,.08); } 
+.actions{ display:flex; gap:5px; flex-wrap:wrap; } 
+
+/* SEARCH & FORM */ 
+.search{ width:100%; background:#081113; border:1px solid var(--line); color:white; outline:none; border-radius:11px; padding:12px 14px; font-size:12px; } 
+.search:focus{ border-color:rgba(168,255,0,.5); box-shadow:0 0 0 3px rgba(168,255,0,.05); } 
+.search-row{ display:flex; gap:10px; margin-bottom:15px; } 
+.form-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:15px; } 
+.form-group{ display:flex; flex-direction:column; gap:7px; } 
+.form-group.full{ grid-column:1/-1; } 
+.form-group label{ font-size:11px; color:var(--muted); } 
+.input, select, textarea{ width:100%; background:#071012; border:1px solid var(--line); color:white; outline:none; border-radius:11px; padding:12px; font-size:12px; } 
+textarea{ min-height:90px; resize:vertical; } 
+.input:focus, select:focus, textarea:focus{ border-color:rgba(168,255,0,.5); box-shadow:0 0 0 3px rgba(168,255,0,.04); } 
+option{ background:#0b1517; } 
+
+/* DASHBOARD */ 
+.dashboard-grid{ display:grid; grid-template-columns:1fr; gap:18px; } 
+@media(min-width:1024px){ .dashboard-grid{ grid-template-columns:1.4fr .8fr; } }
+.quick-actions{ display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; } 
+.quick{ padding:15px; border-radius:13px; background:rgba(13, 24, 26, 0.4) !important; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid rgba(255, 255, 255, 0.08) !important; cursor:pointer; color:white; text-align:left; transition:.3s; width:100%; } 
+.quick:hover{ background:rgba(168,255,0,.08) !important; border-color:rgba(168,255,0,.35) !important; box-shadow:0 10px 30px rgba(0,0,0,.5); transform:translateY(-4px); } 
+.quick-icon{ color:var(--lime); margin-bottom:10px; font-size:18px; } 
+.quick strong{ display:block; font-size:12px; } 
+.quick span{ display:block; color:var(--muted); font-size:10px; margin-top:4px; } 
+
+/* TEST PLAYLIST UI */
+.player-container { display:grid; grid-template-columns: 1fr; gap:15px; margin-top:15px; }
+@media(min-width:900px){ .player-container { grid-template-columns: 1.2fr 1fr; } }
+.video-box { background:#030607; border:1px solid var(--line); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; position:relative; }
+.video-box video { width:100%; height:280px; background:#000; outline:none; }
+.channels-list { max-height:280px; overflow-y:auto; background:#071012; border:1px solid var(--line); border-radius:12px; padding:8px; }
+.channel-item { padding:10px; border-bottom:1px solid var(--line); font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; transition:0.2s; border-radius:8px; margin-bottom:4px; }
+.channel-item:hover { background:rgba(168,255,0,0.1); color:var(--lime); }
+
+/* M3U & XTREAM BOXES */
+.m3u-box, .xtream-box { background:rgba(13,23,25,0.6); border:1px solid var(--line); border-radius:14px; padding:15px; margin-bottom:15px; }
+.m3u-title, .xtream-title { font-weight:800; font-size:12px; margin-bottom:8px; display:flex; align-items:center; gap:8px; color:var(--lime); }
+.m3u-status { font-size:11px; color:var(--muted); margin-top:6px; }
+.m3u-success { color: var(--green); }
+.m3u-warning { color: var(--orange); }
+.m3u-error { color: var(--danger); }
+.xtream-line { display:flex; justify-content:space-between; font-size:11px; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.03); }
+.xtream-label { color: var(--muted); }
+.xtream-value { font-weight: bold; }
+
+/* HISTORY & MODALS */ 
+.history-item{ display:flex; gap:12px; padding:10px 0; border-bottom:1px solid var(--line); font-size:12px; }
+.history-dot{ width:24px; height:24px; min-width:24px; border-radius:50%; background:rgba(168,255,0,0.1); color:var(--lime); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:bold; }
+.history-info strong{ display:block; margin-bottom:2px; }
+.history-info span{ color:var(--muted); font-size:10px; }
+
+.modal{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.72); backdrop-filter:blur(7px); z-index:3000; align-items:center; justify-content:center; padding:5px; } 
+.modal.show{ display:flex; } 
+.modal-box{ width:100%; max-width:520px; max-height:98vh; overflow-y:auto; background:#091214; border:1px solid var(--line); border-radius:14px; box-shadow:0 30px 100px rgba(0,0,0,.7); } 
+.modal-head{ padding:10px 12px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; } 
+.modal-head h3{ font-size:13px; } 
+.close{ border:0; background:#111c1e; color:var(--muted); width:26px; height:26px; border-radius:7px; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; } 
+.modal-body{ padding:10px; } 
+.modal-foot{ padding:10px 12px; border-top:1px solid var(--line); display:flex; justify-content:flex-end; gap:6px; flex-wrap:wrap; } 
+
+.toast{ position:fixed; right:20px; bottom:20px; background:#101a1c; border:1px solid var(--lime); color:white; padding:13px 17px; border-radius:12px; font-size:12px; z-index:5000; transform:translateY(100px); opacity:0; transition:.3s; box-shadow:0 10px 30px rgba(0,0,0,0.5); } 
+.toast.show{ transform:translateY(0); opacity:1; } 
+.empty{ padding:35px 15px; text-align:center; color:var(--muted); font-size:12px; } 
+
+/* SOFIANE SHOP EXACT MATCH INVOICE STYLING */
+.sofiane-invoice { 
+  background: linear-gradient(135deg, #f8fbff, #edf4ff); 
+  color: #0b1c3d; 
+  padding: 12px; 
+  border-radius: 10px; 
+  font-family: Arial, sans-serif; 
+  border: 1.5px solid #2563eb; 
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.12); 
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.sofiane-header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  border-bottom: 2.5px solid #f59e0b; 
+  padding-bottom: 8px; 
+  margin-bottom: 10px; 
+}
+.sofiane-logo-area { 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+}
+.sofiane-bag-icon {
+  font-size: 26px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+.sofiane-brand-box {
+  display: flex;
+  flex-direction: column;
+}
+.sofiane-brand-main {
+  font-size: 14px;
+  font-weight: 900;
+  color: #1e40af;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+}
+.sofiane-brand-main span {
+  color: #f59e0b;
+}
+.sofiane-brand-sub {
+  font-size: 8px;
+  color: #1e40af;
+  font-style: italic;
+  font-weight: bold;
+  margin-top: 1px;
+}
+.sofiane-contacts-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: flex-end;
+}
+.sofiane-contact-pill {
+  background: linear-gradient(135deg, #1e40af, #2563eb);
+  color: #ffffff;
+  font-size: 8px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  border: 1px solid #f59e0b;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  direction: ltr;
+  box-shadow: 0 2px 5px rgba(37,99,235,0.2);
+  white-space: nowrap;
+}
+.sofiane-contact-pill.rtl {
+  direction: rtl;
+}
+.sofiane-title-bar { 
+  background: linear-gradient(90deg, #2563eb, #1d4ed8); 
+  color: #fff; 
+  text-align: center; 
+  padding: 5px; 
+  font-size: 11.5px; 
+  font-weight: 900; 
+  border-radius: 6px; 
+  margin-bottom: 10px; 
+  border: 1px solid #f59e0b; 
+  letter-spacing: 0.5px;
+}
+.sofiane-meta-grid { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 8px; 
+  font-size: 9px; 
+  margin-bottom: 10px; 
+  background: #ffffff; 
+  padding: 8px; 
+  border-radius: 7px; 
+  border: 1px solid #cbd5e1; 
+  box-sizing: border-box;
+}
+.sofiane-meta-row { 
+  display: flex; 
+  justify-content: space-between; 
+  margin-bottom: 4px; 
+  align-items: center;
+}
+.sofiane-meta-row:last-child {
+  margin-bottom: 0;
+}
+.sofiane-meta-row strong { 
+  color: #1e40af; 
+}
+.sofiane-meta-row span:last-child {
+  background: #f8fafc;
+  padding: 2px 5px;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+  min-width: 70px;
+  text-align: left;
+  font-weight: 600;
+}
+.sofiane-table { 
+  width: 100% !important; 
+  max-width: 100% !important;
+  table-layout: fixed !important;
+  border-collapse: collapse; 
+  margin-bottom: 10px; 
+  background: #ffffff; 
+  border-radius: 7px; 
+  overflow: hidden; 
+  border: 1px solid #2563eb; 
+  box-sizing: border-box;
+}
+.sofiane-table th { 
+  background: #2563eb; 
+  color: #fff; 
+  font-size: 8.5px; 
+  padding: 6px 2px; 
+  text-align: center; 
+  border: 1px solid #1d4ed8; 
+  text-transform: uppercase;
+}
+.sofiane-table td { 
+  border: 1px solid #e2e8f0; 
+  padding: 6px 4px; 
+  font-size: 9px; 
+  text-align: center; 
+  height: 24px; 
+  color: #0f172a;
+  word-break: break-word;
+}
+.sofiane-table th:nth-child(1), .sofiane-table td:nth-child(1) { width: 50%; text-align: left; padding-left: 6px; }
+.sofiane-table th:nth-child(2), .sofiane-table td:nth-child(2) { width: 12%; }
+.sofiane-table th:nth-child(3), .sofiane-table td:nth-child(3) { width: 19%; }
+.sofiane-table th:nth-child(4), .sofiane-table td:nth-child(4) { width: 19%; }
+
+.sofiane-bottom-grid { 
+  display: grid; 
+  grid-template-columns: 1fr 1.15fr; 
+  gap: 8px; 
+  box-sizing: border-box;
+}
+.sofiane-box-card { 
+  background: #ffffff; 
+  border: 1px solid #2563eb; 
+  border-radius: 7px; 
+  padding: 7px; 
+  font-size: 9px; 
+  box-sizing: border-box;
+}
+.sofiane-box-title { 
+  font-weight: bold; 
+  color: #1e40af; 
+  margin-bottom: 5px; 
+  border-bottom: 1px solid #e2e8f0; 
+  padding-bottom: 3px; 
+}
+.sofiane-total-row { 
+  display: flex; 
+  justify-content: space-between; 
+  padding: 3px 0; 
+  border-bottom: 1px solid #f1f5f9; 
+  font-size: 9px; 
+  align-items: center;
+}
+.sofiane-total-row:last-child {
+  border-bottom: none;
+}
+.sofiane-total-highlight { 
+  background: #fef08a !important; 
+  padding: 3px 6px; 
+  border-radius: 4px; 
+  font-weight: bold; 
+  color: #0f172a; 
+  border: 1px solid #eab308;
+  margin: 2px 0;
+}
+
+/* MOBILE OVERRIDE */
+@media(max-width:768px){
+  .sidebar{ transform:translateX(-100%); }
+  .sidebar.open{ transform:translateX(0); }
+  .main{ margin-left:0; width:100%; }
+  .menu-btn{ display:flex; }
+  .topbar{ padding:0 15px; }
+  .page{ padding:15px; }
+  .stats{ grid-template-columns: 1fr 1fr; }
+  .sofiane-bottom-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🛍️</div>
+      <div class="brand-text">SOFIANE-SHOP<span>PANEL MANAGEMENT</span></div>
+    </div>
+    <div class="admin-box">
+      <div class="admin-info">
+        <small>المدير / Connecté</small>
+        <strong><span class="status-dot"></span>Sofiane-shop</strong>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="nav-item active" data-page="dashboard">
+        <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg></div>
+        <div class="nav-label"><span class="nav-fr">Dashboard</span><span class="nav-ar">الرئيسية</span></div>
+      </button>
+      <button class="nav-item" data-page="test-playlist">
+        <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
+        <div class="nav-label"><span class="nav-fr">Test Playlist</span><span class="nav-ar">تجربة Playlist</span></div>
+      </button>
+      <button class="nav-item" data-page="clients">
+        <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+        <div class="nav-label"><span class="nav-fr">Clients</span><span class="nav-ar">العملاء</span></div>
+      </button>
+      <button class="nav-item" data-page="abonnements">
+        <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="13" y2="13"></line></svg></div>
+        <div class="nav-label"><span class="nav-fr">Abonnements</span><span class="nav-ar">الاشتراكات</span></div>
+      </button>
+      <button class="nav-item" data-page="payments">
+        <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path><path d="M6 15h4"></path></svg></div>
+        <div class="nav-label"><span class="nav-fr">Paiements</span><span class="nav-ar">الدفعات</span></div>
+      </button>
+      <button class="nav-item" data-page="history">
+        <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v6h6"></path><path d="M12 7v5l3 2"></path></svg></div>
+        <div class="nav-label"><span class="nav-fr">Historique</span><span class="nav-ar">السجل</span></div>
+      </button>
+      <button class="nav-item" data-page="activation">
+        <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4L12 2z"></path></svg></div>
+        <div class="nav-label"><span class="nav-fr">Activation</span><span class="nav-ar">التفعيل</span></div>
+      </button>
+      <button class="nav-item" data-page="settings">
+        <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5v.1h-2.6v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H4.4v-2.6h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5v-.1h2.6v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l-.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.1v2.6h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg></div>
+        <div class="nav-label"><span class="nav-fr">Paramètres</span><span class="nav-ar">الإعدادات</span></div>
+      </button>
+    </div>
+    <div class="sidebar-bottom">SOFIANE-SHOP PANEL<br>Mode Direct</div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <header class="topbar">
+      <div class="top-left">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <div class="page-title">
+          <h1 id="topTitle">Dashboard</h1>
+          <p>Sofiane-shop • Toujours à votre service</p>
+        </div>
+      </div>
+      <div class="top-right">
+        <div class="live-clock" id="liveClock">--:--:--</div>
+        <div class="online">● ONLINE</div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD PAGE -->
+    <div class="page active" id="dashboard">
+      <div class="section-head">
+        <div>
+          <h2>Dashboard — الرئيسية</h2>
+          <p>Vue générale de votre panel / نظرة عامة على اللوحة</p>
+        </div>
+        <button class="btn btn-lime" onclick="openClientModal()"> ＋ Nouveau client </button>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="stat-top"><span class="stat-label">Clients / العملاء</span><div class="stat-icon">👥</div></div><div class="stat-value" id="statClients">0</div><div class="stat-sub">Total clients</div></div>
+        <div class="stat"><div class="stat-top"><span class="stat-label">À payer / المطلوب</span><div class="stat-icon">💰</div></div><div class="stat-value" id="statDue">0 DH</div><div class="stat-sub">Total facturé</div></div>
+        <div class="stat"><div class="stat-top"><span class="stat-label">Payé / المدفوع</span><div class="stat-icon">💳</div></div><div class="stat-value" id="statPaid">0 DH</div><div class="stat-sub">Total reçu</div></div>
+        <div class="stat"><div class="stat-top"><span class="stat-label">Reste / الباقي</span><div class="stat-icon">⚠</div></div><div class="stat-value" id="statRemain">0 DH</div><div class="stat-sub">Solde restant</div></div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="card-head">
+            <h3>Clients récents — العملاء الجدد</h3>
+            <button class="btn btn-dark btn-small" onclick="showPage('clients')">Voir tous</button>
+          </div>
+          <div class="table-wrap">
+            <table><thead><tr><th>Client</th><th>Compte</th><th>État</th><th>Reste</th></tr></thead><tbody id="dashboardTable"></tbody></table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Actions rapides — إجراءات سريعة</h3></div>
+          <div class="card-body">
+            <div class="quick-actions">
+              <button class="quick" onclick="openClientModal()"><div class="quick-icon">👤＋</div><strong>Nouveau client</strong><span>إضافة عميل جديد</span></button>
+              <button class="quick" onclick="showPage('test-playlist')"><div class="quick-icon">▶</div><strong>Test Playlist</strong><span>تجربة Playlist</span></button>
+              <button class="quick" onclick="openPaymentModal()"><div class="quick-icon">💳</div><strong>Nouveau paiement</strong><span>إضافة دفعة</span></button>
+              <button class="quick" onclick="showPage('activation')"><div class="quick-icon">⚡</div><strong>Activation Playlist</strong><span>تفعيل Playlist</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEST PLAYLIST PAGE WITH VIDEO PLAYER -->
+    <div class="page" id="test-playlist">
+      <div class="section-head">
+        <div>
+          <h2>Test Playlist — تجربة Playlist</h2>
+          <p>Testeur M3U avec conversion Xtream & lecteur vidéo / فحص واختبار القنوات</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>▶ Lecteur & Testeur IPTV (M3U → Xtream)</h3></div>
+        <div class="card-body">
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>Lien M3U / رابط M3U للتحويل المباشر</label>
+              <input class="input" id="testPlaylistInput" placeholder="http://server.com:8080/get.php?username=...&password=...&type=m3u_plus">
+            </div>
+            <div class="form-group full">
+              <button class="btn btn-lime" onclick="loadAndTestPlaylist()">⚡ Charger & Tester via Xtream Codes — الفحص السريع</button>
+            </div>
+          </div>
+
+          <div id="xtreamInfoDisplay" style="margin-top:12px;"></div>
+
+          <div class="player-container">
+            <div class="video-box">
+              <video id="iptvPlayer" controls autoplay playsinline></video>
+              <div style="padding:10px; font-size:11px; color:var(--muted); border-top:1px solid var(--line);" id="currentChannelName">
+                Aucune chaîne sélectionnée
+              </div>
+            </div>
+            <div class="channels-list" id="channelsList">
+              <div class="empty">Collez un lien M3U ci-dessus pour charger les chaînes...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENTS PAGE -->
+    <div class="page" id="clients">
+      <div class="section-head">
+        <div>
+          <h2>Clients — العملاء</h2>
+          <p>Gestion de vos clients / إدارة العملاء</p>
+        </div>
+        <button class="btn btn-lime" onclick="openClientModal()"> ＋ Nouveau client </button>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <h3>Liste des clients — قائمة العملاء</h3>
+          <span class="badge badge-lime" id="clientCountText">0 clients</span>
+        </div>
+        <div class="card-body">
+          <div class="search-row"><input class="search" id="clientSearch" placeholder="Rechercher nom / compte / البحث باسم العميل..."></div>
+          <div class="table-wrap">
+            <table><thead><tr><th>Client</th><th>Compte</th><th>Année / العام</th><th>WhatsApp / الواتساب</th><th>Total</th><th>Payé</th><th>Reste</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="clientsTable"></tbody></table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABONNEMENTS PAGE -->
+    <div class="page" id="abonnements">
+      <div class="section-head">
+        <div>
+          <h2>Nouveau Abonnement — اشتراك جديد</h2>
+          <p>Gestion des abonnements Xtream / M3U / إدارة اشتراكات Xtream و M3U</p>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:20px;">
+        <div class="card-head"><h3>📡 Informations Xtream — معلومات Xtream</h3></div>
+        <div class="card-body">
+          <div class="m3u-box">
+            <div class="m3u-title">🔗 <span>M3U → XTREAM AUTOMATIQUE</span></div>
+            <input class="input" type="url" id="abonnementM3U" placeholder="http://server.com/get.php?username=USER&password=PASS&type=m3u_plus" oninput="autoConvertM3U(false)" onblur="autoConvertM3U(true)">
+            <div id="m3uStatus" class="m3u-status">Collez le lien M3U : les informations Xtream seront extraites automatiquement.</div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group full"><label>Client — العميل</label><select id="abonnementClient"><option value="">Sélectionner un client</option></select></div>
+            <div class="form-group"><label>Nom client — اسم العميل</label><input class="input" id="abonnementName" placeholder="Nom du client"></div>
+            <div class="form-group">
+              <label>Application — التطبيق</label>
+              <select id="abonnementApp">
+                <option value="">Sélectionner une application</option><option>IBO Player</option><option>IBO Pro</option><option>Ultra VIP</option><option>TOD Player</option><option>Pipo Player</option><option>Hot IPTV</option><option>Bob Player</option><option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group full"><label>🌐 Xtream Server / URL</label><input class="input" id="abonnementServer" placeholder="http://server.com:8080"></div>
+            <div class="form-group"><label>👤 Username — اسم المستخدم</label><input class="input" id="abonnementUsername" placeholder="Username"></div>
+            <div class="form-group"><label>🔑 Password — كلمة المرور</label><input class="input" id="abonnementPassword" placeholder="Password" type="text"></div>
+            <div class="form-group"><label>📅 Durée — المدة</label><select id="abonnementDuration"><option value="1 mois">1 mois — شهر واحد</option><option value="12 mois">12 mois — عام</option></select></div>
+            <div class="form-group"><label>📆 Date début — تاريخ البداية</label><input class="input" type="date" id="abonnementStart"></div>
+            <div class="form-group"><label>Prix / الثمن (DH)</label><input class="input" type="number" id="abonnementPrice" placeholder="0.00"></div>
+            <div class="form-group full"><label>📝 Note — ملاحظة</label><textarea id="abonnementNote" placeholder="Note / Server / Remarque"></textarea></div>
+            <div class="form-group full"><button class="btn btn-lime" onclick="createAbonnement()">📡＋ Nouveau Abonnement — اشتراك جديد</button></div>
+          </div>
+          <div class="result-box" id="abonnementResult" style="margin-top:10px;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>📡 Abonnements Xtream — اشتراكات Xtream</h3><span class="badge badge-lime" id="abonnementCount">0</span></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Date</th><th>Client</th><th>Application</th><th>Xtream</th><th>Durée</th><th>Expiration</th><th>Actions</th></tr></thead><tbody id="abonnementTable"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENTS PAGE -->
+    <div class="page" id="payments">
+      <div class="section-head">
+        <div><h2>Paiements — الدفعات</h2><p>Suivi des paiements / تتبع الدفعات</p></div>
+        <button class="btn btn-lime" onclick="openPaymentModal()"> ＋ Nouveau paiement </button>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>Historique des paiements</h3></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Note</th></tr></thead><tbody id="paymentsTable"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORY PAGE -->
+    <div class="page" id="history">
+      <div class="section-head"><div><h2>Historique — السجل</h2><p>Toutes les opérations / جميع العمليات</p></div></div>
+      <div class="card"><div class="card-head"><h3>Activité récente</h3></div><div class="card-body"><div class="history-list" id="historyList"></div></div></div>
+    </div>
+
+    <!-- ACTIVATION PAGE -->
+    <div class="page" id="activation">
+      <div class="section-head"><div><h2>Activation — التفعيل</h2><p>Activation Playlist / تفعيل Playlist</p></div></div>
+      <div class="card" style="margin-bottom:20px;">
+        <div class="card-head"><h3>Nouvelle activation</h3></div>
+        <div class="card-body">
+          <div class="form-grid">
+            <div class="form-group full"><label>Client — العميل</label><select id="activationClient"><option value="">Sélectionner un client</option></select></div>
+            <div class="form-group"><label>Nom client — اسم العميل</label><input class="input" id="activationName" placeholder="Nom du client"></div>
+            <div class="form-group"><label>WhatsApp / رقم الواتساب</label><input class="input" id="activationPhone" placeholder="+212 6XXXXXXXX"></div>
+            <div class="form-group"><label>MAC Address</label><input class="input" id="activationMac" placeholder="00:11:22:33:44:55" maxlength="17"></div>
+            <div class="form-group">
+              <label>Application — التطبيق</label>
+              <select id="activationApp"><option value="">Sélectionner une application</option><option>IBO Player</option><option>IBO Pro</option><option>Ultra VIP</option><option>TOD Player</option><option>Pipo Player</option><option>Hot IPTV</option><option>Bob Player</option><option>Autre</option></select>
+            </div>
+            <div class="form-group"><label>Durée — المدة</label><select id="activationDuration"><option value="12 mois">12 mois — 12 شهر</option><option value="Lifetime">Lifetime — مدى الحياة</option></select></div>
+            <div class="form-group"><label>📆 Date début — تاريخ التفعيل</label><input class="input" type="date" id="activationStart"></div>
+            <div class="form-group"><label>Prix / الثمن (DH)</label><input class="input" type="number" id="activationPrice" placeholder="0.00"></div>
+            <div class="form-group full"><label>Note — ملاحظة</label><input class="input" id="activationNote" placeholder="Note facultative"></div>
+            <div class="form-group full"><button class="btn btn-lime" onclick="createActivation()">⚡ Activer Playlist — تفعيل وإصدار الفاتورة</button></div>
+          </div>
+          <div class="result-box" id="activationResult" style="margin-top:10px;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>Activations — التفعيلات</h3><span class="badge badge-lime" id="activationCount">0</span></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Date</th><th>Client</th><th>WhatsApp</th><th>MAC / App</th><th>Durée / Expiration</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="activationTable"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS PAGE -->
+    <div class="page" id="settings">
+      <div class="section-head"><div><h2>Paramètres — الإعدادات</h2><p>Configuration du panel / إعدادات اللوحة</p></div></div>
+      <div class="card">
+        <div class="card-head"><h3>Données du panel — بيانات اللوحة</h3></div>
+        <div class="card-body">
+          <div class="quick-actions">
+            <button class="quick" onclick="exportData()"><div class="quick-icon">⬇</div><strong>Exporter les données</strong><span>تصدير جميع البيانات</span></button>
+            <button class="quick" onclick="document.getElementById('importFile').click()"><div class="quick-icon">⬆</div><strong>Importer les données</strong><span>استيراد البيانات</span></button>
+            <button class="quick" onclick="clearAllData()"><div class="quick-icon" style="color:#ff5b67">🗑</div><strong>Effacer les données</strong><span>حذف جميع البيانات</span></button>
+          </div>
+          <input type="file" id="importFile" accept=".json" style="display:none">
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- MODALS -->
+<div class="modal" id="clientModal"><div class="modal-box"><div class="modal-head"><h3 id="clientModalTitle">Nouveau client — عميل جديد</h3><button class="close" onclick="closeModal('clientModal')">×</button></div><div class="modal-body"><input type="hidden" id="editClientId"><div class="form-grid"><div class="form-group full"><label>Nom / Prénom — الاسم</label><input class="input" id="clientName" placeholder="Nom du client"></div><div class="form-group"><label>WhatsApp / رقم الواتساب</label><input class="input" id="clientPhone" placeholder="+212 6XXXXXXXX"></div><div class="form-group"><label>Année / عام الدخول</label><input class="input" id="clientYear" value="2026"></div><div class="form-group full"><label>Username / Compte</label><input class="input" id="clientAccount" placeholder="Username"></div></div></div><div class="modal-foot"><button class="btn btn-dark" onclick="closeModal('clientModal')">Annuler</button><button class="btn btn-danger" id="deleteClientModalBtn" onclick="deleteCurrentClient()" style="display:none">Supprimer</button><button class="btn btn-lime" onclick="saveClient()">Enregistrer — حفظ</button></div></div></div>
+<div class="modal" id="debtModal"><div class="modal-box"><div class="modal-head"><h3>Ajouter montant — إضافة مبلغ</h3><button class="close" onclick="closeModal('debtModal')">×</button></div><div class="modal-body"><input type="hidden" id="debtClientId"><div class="form-grid"><div class="form-group"><label>Montant DH</label><input class="input" type="number" min="0" step="0.01" id="debtAmount" placeholder="0.00"></div><div class="form-group"><label>Note</label><input class="input" id="debtNote" placeholder="Ex: Abonnement"></div></div></div><div class="modal-foot"><button class="btn btn-dark" onclick="closeModal('debtModal')">Annuler</button><button class="btn btn-lime" onclick="saveDebt()">Ajouter — إضافة</button></div></div></div>
+<div class="modal" id="paymentModal"><div class="modal-box"><div class="modal-head"><h3>Paiement — الدفعة</h3><button class="close" onclick="closeModal('paymentModal')">×</button></div><div class="modal-body"><input type="hidden" id="paymentClientId"><div class="form-grid"><div class="form-group full"><label>Client — العميل</label><select id="paymentClient"><option value="">Sélectionner un client</option></select></div><div class="form-group"><label>Montant DH</label><input class="input" type="number" min="0" step="0.01" id="paymentAmount" placeholder="0.00"></div><div class="form-group"><label>Note</label><input class="input" id="paymentNote" placeholder="Note"></div></div></div><div class="modal-foot"><button class="btn btn-dark" onclick="closeModal('paymentModal')">Annuler</button><button class="btn btn-lime" onclick="savePayment()">Enregistrer — حفظ</button></div></div></div>
+<div class="modal" id="detailModal"><div class="modal-box" style="max-width:650px;"><div class="modal-head"><h3 id="clientDetailTitle">Dossier Client — ملف العميل</h3><button class="close" onclick="closeModal('detailModal')">×</button></div><div class="modal-body" id="detailBody"></div></div></div>
+<div class="modal" id="receiptModal"><div class="modal-box" style="max-width:520px;"><div class="modal-head"><h3>Reçu / Facture — فاتورة</h3><button class="close" onclick="closeModal('receiptModal')">×</button></div><div class="modal-body" id="receiptBody"></div><div class="modal-foot"><button class="btn btn-dark" onclick="closeModal('receiptModal')">Fermer</button><button class="btn btn-lime" onclick="window.print()">🖨 Imprimer</button></div></div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// الحساب الوحيد الدائم: Sofiane-shop
+const currentAgent = "Sofiane-shop";
+
+const KEYS={ clients:"credits_panel_clients", payments:"credits_panel_payments", history:"credits_panel_history", transactions:"credits_panel_transactions", activations:"credits_panel_activations", abonnements:"credits_panel_abonnements" }; 
+let clients=load(KEYS.clients,[]); 
+let payments=load(KEYS.payments,[]); 
+let historyData=load(KEYS.history,[]); 
+let transactions=load(KEYS.transactions,[]); 
+let activations=load(KEYS.activations,[]); 
+let abonnements=load(KEYS.abonnements,[]); 
+
+function load(key,fallback){ try{ const value=localStorage.getItem(key); return value?JSON.parse(value):fallback; }catch(e){ return fallback; } } 
+function saveData(){ localStorage.setItem(KEYS.clients,JSON.stringify(clients)); localStorage.setItem(KEYS.payments,JSON.stringify(payments)); localStorage.setItem(KEYS.history,JSON.stringify(historyData)); localStorage.setItem(KEYS.transactions,JSON.stringify(transactions)); localStorage.setItem(KEYS.activations,JSON.stringify(activations)); localStorage.setItem(KEYS.abonnements,JSON.stringify(abonnements)); } 
+function makeId(){ return Date.now().toString(36)+Math.random().toString(36).substring(2,8); } 
+function money(value){ return Number(value||0).toLocaleString("fr-FR",{minimumFractionDigits:0,maximumFractionDigits:2})+" DH"; } 
+function now(){ return new Date().toLocaleString("fr-FR"); } 
+function dateOnly(){ return new Date().toLocaleDateString("fr-FR"); } 
+function currentYear(){ return new Date().getFullYear().toString(); }
+function escapeHtml(value){ return String(value??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;"); } 
+function initials(name){ return String(name||"?").split(" ").filter(Boolean).slice(0,2).map(x=>x[0]).join("").toUpperCase(); } 
+function getClient(id){ return clients.find(c=>c.id===id); } 
+
+const titles={ dashboard:"Dashboard", "test-playlist":"Test Playlist", clients:"Clients", abonnements:"Abonnements", payments:"Paiements", history:"Historique", activation:"Activation", settings:"Paramètres" }; 
+
+document.querySelectorAll(".nav-item").forEach(item=>{ 
+  item.addEventListener("click",function(){ 
+    this.classList.remove("icon-spin"); 
+    void this.offsetWidth; 
+    this.classList.add("icon-spin"); 
+    showPage(this.dataset.page); 
+  }); 
+}); 
+
+function showPage(page){ 
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active")); 
+  const target=document.getElementById(page); 
+  if(target)target.classList.add("active"); 
+  document.querySelectorAll(".nav-item").forEach(item=>{ 
+    item.classList.toggle("active",item.dataset.page===page); 
+  }); 
+  document.getElementById("topTitle").textContent=titles[page]||"Dashboard"; 
+  document.getElementById("sidebar").classList.remove("open"); 
+} 
+
+document.getElementById("menuBtn").addEventListener("click",()=>{ document.getElementById("sidebar").classList.toggle("open"); }); 
+
+function updateClock(){ document.getElementById("liveClock").textContent=new Date().toLocaleTimeString("fr-FR"); } 
+setInterval(updateClock,1000); 
+updateClock(); 
+
+let hlsInstance = null;
+
+async function loadAndTestPlaylist() {
+  const urlInput = document.getElementById("testPlaylistInput").value.trim();
+  const listContainer = document.getElementById("channelsList");
+  const infoDisplay = document.getElementById("xtreamInfoDisplay");
+  
+  if(!urlInput){
+    toast("Veuillez entrer un lien M3U");
+    return;
+  }
+
+  try {
+    const parsed = new URL(urlInput);
+    let username = parsed.searchParams.get("username") || parsed.searchParams.get("user") || "";
+    let password = parsed.searchParams.get("password") || parsed.searchParams.get("pass") || "";
+    let server = parsed.origin;
+
+    if(!username || !password) {
+      listContainer.innerHTML = `<div class="empty" style="color:var(--danger);">Le lien M3U ne contient pas de paramètres Xtream (username/password).</div>`;
+      toast("Lien invalide");
+      return;
+    }
+
+    infoDisplay.innerHTML = `
+      <div class="xtream-box">
+        <div class="xtream-title">📡 INFORMATIONS XTREAM EXTRAITES</div>
+        <div class="xtream-line"><span class="xtream-label">🌐 Server :</span><span class="xtream-value">${escapeHtml(server)}</span></div>
+        <div class="xtream-line"><span class="xtream-label">👤 Username :</span><span class="xtream-value">${escapeHtml(username)}</span></div>
+        <div class="xtream-line"><span class="xtream-label">🔑 Password :</span><span class="xtream-value">${escapeHtml(password)}</span></div>
+      </div>
+    `;
+
+    listContainer.innerHTML = `<div class="empty" style="color:var(--lime);">Connexion au serveur Xtream...</div>`;
+
+    const apiUrl = `${server}/player_api.php?username=${username}&password=${password}&action=get_live_streams`;
+    const proxyApiUrl = `https://corsproxy.io/?${encodeURIComponent(apiUrl)}`;
+
+    let response = await fetch(proxyApiUrl).catch(() => null);
+    
+    if(!response || !response.ok) {
+      response = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`).catch(() => null);
+    }
+
+    if(!response || !response.ok) {
+      listContainer.innerHTML = `<div class="empty" style="color:var(--danger);">Erreur de connexion au serveur Xtream (CORS / Serveur Inaccessible).</div>`;
+      toast("Erreur Xtream API");
+      return;
+    }
+
+    const channelsData = await response.json();
+
+    if(!Array.isArray(channelsData) || channelsData.length === 0) {
+      listContainer.innerHTML = `<div class="empty" style="color:var(--warning);">Aucune chaîne live trouvée sur ce compte.</div>`;
+      toast("Aucune chaîne trouvée");
+      return;
+    }
+
+    listContainer.innerHTML = channelsData.slice(0, 300).map((ch) => {
+      const streamUrl = `${server}/live/${username}/${password}/${ch.stream_id}.m3u8`;
+      return `
+        <div class="channel-item" onclick="playChannel('${encodeURIComponent(streamUrl)}', '${escapeHtml(ch.name)}')">
+          <span>📺 ${escapeHtml(ch.name)}</span>
+          <span style="color:var(--lime); font-size:10px;">PLAY ▶</span>
+        </div>
+      `;
+    }).join("");
+
+    toast(`${channelsData.length} chaînes chargées avec succès !`);
+
+  } catch (err) {
+    listContainer.innerHTML = `<div class="empty" style="color:var(--danger);">Erreur lors de l'extraction M3U -> Xtream.</div>`;
+    toast("Erreur d'extraction M3U");
+  }
+}
+
+function playChannel(encodedUrl, name) {
+  let videoUrl = decodeURIComponent(encodedUrl);
+  const video = document.getElementById("iptvPlayer");
+  document.getElementById("currentChannelName").textContent = "Lecture : " + name;
+
+  if (hlsInstance) {
+    hlsInstance.destroy();
+    hlsInstance = null;
+  }
+
+  video.pause();
+
+  if(videoUrl.startsWith("http://")) {
+    videoUrl = `https://corsproxy.io/?${encodeURIComponent(videoUrl)}`;
+  }
+
+  if (videoUrl.includes(".m3u8") && typeof Hls !== 'undefined' && Hls.isSupported()) {
+    hlsInstance = new Hls({
+      enableWorker: true,
+      lowLatencyMode: true
+    });
+    hlsInstance.loadSource(videoUrl);
+    hlsInstance.attachMedia(video);
+    hlsInstance.on(Hls.Events.MANIFEST_PARSED, function() {
+      video.play().catch(() => toast("Cliquez sur Play"));
+    });
+    hlsInstance.on(Hls.Events.ERROR, function(event, data) {
+      if (data.fatal) {
+        if (data.type === Hls.ErrorTypes.NETWORK_ERROR) hlsInstance.startLoad();
+        else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) hlsInstance.recoverMediaError();
+        else hlsInstance.destroy();
+      }
+    });
+  } else {
+    video.src = videoUrl;
+    video.load();
+    video.play().catch(() => {
+      toast("Erreur de lecture");
+    });
+  }
+  toast("Lecture en cours...");
+}
+
+function renderStats(){ 
+  const due=clients.reduce((sum,c)=>sum+Number(c.totalDue||0),0); 
+  const paid=clients.reduce((sum,c)=>sum+Number(c.totalPaid||0),0); 
+  const remain=clients.reduce((sum,c)=>sum+Math.max(0,Number(c.totalDue||0)-Number(c.totalPaid||0)),0); 
+  document.getElementById("statClients").textContent=clients.length; 
+  document.getElementById("statDue").textContent=money(due); 
+  document.getElementById("statPaid").textContent=money(paid); 
+  document.getElementById("statRemain").textContent=money(remain); 
+} 
+
+function clientStatus(client){ 
+  const due=Number(client.totalDue||0); 
+  const paid=Number(client.totalPaid||0); 
+  const remain=Math.max(0,due-paid); 
+  if(due<=0) return{text:"Aucun solde",cls:"badge-green"}; 
+  if(remain<=0) return{text:"Payé",cls:"badge-green"}; 
+  return{text:"Reste",cls:"badge-orange"}; 
+} 
+
+function renderDashboard(){ 
+  const body=document.getElementById("dashboardTable"); 
+  const recent=[...clients].sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,8); 
+  if(!recent.length){ body.innerHTML=`<tr><td colspan="4"><div class="empty">Aucun client / لا يوجد عملاء</div></td></tr>`; return; } 
+  body.innerHTML=recent.map(client=>{ 
+    const status=clientStatus(client); 
+    const remain=Math.max(0,Number(client.totalDue||0)-Number(client.totalPaid||0)); 
+    return`<tr><td><div class="client-cell"><span class="avatar">${client.avatar?`<img src="${client.avatar}">`:escapeHtml(initials(client.name))}</span><strong>${escapeHtml(client.name)}</strong></div></td><td>${escapeHtml(client.account||"-")}</td><td><span class="badge ${status.cls}">${status.text}</span></td><td>${money(remain)}</td></tr>`; 
+  }).join(""); 
+} 
+
+function renderClients(){ 
+  const search=document.getElementById("clientSearch").value.trim().toLowerCase(); 
+  const list=clients.filter(c=>String(c.name||"").toLowerCase().includes(search)||String(c.account||"").toLowerCase().includes(search)||String(c.phone||"").toLowerCase().includes(search)); 
+  document.getElementById("clientCountText").textContent=clients.length+" clients"; 
+  const body=document.getElementById("clientsTable"); 
+  if(!list.length){ body.innerHTML=`<tr><td colspan="9"><div class="empty">Aucun client trouvé / لم يتم العثور على عميل</div></td></tr>`; return; } 
+  body.innerHTML=list.map(c=>{ 
+    const due=Number(c.totalDue||0); 
+    const paid=Number(c.totalPaid||0); 
+    const remain=Math.max(0,due-paid); 
+    const status=clientStatus(c); 
+    return`<tr><td><div class="client-cell"><span class="avatar">${c.avatar?`<img src="${c.avatar}">`:escapeHtml(initials(c.name))}</span><strong>${escapeHtml(c.name)}</strong></div></td><td>${escapeHtml(c.account||"-")}</td><td><span class="badge badge-blue">${escapeHtml(c.year||currentYear())}</span></td><td><code>${escapeHtml(c.phone||"-")}</code></td><td>${money(due)}</td><td>${money(paid)}</td><td>${money(remain)}</td><td><span class="badge ${status.cls}">${status.text}</span></td><td><div class="actions"><button class="btn btn-dark btn-small" onclick="viewClient('${c.id}')">👁</button><button class="btn btn-blue btn-small" onclick="openDebtModal('${c.id}')">＋DH</button><button class="btn btn-lime btn-small" onclick="openPaymentModal('${c.id}')">💳</button><button class="btn btn-dark btn-small" onclick="editClient('${c.id}')">✎</button><button class="btn btn-dark btn-small" onclick="openClientInvoice('${c.id}')">🧾</button></div></td></tr>`; 
+  }).join(""); 
+} 
+
+function openClientModal(){ 
+  document.getElementById("editClientId").value=""; 
+  document.getElementById("clientName").value=""; 
+  document.getElementById("clientPhone").value=""; 
+  document.getElementById("clientYear").value=currentYear(); 
+  document.getElementById("clientAccount").value=""; 
+  document.getElementById("clientModalTitle").textContent="Nouveau client — عميل جديد"; 
+  document.getElementById("deleteClientModalBtn").style.display="none"; 
+  openModal("clientModal"); 
+} 
+
+function editClient(clientId){ 
+  const client=getClient(clientId); 
+  if(!client)return; 
+  document.getElementById("editClientId").value=client.id; 
+  document.getElementById("clientName").value=client.name||""; 
+  document.getElementById("clientPhone").value=client.phone||""; 
+  document.getElementById("clientYear").value=client.year||currentYear(); 
+  document.getElementById("clientAccount").value=client.account||""; 
+  document.getElementById("clientModalTitle").textContent="Modifier client — تعديل العميل"; 
+  document.getElementById("deleteClientModalBtn").style.display="inline-flex"; 
+  openModal("clientModal"); 
+} 
+
+function saveClient(){ 
+  const editId=document.getElementById("editClientId").value; 
+  const name=document.getElementById("clientName").value.trim(); 
+  const phone=document.getElementById("clientPhone").value.trim(); 
+  const year=document.getElementById("clientYear").value.trim()||currentYear(); 
+  const account=document.getElementById("clientAccount").value.trim(); 
+  if(!name){ toast("Veuillez entrer le nom du client"); return; } 
+  if(editId){ 
+    const client=getClient(editId); 
+    if(client){ client.name=name; client.phone=phone; client.year=year; client.account=account; } 
+    addHistory("Client modifié",`${name}`); 
+    toast("Client modifié avec succès"); 
+  }else{ 
+    const client={id:makeId(),name,phone,year,account,totalDue:0,totalPaid:0,date:dateOnly(), agent:currentAgent}; 
+    clients.unshift(client); 
+    addHistory("Nouveau client",`${name}`); 
+    toast("Client ajouté avec succès"); 
+  } 
+  saveData(); 
+  closeModal("clientModal"); 
+  renderAll(); 
+} 
+
+function deleteCurrentClient(){ 
+  const id=document.getElementById("editClientId").value; 
+  if(!id)return; 
+  const client=getClient(id); 
+  if(!client)return; 
+  if(!confirm("Supprimer ce client ?\n\nحذف هذا العميل ؟"))return; 
+  clients=clients.filter(c=>c.id!==id); 
+  payments=payments.filter(p=>p.clientId!==id); 
+  transactions=transactions.filter(t=>t.clientId!==id); 
+  abonnements=abonnements.filter(a=>a.clientId!==id); 
+  addHistory("Client supprimé",`${client.name}`); 
+  saveData(); 
+  closeModal("clientModal"); 
+  renderAll(); 
+  toast("Client supprimé"); 
+} 
+
+function viewClient(id){ 
+  const c=getClient(id); 
+  if(!c)return; 
+  const remain=Math.max(0,Number(c.totalDue||0)-Number(c.totalPaid||0)); 
+  
+  const clientAbonnements = abonnements.filter(a => a.clientId === id);
+  const clientActivations = activations.filter(act => act.clientId === id);
+  const clientPayments = payments.filter(p => p.clientId === id);
+
+  document.getElementById("clientDetailTitle").textContent = `ملف العميل: ${c.name}`;
+  
+  let html = `
+    <div class="form-grid" style="margin-bottom:15px;">
+      <div class="form-group"><label>Nom / الاسم</label><div class="input">${escapeHtml(c.name)}</div></div>
+      <div class="form-group"><label>WhatsApp / الواتساب</label><div class="input">${escapeHtml(c.phone||"-")}</div></div>
+      <div class="form-group"><label>Année / العام</label><div class="input">${escapeHtml(c.year||currentYear())}</div></div>
+      <div class="form-group"><label>Compte / Username</label><div class="input">${escapeHtml(c.account||"-")}</div></div>
+      <div class="form-group"><label>Total Facturé</label><div class="input" style="color:var(--orange);">${money(c.totalDue)}</div></div>
+      <div class="form-group"><label>Total Payé</label><div class="input" style="color:var(--green);">${money(c.totalPaid)}</div></div>
+      <div class="form-group full"><label>Reste / الباقي</label><div class="input" style="color:var(--danger); font-weight:bold;">${money(remain)}</div></div>
+    </div>
+
+    <div style="margin-top:15px; border-top:1px solid var(--line); padding-top:12px;">
+      <h4 style="color:var(--lime); font-size:12px; margin-bottom:8px;">📡 الاشتراكات (Abonnements Xtream)</h4>
+  `;
+
+  if(clientAbonnements.length > 0) {
+    html += `<div class="table-wrap"><table><thead><tr><th>التاريخ</th><th>التطبيق</th><th>Server / User</th><th>المدة والانتهاء</th></tr></thead><tbody>`;
+    clientAbonnements.forEach(ab => {
+      html += `<tr><td>${escapeHtml(ab.date)}</td><td><span class="badge badge-lime">${escapeHtml(ab.app)}</span></td><td>${escapeHtml(ab.server)}<br><small>${escapeHtml(ab.username)}</small></td><td>${escapeHtml(ab.duration)}<br><span style="color:var(--orange);">${escapeHtml(ab.expiration)}</span></td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  } else {
+    html += `<div style="color:var(--muted); font-size:11px;">لا توجد اشتراكات مسجلة لهذا العميل.</div>`;
+  }
+
+  html += `</div><div style="margin-top:15px; border-top:1px solid var(--line); padding-top:12px;">
+      <h4 style="color:var(--blue); font-size:12px; margin-bottom:8px;">⚡ التفعيلات (Activations Playlist)</h4>`;
+
+  if(clientActivations.length > 0) {
+    html += `<div class="table-wrap"><table><thead><tr><th>التاريخ</th><th>التطبيق</th><th>MAC Address</th><th>الانتهاء والثمن</th></tr></thead><tbody>`;
+    clientActivations.forEach(act => {
+      html += `<tr><td>${escapeHtml(act.date)}</td><td><span class="badge badge-blue">${escapeHtml(act.app)}</span></td><td><code>${escapeHtml(act.mac)}</code></td><td>${escapeHtml(act.expiration)}<br><strong style="color:var(--green);">${money(act.price)}</strong></td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  } else {
+    html += `<div style="color:var(--muted); font-size:11px;">لا توجد تفعيلات مسجلة لهذا العميل.</div>`;
+  }
+
+  html += `</div><div style="margin-top:15px; border-top:1px solid var(--line); padding-top:12px;">
+      <h4 style="color:var(--green); font-size:12px; margin-bottom:8px;">💳 الدفعات المالية (Paiements)</h4>`;
+
+  if(clientPayments.length > 0) {
+    html += `<div class="table-wrap"><table><thead><tr><th>التاريخ</th><th>المبلغ المدفوع</th><th>ملاحظة</th></tr></thead><tbody>`;
+    clientPayments.forEach(p => {
+      html += `<tr><td>${escapeHtml(p.date)}</td><td><span class="badge badge-green">+${money(p.amount)}</span></td><td>${escapeHtml(p.note||"-")}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  } else {
+    html += `<div style="color:var(--muted); font-size:11px;">لا توجد دفعات مالية مسجلة لهذا العميل.</div>`;
+  }
+
+  html += `</div>`;
+
+  document.getElementById("detailBody").innerHTML = html; 
+  openModal("detailModal"); 
+} 
+
+function openDebtModal(id){ 
+  const c=getClient(id); 
+  if(!c)return; 
+  document.getElementById("debtClientId").value=id; 
+  document.getElementById("debtAmount").value=""; 
+  document.getElementById("debtNote").value=""; 
+  openModal("debtModal"); 
+} 
+
+function saveDebt(){ 
+  const id=document.getElementById("debtClientId").value; 
+  const amount=Number(document.getElementById("debtAmount").value); 
+  const note=document.getElementById("debtNote").value.trim(); 
+  const c=getClient(id); 
+  if(!c||amount<=0){ toast("Montant invalide"); return; } 
+  c.totalDue=Number(c.totalDue||0)+amount; 
+  transactions.unshift({id:makeId(),clientId:id,type:"Dette",amount,note,date:now(),agent:currentAgent}); 
+  addHistory("Montant ajouté",`${c.name} • ${money(amount)}`); 
+  saveData(); 
+  closeModal("debtModal"); 
+  renderAll(); 
+  toast("Montant ajouté"); 
+} 
+
+function openPaymentModal(clientId=""){ 
+  const select=document.getElementById("paymentClient"); 
+  select.innerHTML=`<option value="">Sélectionner un client</option>${clients.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}${c.account?" • "+escapeHtml(c.account):""}</option>`).join("")}`; 
+  select.value=clientId||""; 
+  document.getElementById("paymentClientId").value=clientId||""; 
+  document.getElementById("paymentAmount").value=""; 
+  document.getElementById("paymentNote").value=""; 
+  openModal("paymentModal"); 
+} 
+
+document.getElementById("paymentClient").addEventListener("change",function(){ document.getElementById("paymentClientId").value=this.value; }); 
+
+function savePayment(){ 
+  const id=document.getElementById("paymentClient").value; 
+  const amount=Number(document.getElementById("paymentAmount").value); 
+  const note=document.getElementById("paymentNote").value.trim(); 
+  const c=getClient(id); 
+  if(!c){ toast("Sélectionnez un client"); return; } 
+  if(amount<=0){ toast("Montant invalide"); return; } 
+  const remain=Math.max(0,Number(c.totalDue||0)-Number(c.totalPaid||0)); 
+  if(remain>0&&amount>remain){ toast("Le paiement dépasse le reste : "+money(remain)); return; } 
+  c.totalPaid=Number(c.totalPaid||0)+amount; 
+  payments.unshift({id:makeId(),clientId:id,name:c.name,amount,note,date:now(),agent:currentAgent}); 
+  transactions.unshift({id:makeId(),clientId:id,type:"Paiement",amount,note,date:now(),agent:currentAgent}); 
+  addHistory("Paiement reçu",`${c.name} • ${money(amount)}`); 
+  saveData(); 
+  closeModal("paymentModal"); 
+  renderAll(); 
+  toast("Paiement enregistré"); 
+} 
+
+function renderPayments(){ 
+  const body=document.getElementById("paymentsTable"); 
+  if(!payments.length){ body.innerHTML=`<tr><td colspan="4"><div class="empty">Aucun paiement / لا توجد دفعات</div></td></tr>`; return; } 
+  body.innerHTML=payments.map(p=>`<tr><td>${escapeHtml(p.date)}</td><td><strong>${escapeHtml(p.name)}</strong></td><td><span class="badge badge-green">+${money(p.amount)}</span></td><td>${escapeHtml(p.note||"-")}</td></tr>`).join(""); 
+} 
+
+function addHistory(title,details){ 
+  historyData.unshift({id:makeId(),title,details,date:now(),agent:currentAgent}); 
+  historyData=historyData.slice(0,100); 
+} 
+
+function renderHistory(){ 
+  const box=document.getElementById("historyList"); 
+  if(!historyData.length){ box.innerHTML=`<div class="empty">Aucun historique / لا يوجد سجل</div>`; return; } 
+  box.innerHTML=historyData.map(h=>`<div class="history-item"><div class="history-dot">✓</div><div class="history-info"><strong>${escapeHtml(h.title)}</strong><span>${escapeHtml(h.details||"")} • ${escapeHtml(h.date)}</span></div></div>`).join(""); 
+} 
+
+function abonnementToday(){ 
+  const d=new Date(); 
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; 
+} 
+
+function calcExpiration(startDate,duration){ 
+  if(!startDate) startDate = abonnementToday();
+  if(duration==="Lifetime") return "Lifetime (مدى الحياة)";
+  const d=new Date(startDate+"T00:00:00"); 
+  if(duration==="1 mois") d.setMonth(d.getMonth()+1); 
+  if(duration==="12 mois") d.setFullYear(d.getFullYear()+1); 
+  return `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}/${d.getFullYear()}`; 
+} 
+
+function fillAbonnementClients(){ 
+  const select=document.getElementById("abonnementClient"); 
+  const current=select.value; 
+  select.innerHTML=`<option value="">Sélectionner un client</option>${clients.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}${c.account?" • "+escapeHtml(c.account):""}</option>`).join("")}`; 
+  if(current) select.value=current; 
+} 
+
+document.getElementById("abonnementClient").addEventListener("change",function(){ 
+  const c=getClient(this.value); 
+  if(c) document.getElementById("abonnementName").value=c.name||""; 
+}); 
+
+function autoConvertM3U(showMessage=false){ 
+  const input=document.getElementById("abonnementM3U"); 
+  const status=document.getElementById("m3uStatus"); 
+  if(!input||!status) return false; 
+  const value=input.value.trim(); 
+  if(!value){ 
+    status.className="m3u-status"; 
+    status.textContent="Collez le lien M3U : les informations Xtream seront extraites automatiquement."; 
+    return false; 
+  } 
+  try{ 
+    const parsed=new URL(value); 
+    let username=parsed.searchParams.get("username")||parsed.searchParams.get("user")||""; 
+    let password=parsed.searchParams.get("password")||parsed.searchParams.get("pass")||""; 
+    try{ username=decodeURIComponent(username); password=decodeURIComponent(password); }catch(e){} 
+    const server=parsed.origin; 
+    if(username&&password){ 
+      document.getElementById("abonnementServer").value=server; 
+      document.getElementById("abonnementUsername").value=username; 
+      document.getElementById("abonnementPassword").value=password; 
+      status.className="m3u-status m3u-success"; 
+      status.innerHTML=`✓ M3U détecté — Xtream extrait.<br>🌐 Server : ${escapeHtml(server)}`; 
+      if(showMessage){ document.getElementById("abonnementResult").innerHTML=`<strong style="color:var(--green)">✓ Conversion M3U → Xtream réussية</strong>`; } 
+      return true; 
+    } 
+    status.className="m3u-status m3u-warning"; 
+    status.textContent="⚠ Le lien M3U ne contient pas username/password."; 
+    return false; 
+  }catch(e){ 
+    status.className="m3u-status m3u-error"; 
+    status.textContent="⚠ Lien M3U non valide."; 
+    return false; 
+  } 
+} 
+
+function clearM3UStatus(){ 
+  const status=document.getElementById("m3uStatus"); 
+  if(status){ status.className="m3u-status"; status.textContent="Collez le lien M3U : les informations Xtream seront extraites automatiquement."; } 
+} 
+
+function createAbonnement(){ 
+  const m3uUrl=document.getElementById("abonnementM3U").value.trim(); 
+  if(m3uUrl){ 
+    const converted=autoConvertM3U(true); 
+    if(!converted){ toast("Le lien M3U ne permet pas d'extraire Xtream"); return; } 
+  } 
+  const clientId=document.getElementById("abonnementClient").value; 
+  const name=document.getElementById("abonnementName").value.trim(); 
+  const app=document.getElementById("abonnementApp").value; 
+  const server=document.getElementById("abonnementServer").value.trim(); 
+  const username=document.getElementById("abonnementUsername").value.trim(); 
+  const password=document.getElementById("abonnementPassword").value.trim(); 
+  const duration=document.getElementById("abonnementDuration").value; 
+  const startDate=document.getElementById("abonnementStart").value||abonnementToday(); 
+  const price=Number(document.getElementById("abonnementPrice").value)||0; 
+  const note=document.getElementById("abonnementNote").value.trim(); 
+
+  if(!name){ toast("Entrez le nom du client"); return; } 
+  if(!server){ toast("Entrez le Server Xtream"); return; } 
+  if(!username){ toast("Entrez le Username Xtream"); return; } 
+  if(!password){ toast("Entrez le Password Xtream"); return; } 
+  if(!app){ toast("Sélectionnez une application"); return; } 
+
+  const expiration=calcExpiration(startDate,duration); 
+
+  let finalClientId=clientId;
+  if(!finalClientId){
+    let existingClient=clients.find(c=>c.name.toLowerCase()===name.toLowerCase());
+    if(existingClient){
+      finalClientId=existingClient.id;
+    }else{
+      let newC={id:makeId(), name, phone:"", year:currentYear(), account:username, totalDue:0, totalPaid:0, date:dateOnly(), agent:currentAgent};
+      clients.unshift(newC);
+      finalClientId=newC.id;
+    }
+  }
+
+  if(price>0){
+    let clientObj=getClient(finalClientId);
+    if(clientObj){
+      clientObj.totalDue=Number(clientObj.totalDue||0)+price;
+      transactions.unshift({id:makeId(), clientId:finalClientId, type:"Abonnement", amount:price, note:`Xtream (${app})`, date:now(), agent:currentAgent});
+    }
+  }
+
+  const client=getClient(finalClientId); 
+  const abonnement={ id:makeId(), date:dateOnly(), createdAt:now(), clientId:finalClientId||"", name, account:client?client.account||username: username, app, type:"Xtream", server, username, password, m3uUrl, duration, startDate, expiration, price, note, status:"Actif", agent:currentAgent }; 
+  abonnements.unshift(abonnement); 
+  addHistory(m3uUrl?"Nouveau Abonnement M3U → Xtream":"Nouveau Abonnement Xtream", `${name} • ${app}`); 
+  saveData(); 
+  document.getElementById("abonnementResult").innerHTML=`<strong style="color:var(--lime)">✓ Abonnement créé avec succès</strong>`; 
+  document.getElementById("abonnementM3U").value=""; 
+  document.getElementById("abonnementServer").value=""; 
+  document.getElementById("abonnementUsername").value=""; 
+  document.getElementById("abonnementPassword").value=""; 
+  document.getElementById("abonnementPrice").value=""; 
+  document.getElementById("abonnementNote").value=""; 
+  clearM3UStatus(); 
+  renderAbonnements(); 
+  renderClients();
+  renderStats();
+  toast("Abonnement créé avec succès"); 
+} 
+
+function renderAbonnements(){ 
+  document.getElementById("abonnementCount").textContent=abonnements.length; 
+  const body=document.getElementById("abonnementTable"); 
+  if(!abonnements.length){ body.innerHTML=`<tr><td colspan="7"><div class="empty">Aucun abonnement Xtream / لا توجد اشتراكات</div></td></tr>`; return; } 
+  body.innerHTML=abonnements.map(a=>`<tr><td>${escapeHtml(a.date||"-")}</td><td><div class="client-cell"><span class="avatar">${escapeHtml(initials(a.name))}</span><strong>${escapeHtml(a.name)}</strong></div></td><td><span class="badge badge-lime">${escapeHtml(a.app||"-")}</span></td><td><span class="badge badge-blue">📡 Xtream</span>${a.m3uUrl?`<span class="badge badge-green" style="margin-left:3px">M3U ✓</span>`:""}<br><small style="color:var(--muted);font-size:9px;">${escapeHtml(a.username||"-")}</small></td><td><span class="badge badge-lime">${escapeHtml(a.duration||"-")}</span></td><td><span class="badge badge-orange">${escapeHtml(a.expiration||"-")}</span></td><td><div class="actions"><button class="btn btn-blue btn-small" onclick="viewAbonnement('${a.id}')">👁</button>${a.clientId?`<button class="btn btn-blue btn-small" onclick="openDebtModal('${a.clientId}')">＋DH</button><button class="btn btn-lime btn-small" onclick="openPaymentModal('${a.clientId}')">💳</button>`:``}<button class="btn btn-dark btn-small" onclick="openAbonnementReceipt('${a.id}')">🧾</button><button class="btn btn-lime btn-small" onclick="copyXtream('${a.id}')">📋</button><button class="btn btn-danger btn-small" onclick="deleteAbonnement('${a.id}')">🗑</button></div></td></tr>`).join(""); 
+} 
+
+function viewAbonnement(id){ 
+  const a=abonnements.find(x=>x.id===id); 
+  if(!a) return; 
+  document.getElementById("detailBody").innerHTML=`<div class="xtream-box"><div class="xtream-title">📡 INFORMATIONS XTREAM</div><div class="xtream-line"><span class="xtream-label">Client</span><span class="xtream-value">${escapeHtml(a.name)}</span></div><div class="xtream-line"><span class="xtream-label">Application</span><span class="xtream-value">${escapeHtml(a.app||"-")}</span></div>${a.m3uUrl?`<div class="xtream-line"><span class="xtream-label">🔗 M3U URL</span><span class="xtream-value" style="color:var(--green)">${escapeHtml(a.m3uUrl)}</span></div>`:""}<div class="xtream-line"><span class="xtream-label">🌐 Server</span><span class="xtream-value">${escapeHtml(a.server||"-")}</span></div><div class="xtream-line"><span class="xtream-label">👤 Username</span><span class="xtream-value">${escapeHtml(a.username||"-")}</span></div><div class="xtream-line"><span class="xtream-label">🔑 Password</span><span class="xtream-value">${escapeHtml(a.password||"-")}</span></div><div class="xtream-line"><span class="xtream-label">📅 Durée</span><span class="xtream-value">${escapeHtml(a.duration||"-")}</span></div><div class="xtream-line"><span class="xtream-label">⏳ Expiration</span><span class="xtream-value" style="color:var(--lime)">${escapeHtml(a.expiration||"-")}</span></div></div>`; 
+  openModal("detailModal"); 
+} 
+
+function copyXtream(id){ 
+  const a=abonnements.find(x=>x.id===id); 
+  if(!a) return; 
+  const text=`XTREAM\nClient: ${a.name}\nServer: ${a.server}\nUsername: ${a.username}\nPassword: ${a.password}\nApplication: ${a.app}\nExpiration: ${a.expiration}`.trim(); 
+  navigator.clipboard.writeText(text).then(()=>{ toast("Informations copiées"); }); 
+} 
+
+function deleteAbonnement(id){ 
+  const a=abonnements.find(x=>x.id===id); 
+  if(!a) return; 
+  if(!confirm("Supprimer cet abonnement ?")) return; 
+  abonnements=abonnements.filter(x=>x.id!==id); 
+  addHistory("Abonnement supprimé",`${a.name}`); 
+  saveData(); 
+  renderAbonnements(); 
+  toast("Abonnement supprimé"); 
+} 
+
+function fillActivationClients(){ 
+  const select=document.getElementById("activationClient"); 
+  const current=select.value; 
+  select.innerHTML=`<option value="">Sélectionner un client</option>${clients.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}${c.phone?" • "+escapeHtml(c.phone):""}</option>`).join("")}`; 
+  if(current) select.value=current; 
+} 
+
+document.getElementById("activationClient").addEventListener("change",function(){ 
+  const c=getClient(this.value); 
+  if(c){ 
+    document.getElementById("activationName").value=c.name||""; 
+    document.getElementById("activationPhone").value=c.phone||""; 
+  } 
+}); 
+
+document.getElementById("activationMac").addEventListener("input",function(){ 
+  let value=this.value.replace(/[^a-fA-F0-9]/g,"").toUpperCase().slice(0,12); 
+  let parts=[]; 
+  for(let i=0; i<value.length; i+=2) parts.push(value.slice(i,i+2)); 
+  this.value=parts.join(":"); 
+}); 
+
+function createActivation(){ 
+  const clientId=document.getElementById("activationClient").value; 
+  const name=document.getElementById("activationName").value.trim(); 
+  const phone=document.getElementById("activationPhone").value.trim(); 
+  const mac=document.getElementById("activationMac").value.trim(); 
+  const app=document.getElementById("activationApp").value; 
+  const duration=document.getElementById("activationDuration").value; 
+  const startDate=document.getElementById("activationStart").value||abonnementToday(); 
+  const price=Number(document.getElementById("activationPrice").value)||0; 
+  const note=document.getElementById("activationNote").value.trim(); 
+
+  if(!name){ toast("Entrez le nom du client"); return; } 
+  if(!mac){ toast("Entrez la MAC Address"); return; } 
+  if(!app){ toast("Sélectionnez une application"); return; } 
+
+  const expiration = calcExpiration(startDate, duration);
+
+  let finalClientId=clientId;
+  if(!finalClientId){
+    let existingClient=clients.find(c=>c.name.toLowerCase()===name.toLowerCase()||(phone&&c.phone===phone));
+    if(existingClient){
+      finalClientId=existingClient.id;
+    }else{
+      let newC={id:makeId(), name, phone, year:currentYear(), account:"Activation", totalDue:0, totalPaid:0, date:dateOnly(), agent:currentAgent};
+      clients.unshift(newC);
+      finalClientId=newC.id;
+    }
+  }
+
+  if(price>0){
+    let clientObj=getClient(finalClientId);
+    if(clientObj){
+      clientObj.totalDue=Number(clientObj.totalDue||0)+price;
+      transactions.unshift({id:makeId(), clientId:finalClientId, type:"Activation", amount:price, note:`${app} (${mac})`, date:now(), agent:currentAgent});
+    }
+  }
+
+  const client=getClient(finalClientId); 
+  const activation={ id:makeId(), date:dateOnly(), startDate, expiration, createdAt:now(), clientId:finalClientId, name, phone, mac, app, duration, price, note, status:"Activé", agent:currentAgent }; 
+  activations.unshift(activation); 
+  addHistory("Activation créée",`${name} • ${app} • ${mac}`); 
+  saveData(); 
+  document.getElementById("activationResult").innerHTML=`<strong style="color:var(--lime)">✓ Activation réussie & Facturée</strong>`; 
+  renderActivations(); 
+  renderClients(); 
+  renderStats(); 
+  toast("Activation créée avec succès"); 
+} 
+
+function renderActivations(){ 
+  document.getElementById("activationCount").textContent=activations.length; 
+  const body=document.getElementById("activationTable"); 
+  if(!activations.length){ body.innerHTML=`<tr><td colspan="7"><div class="empty">Aucune activation / لا توجد تفعيلات</div></td></tr>`; return; } 
+  body.innerHTML=activations.map(a=>`<tr><td>${escapeHtml(a.date)}</td><td><strong>${escapeHtml(a.name)}</strong></td><td><code>${escapeHtml(a.phone||"-")}</code></td><td><span class="badge badge-lime">${escapeHtml(a.app)}</span><br><small style="color:var(--muted)">${escapeHtml(a.mac)}</small></td><td><span class="badge badge-blue">Début: ${escapeHtml(a.startDate||"-")}</span><br><span class="badge badge-orange" style="margin-top:3px;">Fin: ${escapeHtml(a.expiration||"-")}</span></td><td><span class="badge badge-green">${escapeHtml(a.status)}</span></td><td><div class="actions"><button class="btn btn-dark btn-small" onclick="viewActivation('${a.id}')">👁</button>${a.clientId?`<button class="btn btn-blue btn-small" onclick="openDebtModal('${a.clientId}')">＋DH</button><button class="btn btn-lime btn-small" onclick="openPaymentModal('${a.clientId}')">💳</button>`:``}<button class="btn btn-lime btn-small" onclick="openActivationReceipt('${a.id}')">🧾</button><button class="btn btn-danger btn-small" onclick="deleteActivation('${a.id}')">🗑</button></div></td></tr>`).join(""); 
+} 
+
+function viewActivation(id){ 
+  const a=activations.find(x=>x.id===id); 
+  if(!a) return; 
+  document.getElementById("detailBody").innerHTML=`<div class="xtream-box"><div class="xtream-title">⚡ DÉTAILS ACTIVATION</div><div class="xtream-line"><span class="xtream-label">Client</span><span class="xtream-value">${escapeHtml(a.name)}</span></div><div class="xtream-line"><span class="xtream-label">WhatsApp</span><span class="xtream-value">${escapeHtml(a.phone||"-")}</span></div><div class="xtream-line"><span class="xtream-label">MAC Address</span><span class="xtream-value" style="color:var(--lime)">${escapeHtml(a.mac)}</span></div><div class="xtream-line"><span class="xtream-label">Application</span><span class="xtream-value">${escapeHtml(a.app)}</span></div><div class="xtream-line"><span class="xtream-label">Durée</span><span class="xtream-value">${escapeHtml(a.duration)}</span></div><div class="xtream-line"><span class="xtream-label">Date Début</span><span class="xtream-value" style="color:var(--blue)">${escapeHtml(a.startDate||"-")}</span></div><div class="xtream-line"><span class="xtream-label">Date Expiration</span><span class="xtream-value" style="color:var(--orange)">${escapeHtml(a.expiration||"-")}</span></div><div class="xtream-line"><span class="xtream-label">Prix</span><span class="xtream-value" style="color:var(--green)">${money(a.price)}</span></div></div>`; 
+  openModal("detailModal"); 
+} 
+
+function deleteActivation(id){ 
+  const a=activations.find(x=>x.id===id); 
+  if(!a) return; 
+  if(!confirm("Supprimer cette activation ?")) return; 
+  activations=activations.filter(x=>x.id!==id); 
+  addHistory("Activation supprimée",`${a.name}`); 
+  saveData(); 
+  renderActivations(); 
+  toast("Activation supprimée"); 
+} 
+
+// فاتورة Sofiane-shop الأنيقة والدائمة لكافة المخرجات
+function generateInvoiceHTML(itemType, itemData, clientData, priceVal) {
+  let designationText = "";
+  if(itemType === 'activation') {
+    designationText = `Activation ${escapeHtml(itemData.app)} (${escapeHtml(itemData.mac)}) - ${escapeHtml(itemData.duration)}`;
+  } else if(itemType === 'abonnement') {
+    designationText = `Abonnement Xtream ${escapeHtml(itemData.app)} (${escapeHtml(itemData.username)}) - ${escapeHtml(itemData.duration)}`;
+  } else {
+    designationText = `Compte: ${escapeHtml(clientData.account||'-')} (Année: ${escapeHtml(clientData.year||currentYear())})`;
+  }
+
+  return `
+    <div class="sofiane-invoice">
+      <div class="sofiane-header">
+        <div class="sofiane-logo-area">
+          <div class="sofiane-bag-icon">🛍️</div>
+          <div class="sofiane-brand-box">
+            <div class="sofiane-brand-main">Sofiane<span>-shop</span></div>
+            <div class="sofiane-brand-sub">Toujours à votre service</div>
+          </div>
+        </div>
+        <div class="sofiane-contacts-stack">
+          <div class="sofiane-contact-pill">✉️ soufianshop65@gmail.com</div>
+          <div class="sofiane-contact-pill rtl">📍 حي المدرسي 310 تطوان</div>
+          <div class="sofiane-contact-pill">📞 06 58 50 05 55</div>
+          <div class="sofiane-contact-pill">📞 06 66 22 70 60</div>
+        </div>
+      </div>
+      <div class="sofiane-title-bar">📄 FACTURE / فاتورة</div>
+      <div class="sofiane-meta-grid">
+        <div>
+          <div class="sofiane-meta-row"><span><strong>N° facture :</strong></span> <span>#${itemData.id.slice(-6).toUpperCase()}</span></div>
+          <div class="sofiane-meta-row"><span><strong>Date :</strong></span> <span>${escapeHtml(itemData.startDate || itemData.date || dateOnly())}</span></div>
+          ${itemData.expiration ? `<div class="sofiane-meta-row"><span><strong>Date fin :</strong></span> <span style="color:#d97706;">${escapeHtml(itemData.expiration)}</span></div>` : ''}
+        </div>
+        <div>
+          <div class="sofiane-meta-row"><span><strong>Client :</strong></span> <span>${escapeHtml(itemData.name || clientData.name)}</span></div>
+          <div class="sofiane-meta-row"><span><strong>WhatsApp :</strong></span> <span>${escapeHtml(itemData.phone || clientData.phone || "-")}</span></div>
+        </div>
+      </div>
+      <table class="sofiane-table">
+        <thead>
+          <tr>
+            <th>Désignation / الوصف</th>
+            <th>Qté</th>
+            <th>P.U</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align:left;">${designationText}</td>
+            <td>1</td>
+            <td>${priceVal>0?money(priceVal):'-'}</td>
+            <td>${priceVal>0?money(priceVal):'-'}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="sofiane-bottom-grid">
+        <div class="sofiane-box-card">
+          <div class="sofiane-box-title">💳 Paiement</div>
+          <div>Espèces / Virement</div>
+        </div>
+        <div class="sofiane-box-card">
+          <div class="sofiane-total-row"><span>Total :</span> <span>${priceVal>0?money(priceVal):'-'}</span></div>
+          <div class="sofiane-total-row sofiane-total-highlight"><span>Montant (DH) :</span> <span>${priceVal>0?money(priceVal):'-'}</span></div>
+          <div class="sofiane-total-row"><span>Statut :</span> <span style="color:var(--green)">Payé / Validé</span></div>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:8px; font-weight:bold; color:#1e40af; font-size:9px;">
+        Merci pour votre confiance — شكرا لكم على ثقتكم
+      </div>
+    </div>
+  `;
+}
+
+function openActivationReceipt(id){ 
+  const a=activations.find(x=>x.id===id); 
+  if(!a) return; 
+  const priceVal = Number(a.price||0);
+  document.getElementById("receiptBody").innerHTML = generateInvoiceHTML('activation', a, {}, priceVal);
+  openModal("receiptModal"); 
+} 
+
+function openAbonnementReceipt(id){ 
+  const a=abonnements.find(x=>x.id===id); 
+  if(!a) return; 
+  const priceVal = Number(a.price||0);
+  document.getElementById("receiptBody").innerHTML = generateInvoiceHTML('abonnement', a, {}, priceVal);
+  openModal("receiptModal"); 
+} 
+
+function openClientInvoice(id){ 
+  const c=getClient(id); 
+  if(!c) return; 
+  const due=Number(c.totalDue||0); 
+  document.getElementById("receiptBody").innerHTML = generateInvoiceHTML('client', c, c, due);
+  openModal("receiptModal"); 
+} 
+
+function openModal(id){ document.getElementById(id).classList.add("show"); } 
+function closeModal(id){ document.getElementById(id).classList.remove("show"); } 
+
+document.querySelectorAll(".modal").forEach(modal=>{ 
+  modal.addEventListener("click",function(e){ if(e.target===this) this.classList.remove("show"); }); 
+}); 
+
+let toastTimer; 
+function toast(message){ 
+  const box=document.getElementById("toast"); 
+  box.textContent=message; 
+  box.classList.add("show"); 
+  clearTimeout(toastTimer); 
+  toastTimer=setTimeout(()=>{ box.classList.remove("show"); },2500); 
+} 
+
+function exportData(){ 
+  const data={clients,payments,history:historyData,transactions,activations,abonnements}; 
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}); 
+  const url=URL.createObjectURL(blob); 
+  const a=document.createElement("a"); 
+  a.href=url; 
+  a.download="sofiane-shop-backup.json"; 
+  a.click(); 
+  URL.revokeObjectURL(url); 
+  toast("Données exportées"); 
+} 
+
+document.getElementById("importFile").addEventListener("change",function(){ 
+  const file=this.files[0]; 
+  if(!file) return; 
+  const reader=new FileReader(); 
+  reader.onload=function(){ 
+    try{ 
+      const data=JSON.parse(reader.result); 
+      clients=Array.isArray(data.clients)?data.clients:[]; 
+      payments=Array.isArray(data.payments)?data.payments:[]; 
+      historyData=Array.isArray(data.history)?data.history:[]; 
+      transactions=Array.isArray(data.transactions)?data.transactions:[]; 
+      activations=Array.isArray(data.activations)?data.activations:[]; 
+      abonnements=Array.isArray(data.abonnements)?data.abonnements:[]; 
+      saveData(); 
+      renderAll(); 
+      toast("Données importées"); 
+    }catch(e){ toast("Fichier JSON invalide"); } 
+  }; 
+  reader.readAsText(file); 
+  this.value=""; 
+}); 
+
+function clearAllData(){ 
+  if(!confirm("Supprimer toutes les données ?\n\nتأكيد مسح جميع البيانات؟")) return; 
+  clients=[]; payments=[]; historyData=[]; transactions=[]; activations=[]; abonnements=[]; 
+  saveData(); 
+  renderAll(); 
+  toast("Données supprimées"); 
+} 
+
+document.getElementById("clientSearch").addEventListener("input",renderClients); 
+
+function renderAll(){ 
+  renderStats(); 
+  renderDashboard(); 
+  renderClients(); 
+  renderPayments(); 
+  renderHistory(); 
+  fillActivationClients(); 
+  renderActivations(); 
+  fillAbonnementClients(); 
+  renderAbonnements(); 
+} 
+
+const activationStart=document.getElementById("activationStart"); 
+if(activationStart) activationStart.value=abonnementToday(); 
+
+const abonnementStart=document.getElementById("abonnementStart"); 
+if(abonnementStart) abonnementStart.value=abonnementToday(); 
+renderAll();
+</script>
+</body>
+</html>
+
