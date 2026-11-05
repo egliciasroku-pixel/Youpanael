@@ -36,7 +36,6 @@ body{ background: radial-gradient(circle at 10% 0%,rgba(168,255,0,.05),transpare
 .nav-item.icon-spin .nav-icon{ animation:iconSpin .5s ease; } 
 .nav-label{ display:flex; flex-direction:column; line-height:1.1; } 
 .nav-fr{ font-size:11.5px; font-weight:800; } 
-.nav-ar{ font-size:9.5px; margin-top:2px; direction:rtl; opacity:.75; } 
 .sidebar-bottom{ margin-top:auto; padding-top:8px; color:var(--muted); font-size:8.5px; text-align:center; } 
 
 /* MAIN CONTAINER */ 
@@ -87,7 +86,140 @@ body{ background: radial-gradient(circle at 10% 0%,rgba(168,255,0,.05),transpare
 .btn-blue { background: rgba(85, 184, 255, 0.1) !important; color: var(--blue) !important; }
 .btn-small { padding: 5px 7px; font-size: 9.5px; border-radius: 7px; }
 
-/* ULTRA LUXURY ANIMATED GLOW BUTTONS FOR SETTINGS */
+/* MULTI-DEVICE SELECTION CARDS */
+.multi-device-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+  max-height: 440px;
+  overflow-y: auto;
+  padding: 4px;
+  direction: ltr;
+}
+.multi-device-grid::-webkit-scrollbar { width: 4px; }
+.multi-device-grid::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+
+.device-select-card {
+  background: var(--bg);
+  box-shadow: inset 0 6px 12px rgba(0, 0, 0, 0.8), inset 0 -2px 5px rgba(255, 255, 255, 0.02), 0 2px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  text-align: left;
+}
+.device-select-card:hover {
+  box-shadow: inset 0 8px 16px rgba(0, 0, 0, 0.9), 0 4px 15px rgba(168, 255, 0, 0.1);
+  transform: translateY(-1px);
+}
+.device-select-card.selected {
+  background: linear-gradient(145deg, #071012, #04090a);
+  box-shadow: inset 0 8px 18px rgba(0, 0, 0, 0.95), 0 0 15px rgba(168,255,0,0.25);
+  border-color: rgba(168,255,0,0.5) !important;
+}
+.device-select-card img {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+  background: #ffffff;
+  box-shadow: inset 0 4px 8px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  padding: 4px;
+}
+.device-select-card .dev-title {
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--text);
+  text-align: center;
+  line-height: 1.3;
+}
+.device-select-card .checkbox-mark {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+  color: transparent;
+  font-size: 10px;
+  font-weight: bold;
+}
+.device-select-card.selected .checkbox-mark {
+  background: var(--lime);
+  color: #050807;
+  box-shadow: 0 0 6px var(--lime);
+}
+
+/* SINGLE DEVICE CARD */
+.single-device-card {
+  background: linear-gradient(145deg, #0b1517, #071012);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.single-device-controls {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  background: rgba(5, 11, 12, 0.85);
+  padding: 10px;
+  border-radius: 10px;
+}
+.device-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.device-input-group label {
+  font-size: 9px;
+  color: var(--muted);
+  font-weight: bold;
+}
+.device-select-styled, .device-num-input {
+  background: #0d1719 !important;
+  color: var(--lime2) !important;
+  border-radius: 8px !important;
+  padding: 8px 10px !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  outline: none;
+  width: 100%;
+}
+.single-device-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+}
+.total-badge-container small {
+  color: var(--muted);
+  font-size: 8.5px;
+  display: block;
+}
+.total-badge-container span {
+  color: var(--lime);
+  font-size: 15px;
+  font-weight: 900;
+}
+
+/* LUXURY ACTION BUTTONS */
 .lux-action-btn {
   position: relative;
   background: linear-gradient(135deg, rgba(13, 23, 25, 0.9), rgba(8, 16, 18, 0.95)) !important;
@@ -109,20 +241,6 @@ body{ background: radial-gradient(circle at 10% 0%,rgba(168,255,0,.05),transpare
 .lux-action-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 35px rgba(168, 255, 0, 0.15);
-}
-.lux-action-btn::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(60deg, transparent, rgba(168, 255, 0, 0.15), transparent);
-  transform: rotate(30deg) translateX(-100%);
-  transition: transform 0.7s ease-in-out;
-}
-.lux-action-btn:hover::after {
-  transform: rotate(30deg) translateX(100%);
 }
 .lux-btn-top {
   display: flex;
@@ -185,16 +303,61 @@ tr:hover td{ background:rgba(168,255,0,.015); }
 .form-group label{ font-size:10px; color:var(--muted); } 
 .input, select, textarea{ width:100%; background:#071012; color:white; outline:none; border-radius:9px; padding:9px; font-size:11px; } 
 textarea{ min-height:70px; resize:vertical; } 
-option{ background:#0b1517; } 
 
-/* LUXURY APP SELECTOR STYLING */
-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a8ff00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 14px;
-  padding-right: 30px;
+/* CUSTOM SELECTOR FOR APPS */
+.custom-select-wrapper { position: relative; width: 100%; }
+.custom-select-trigger {
+  background: #071012;
+  border-radius: 9px;
+  padding: 8px 10px;
+  font-size: 11px;
+  color: var(--lime2);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.6);
+}
+.custom-select-trigger span { display: flex; align-items: center; gap: 8px; }
+.custom-select-trigger img { width: 26px; height: 26px; object-fit: contain; border-radius: 4px; background: #fff; padding: 1px; }
+.custom-select-trigger .none-icon {
+  width: 26px; height: 26px; border-radius: 4px; background: rgba(168,255,0,0.1); color: var(--lime); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;
+}
+
+.custom-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #081214;
+  border-radius: 9px;
+  margin-top: 4px;
+  display: none;
+  z-index: 999;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  overflow: hidden;
+}
+.custom-options.open { display: block; }
+.custom-option {
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #f4f7f5;
+  font-size: 11.5px;
+  font-weight: 800;
+  transition: background 0.2s;
+  background: #081214 !important;
+}
+.custom-option:hover {
+  background: rgba(168,255,0,0.12) !important;
+  color: var(--lime);
+}
+.custom-option img { width: 28px; height: 28px; object-fit: contain; border-radius: 4px; background: #fff; padding: 1px; }
+.custom-option .none-icon {
+  width: 28px; height: 28px; border-radius: 4px; background: rgba(168,255,0,0.1); color: var(--lime); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold;
 }
 
 /* DASHBOARD */ 
@@ -237,7 +400,7 @@ select {
 .toast.show{ transform:translateY(0); opacity:1; } 
 .empty{ padding:25px 10px; text-align:center; color:var(--muted); font-size:11px; } 
 
-/* SOFIANE SHOP EXACT MATCH INVOICE STYLING (WITHOUT BORDER) */
+/* SOFIANE SHOP EXACT MATCH INVOICE STYLING */
 .sofiane-invoice { 
   background: #ffffff; 
   color: #1e3a8a; 
@@ -276,6 +439,26 @@ select {
 .sofiane-contacts-stack { display: flex; flex-direction: column; gap: 3px; align-items: flex-end; }
 .sofiane-contact-pill { background: #2563eb; color: #fff; font-size: 7.5px; padding: 3px 8px; border-radius: 12px; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 2px 4px rgba(37,99,235,0.2); }
 
+.whatsapp-glass-pill-top {
+  background: rgba(37, 211, 102, 0.12);
+  backdrop-filter: blur(4px);
+  color: #0f172a;
+  font-size: 8px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 5px rgba(37, 211, 102, 0.25);
+}
+.whatsapp-mini-icon {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(37,211,102,0.4));
+}
+
 .sofiane-title-bar { background: #2563eb; color: #fff; text-align: center; padding: 6px; font-size: 11.5px; font-weight: 900; border-radius: 6px; letter-spacing: 0.5px; margin: 4px 0; }
 
 .sofiane-meta-table {
@@ -304,20 +487,20 @@ select {
   width: 28%;
 }
 
-.sofiane-table { width: 100% !important; border-collapse: collapse; background: #f8fafc; border-radius: 6px; overflow: hidden; border: none !important; margin-top: 2px; }
+.sofiane-table { width: 100% !important; border-collapse: collapse; background: #f8fafc; border-radius: 6px; overflow: hidden; border: none !important; margin-top: 2px; table-layout: fixed; }
 .sofiane-table th { background: #2563eb; color: #fff; font-size: 8px; padding: 6px 4px; text-align: center; text-transform: uppercase; }
-.sofiane-table td { padding: 6px 4px; font-size: 8.5px; text-align: center; color: #0f172a; word-break: break-word; border: none !important; }
-.sofiane-table th:nth-child(1), .sofiane-table td:nth-child(1) { width: 44%; text-align: left; padding-left: 6px; }
-.sofiane-table th:nth-child(2), .sofiane-table td:nth-child(2) { width: 14%; }
-.sofiane-table th:nth-child(3), .sofiane-table td:nth-child(3) { width: 21%; }
-.sofiane-table th:nth-child(4), .sofiane-table td:nth-child(4) { width: 21%; }
+.sofiane-table td { padding: 6px 4px; font-size: 8.5px; text-align: center; color: #0f172a; word-break: break-word; border: none !important; vertical-align: top; }
+.sofiane-table th:nth-child(1), .sofiane-table td:nth-child(1) { width: 52%; text-align: left; padding-left: 6px; }
+.sofiane-table th:nth-child(2), .sofiane-table td:nth-child(2) { width: 12%; }
+.sofiane-table th:nth-child(3), .sofiane-table td:nth-child(3) { width: 18%; }
+.sofiane-table th:nth-child(4), .sofiane-table td:nth-child(4) { width: 18%; }
 
-.invoice-app-cell { display: flex; align-items: center; gap: 5px; text-align: left; }
-.invoice-app-logo { width: 16px; height: 16px; object-fit: contain; border-radius: 3px; background: #fff; padding: 1px; flex-shrink: 0; }
+.invoice-app-cell { display: flex; align-items: flex-start; gap: 6px; text-align: left; width: 100%; }
+.invoice-images-group { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+.invoice-app-logo { width: 34px; height: 34px; object-fit: contain; border-radius: 6px; background: #ffffff; padding: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; }
 
 .sofiane-payment-box {
   background: #f8fafc;
-  border: none !important;
   border-radius: 6px;
   padding: 6px 8px;
   font-size: 8.5px;
@@ -338,13 +521,12 @@ select {
 
 .sofiane-summary-box {
   background: #f8fafc;
-  border: none !important;
   border-radius: 6px;
-  padding: 6px 8px;
+  padding: 8px 10px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  font-size: 8.5px;
+  gap: 5px;
+  font-size: 9px;
 }
 .sofiane-sum-row {
   display: flex;
@@ -354,27 +536,107 @@ select {
   font-weight: 600;
 }
 .sofiane-sum-highlight {
-  background: #fef08a !important;
-  padding: 3px 6px;
-  border-radius: 4px;
-  color: #0f172a;
+  background: linear-gradient(135deg, #fef08a, #fde047) !important;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #1e293b;
   font-weight: 900;
+  font-size: 11.5px;
+  box-shadow: 0 3px 10px rgba(234, 179, 8, 0.25);
+  margin: 2px 0;
+  border-left: 4px solid #ca8a04 !important;
 }
 
-.sofiane-invoice-footer {
-  padding-top: 4px;
+/* SOFIANE SHOP OFFICIAL SEAL & LUXURY SIGNATURE FOOTER */
+.sofiane-footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  margin-top: 4px;
+  border-top: 1px dashed #e2e8f0;
+}
+
+.sofiane-signature-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  text-align: center;
+  gap: 1px;
+  align-items: flex-start;
+  flex: 1;
 }
-.sofiane-footer-msg {
+.sofiane-thank-text {
   font-weight: 800;
   color: #1e40af;
-  font-size: 8px;
+  font-size: 7.5px;
   letter-spacing: 0.3px;
+  margin-bottom: 1px;
+}
+.architect-signature-wrapper {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+}
+.architect-signature-svg {
+  width: 135px;
+  height: 38px;
+  overflow: visible;
+  filter: drop-shadow(0.5px 0.5px 1px rgba(29,78,216,0.3));
+}
+.sofiane-sign-label {
+  font-size: 6.5px;
+  color: #64748b;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+.sofiane-official-seal {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  border: 2px dashed #1e40af !important;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25) !important;
+  transform: rotate(-5deg);
+  flex-shrink: 0;
+  padding: 4px;
+}
+
+.seal-circle-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid #1e40af !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.seal-center-img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #2563eb;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  z-index: 2;
+}
+
+.seal-svg-text {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: visible;
 }
 
 /* MOBILE OVERRIDE */
@@ -386,6 +648,7 @@ select {
   .topbar{ padding:0 10px; }
   .page{ padding:10px; }
   .stats{ grid-template-columns: 1fr 1fr; }
+  .multi-device-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -400,38 +663,44 @@ select {
     </div>
     <div class="admin-box">
       <div class="admin-info">
-        <small>المدير / Connecté</small>
+        <small>Connecté</small>
         <strong><span class="status-dot"></span>Sofiane-shop</strong>
       </div>
     </div>
     <div class="nav">
       <button class="nav-item active" data-page="dashboard">
         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg></div>
-        <div class="nav-label"><span class="nav-fr">Dashboard</span><span class="nav-ar">الرئيسية</span></div>
+        <div class="nav-label"><span class="nav-fr">Dashboard</span></div>
       </button>
+
+      <button class="nav-item" data-page="devices">
+        <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
+        <div class="nav-label"><span class="nav-fr">Appareils</span></div>
+      </button>
+
       <button class="nav-item" data-page="clients">
         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
-        <div class="nav-label"><span class="nav-fr">Clients</span><span class="nav-ar">العملاء</span></div>
+        <div class="nav-label"><span class="nav-fr">Clients</span></div>
       </button>
       <button class="nav-item" data-page="abonnements">
         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="13" y2="13"></line></svg></div>
-        <div class="nav-label"><span class="nav-fr">Abonnements</span><span class="nav-ar">الاشتراكات</span></div>
+        <div class="nav-label"><span class="nav-fr">Abonnements</span></div>
       </button>
       <button class="nav-item" data-page="payments">
         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path><path d="M6 15h4"></path></svg></div>
-        <div class="nav-label"><span class="nav-fr">Paiements</span><span class="nav-ar">الدفعات</span></div>
+        <div class="nav-label"><span class="nav-fr">Paiements</span></div>
       </button>
       <button class="nav-item" data-page="history">
         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v6h6"></path><path d="M12 7v5l3 2"></path></svg></div>
-        <div class="nav-label"><span class="nav-fr">Historique</span><span class="nav-ar">السجل</span></div>
+        <div class="nav-label"><span class="nav-fr">Historique</span></div>
       </button>
       <button class="nav-item" data-page="activation">
         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4L12 2z"></path></svg></div>
-        <div class="nav-label"><span class="nav-fr">Activation</span><span class="nav-ar">التفعيل</span></div>
+        <div class="nav-label"><span class="nav-fr">Activation</span></div>
       </button>
       <button class="nav-item" data-page="settings">
         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5v.1h-2.6v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H4.4v-2.6h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5v-.1h2.6v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l-.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.1v2.6h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg></div>
-        <div class="nav-label"><span class="nav-fr">Paramètres</span><span class="nav-ar">الإعدادات</span></div>
+        <div class="nav-label"><span class="nav-fr">Paramètres</span></div>
       </button>
     </div>
     <div class="sidebar-bottom">SOFIANE-SHOP PANEL<br>Mode Direct</div>
@@ -457,21 +726,21 @@ select {
     <div class="page active" id="dashboard">
       <div class="section-head">
         <div>
-          <h2>Dashboard — الرئيسية</h2>
-          <p>Vue générale de votre panel / نظرة عامة على اللوحة</p>
+          <h2>Dashboard</h2>
+          <p>Vue générale de votre panel</p>
         </div>
         <button class="btn btn-lime" onclick="openClientModal()"> ＋ Nouveau client </button>
       </div>
       <div class="stats">
-        <div class="stat"><div class="stat-top"><span class="stat-label">Clients / العملاء</span><div class="stat-icon">👥</div></div><div class="stat-value" id="statClients">0</div><div class="stat-sub">Total clients</div></div>
-        <div class="stat"><div class="stat-top"><span class="stat-label">À payer / المطلوب</span><div class="stat-icon">💰</div></div><div class="stat-value" id="statDue">0 DH</div><div class="stat-sub">Total facturé</div></div>
-        <div class="stat"><div class="stat-top"><span class="stat-label">Payé / المدفوع</span><div class="stat-icon">💳</div></div><div class="stat-value" id="statPaid">0 DH</div><div class="stat-sub">Total reçu</div></div>
-        <div class="stat"><div class="stat-top"><span class="stat-label">Reste / الباقي</span><div class="stat-icon">⚠</div></div><div class="stat-value" id="statRemain">0 DH</div><div class="stat-sub">Solde restant</div></div>
+        <div class="stat"><div class="stat-top"><span class="stat-label">Clients</span><div class="stat-icon">👥</div></div><div class="stat-value" id="statClients">0</div><div class="stat-sub">Total clients</div></div>
+        <div class="stat"><div class="stat-top"><span class="stat-label">À payer</span><div class="stat-icon">💰</div></div><div class="stat-value" id="statDue">0 DH</div><div class="stat-sub">Total facturé</div></div>
+        <div class="stat"><div class="stat-top"><span class="stat-label">Payé</span><div class="stat-icon">💳</div></div><div class="stat-value" id="statPaid">0 DH</div><div class="stat-sub">Total reçu</div></div>
+        <div class="stat"><div class="stat-top"><span class="stat-label">Reste</span><div class="stat-icon">⚠</div></div><div class="stat-value" id="statRemain">0 DH</div><div class="stat-sub">Solde restant</div></div>
       </div>
       <div class="dashboard-grid">
         <div class="card">
           <div class="card-head">
-            <h3>Clients récents — العملاء الجدد</h3>
+            <h3>Clients récents</h3>
             <button class="btn btn-dark btn-small" onclick="showPage('clients')">Voir tous</button>
           </div>
           <div class="table-wrap">
@@ -479,15 +748,77 @@ select {
           </div>
         </div>
         <div class="card">
-          <div class="card-head"><h3>Actions rapides — إجراءات سريعة</h3></div>
+          <div class="card-head"><h3>Actions rapides</h3></div>
           <div class="card-body">
             <div class="quick-actions">
-              <button class="quick" onclick="openClientModal()"><div class="quick-icon">👤＋</div><strong>Nouveau client</strong><span>إضافة عميل جديد</span></button>
-              <button class="quick" onclick="openPaymentModal()"><div class="quick-icon">💳</div><strong>Nouveau paiement</strong><span>إضافة دفعة</span></button>
-              <button class="quick" onclick="showPage('activation')"><div class="quick-icon">⚡</div><strong>Activation Playlist</strong><span>تفعيل Playlist</span></button>
-              <button class="quick" onclick="showPage('abonnements')"><div class="quick-icon">📡</div><strong>Nouveau Abonnement</strong><span>اشتراك جديد</span></button>
+              <button class="quick" onclick="openClientModal()"><div class="quick-icon">👤＋</div><strong>Nouveau client</strong><span>Ajouter un client</span></button>
+              <button class="quick" onclick="openPaymentModal()"><div class="quick-icon">💳</div><strong>Nouveau paiement</strong><span>Enregistrer un paiement</span></button>
+              <button class="quick" onclick="showPage('activation')"><div class="quick-icon">⚡</div><strong>Activation</strong><span>Activer une playlist</span></button>
+              <button class="quick" onclick="showPage('abonnements')"><div class="quick-icon">📡</div><strong>Abonnement</strong><span>Nouveau abonnement</span></button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEVICES PAGE -->
+    <div class="page" id="devices">
+      <div class="section-head">
+        <div>
+          <h2>Appareils Électroniques</h2>
+          <p>Catalogue des appareils et point de vente</p>
+        </div>
+        <span class="badge badge-lime">Sofiane Shop Store</span>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <h3>Point de Vente des Appareils</h3>
+          <span class="badge badge-blue">Catalogue Interactif</span>
+        </div>
+        <div class="card-body">
+          
+          <div class="single-device-card">
+            <div class="device-input-group full">
+              <label>Choisir les appareils (2 par ligne)</label>
+              <div class="multi-device-grid" id="multiDeviceGrid"></div>
+            </div>
+
+            <div class="single-device-controls">
+              <div class="device-input-group">
+                <label>Nom du client (Optionnel)</label>
+                <select class="device-select-styled" id="unified_client_select">
+                  <option value="">-- None --</option>
+                </select>
+              </div>
+
+              <div class="device-input-group">
+                <label>Moyen de paiement</label>
+                <select class="device-select-styled" id="unified_payment_method" onchange="onPaymentMethodChange()">
+                  <option value="Espèces">Espèces</option>
+                  <option value="Virement">Virement</option>
+                </select>
+              </div>
+
+              <div class="device-input-group" id="dynamic_payment_field_wrapper">
+                <label id="dynamic_field_label">Montant payé (Espèces)</label>
+                <input type="text" class="device-num-input" id="unified_dynamic_payment_detail" placeholder="Entrer le montant...">
+              </div>
+
+              <div class="device-input-group">
+                <label>Prix Total (DH)</label>
+                <input type="number" class="device-num-input" id="unified_price_input" value="0" min="0" oninput="recalcUnifiedTotal()">
+              </div>
+            </div>
+
+            <div class="single-device-footer">
+              <div class="total-badge-container">
+                <small>Total :</small>
+                <span id="unified_total_display">0 DH</span>
+              </div>
+              <button class="btn btn-lime" onclick="checkoutUnifiedDevice()">🧾 Émettre la facture</button>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -496,18 +827,18 @@ select {
     <div class="page" id="clients">
       <div class="section-head">
         <div>
-          <h2>Clients — العملاء</h2>
-          <p>Gestion de vos clients / إدارة العملاء</p>
+          <h2>Clients</h2>
+          <p>Gestion de vos clients</p>
         </div>
         <button class="btn btn-lime" onclick="openClientModal()"> ＋ Nouveau client </button>
       </div>
       <div class="card">
         <div class="card-head">
-          <h3>Liste des clients — قائمة العملاء</h3>
+          <h3>Liste des clients</h3>
           <span class="badge badge-lime" id="clientCountText">0 clients</span>
         </div>
         <div class="card-body">
-          <div class="search-row"><input class="search" id="clientSearch" placeholder="Rechercher nom / compte / البحث باسم العميل..."></div>
+          <div class="search-row"><input class="search" id="clientSearch" placeholder="Rechercher nom / compte..."></div>
           <div class="table-wrap">
             <table><thead><tr><th>Client</th><th>Compte</th><th>Année</th><th>WhatsApp</th><th>Total</th><th>Payé</th><th>Reste</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="clientsTable"></tbody></table>
           </div>
@@ -519,12 +850,12 @@ select {
     <div class="page" id="abonnements">
       <div class="section-head">
         <div>
-          <h2>Nouveau Abonnement — اشتراك جديد</h2>
-          <p>Gestion des abonnements Xtream / M3U / إدارة اشتراكات Xtream و M3U</p>
+          <h2>Nouveau Abonnement</h2>
+          <p>Gestion des abonnements Xtream / M3U</p>
         </div>
       </div>
       <div class="card" style="margin-bottom:14px;">
-        <div class="card-head"><h3>📡 Informations Xtream — معلومات Xtream</h3></div>
+        <div class="card-head"><h3>📡 Informations Xtream</h3></div>
         <div class="card-body">
           <div class="m3u-box">
             <div class="m3u-title">🔗 <span>M3U → XTREAM AUTOMATIQUE</span></div>
@@ -532,35 +863,40 @@ select {
             <div id="m3uStatus" class="m3u-status">Collez le lien M3U : les informations Xtream seront extraites automatiquement.</div>
           </div>
           <div class="form-grid">
-            <div class="form-group full"><label>Client — العميل</label><select id="abonnementClient"><option value="">Sélectionner un client</option></select></div>
-            <div class="form-group"><label>Nom client — اسم العميل</label><input class="input" id="abonnementName" placeholder="Nom du client"></div>
+            <div class="form-group full"><label>Client</label><select id="abonnementClient"><option value="">Sélectionner un client</option></select></div>
+            <div class="form-group"><label>Nom du client</label><input class="input" id="abonnementName" placeholder="Nom du client"></div>
+
             <div class="form-group">
-              <label>Application — التطبيق / المنتج</label>
-              <select id="abonnementApp">
-                <option value="">Sélectionner une application</option>
-                <option value="Hot Player">Hot Player</option>
-                <option value="Lamyar Web">Lamyar Web</option>
-                <option value="Ultra VIP">Ultra VIP</option>
-                <option value="Pipo Player">Pipo Player</option>
-                <option value="IBO Pro">IBO Pro</option>
-                <option value="Box">Box</option>
-                <option value="Autre">Autre</option>
-              </select>
+              <label>Application</label>
+              <div class="custom-select-wrapper" id="wrapper_abonnementApp">
+                <div class="custom-select-trigger" onclick="toggleCustomSelect('abonnementApp')">
+                  <span id="trigger_abonnementApp"><div class="none-icon">N</div> None</span>
+                  <span>▼</span>
+                </div>
+                <div class="custom-options" id="options_abonnementApp">
+                  <div class="custom-option" onclick="selectCustomOption('abonnementApp', 'None', '')"><div class="none-icon">N</div> None</div>
+                  <div class="custom-option" onclick="selectCustomOption('abonnementApp', 'Hot IPTV', 'https://i.ibb.co/m5CRtrtV/939e65a3-917f-48a1-915e-3d77f2904537-1000x1000-BUu-BOu-M6s78-PKC3y7lv-RUrdb-TYB6r-Sb-Pj-Thw8f-Ah-1.webp')"><img src="https://i.ibb.co/m5CRtrtV/939e65a3-917f-48a1-915e-3d77f2904537-1000x1000-BUu-BOu-M6s78-PKC3y7lv-RUrdb-TYB6r-Sb-Pj-Thw8f-Ah-1.webp"> Hot IPTV</div>
+                  <div class="custom-option" onclick="selectCustomOption('abonnementApp', 'Ibo pro', 'https://i.ibb.co/DfxxWqWr/logo-512.webp')"><img src="https://i.ibb.co/DfxxWqWr/logo-512.webp"> Ibo pro</div>
+                  <div class="custom-option" onclick="selectCustomOption('abonnementApp', 'Ultra VIP', 'https://i.ibb.co/x8dMyqKd/IMG-20261101-200309.jpg')"><img src="https://i.ibb.co/x8dMyqKd/IMG-20261101-200309.jpg"> Ultra VIP</div>
+                </div>
+                <input type="hidden" id="abonnementApp" value="None">
+              </div>
             </div>
+
             <div class="form-group full"><label>🌐 Xtream Server / URL</label><input class="input" id="abonnementServer" placeholder="http://server.com:8080"></div>
-            <div class="form-group"><label>👤 Username — اسم المستخدم</label><input class="input" id="abonnementUsername" placeholder="Username"></div>
-            <div class="form-group"><label>🔑 Password — كلمة المرور</label><input class="input" id="abonnementPassword" placeholder="Password" type="text"></div>
-            <div class="form-group"><label>📅 Durée — المدة</label><select id="abonnementDuration"><option value="1 mois">1 mois — شهر واحد</option><option value="12 mois">12 mois — عام</option></select></div>
-            <div class="form-group"><label>📆 Date début — تاريخ البداية</label><input class="input" type="date" id="abonnementStart"></div>
-            <div class="form-group"><label>Prix / الثمن (DH)</label><input class="input" type="number" id="abonnementPrice" placeholder="0.00"></div>
-            <div class="form-group full"><label>📝 Note — ملاحظة (تظهر في الفاتورة)</label><textarea id="abonnementNote" placeholder="Note / Server / Remarque"></textarea></div>
-            <div class="form-group full"><button class="btn btn-lime" onclick="createAbonnement()">📡＋ Nouveau Abonnement — اشتراك جديد</button></div>
+            <div class="form-group"><label>👤 Username</label><input class="input" id="abonnementUsername" placeholder="Username"></div>
+            <div class="form-group"><label>🔑 Password</label><input class="input" id="abonnementPassword" placeholder="Password" type="text"></div>
+            <div class="form-group"><label>📅 Durée</label><select id="abonnementDuration"><option value="1 mois">1 mois</option><option value="12 mois">12 mois</option></select></div>
+            <div class="form-group"><label>📆 Date début</label><input class="input" type="date" id="abonnementStart"></div>
+            <div class="form-group"><label>Prix (DH)</label><input class="input" type="number" id="abonnementPrice" placeholder="0.00"></div>
+            <div class="form-group full"><label>📝 Note / Remarque</label><textarea id="abonnementNote" placeholder="Remarque / Server / Détails"></textarea></div>
+            <div class="form-group full"><button class="btn btn-lime" onclick="createAbonnement()">📡＋ Créer l'abonnement</button></div>
           </div>
           <div class="result-box" id="abonnementResult" style="margin-top:8px;"></div>
         </div>
       </div>
       <div class="card">
-        <div class="card-head"><h3>📡 Abonnements Xtream — اشتراكات Xtream</h3><span class="badge badge-lime" id="abonnementCount">0</span></div>
+        <div class="card-head"><h3>📡 Abonnements Xtream</h3><span class="badge badge-lime" id="abonnementCount">0</span></div>
         <div class="table-wrap">
           <table><thead><tr><th>Date</th><th>Client</th><th>Application</th><th>Xtream</th><th>Durée</th><th>Expiration</th><th>Actions</th></tr></thead><tbody id="abonnementTable"></tbody></table>
         </div>
@@ -569,58 +905,63 @@ select {
 
     <!-- PAYMENTS PAGE -->
     <div class="page" id="payments">
-      <div class="section-head"><div><h2>Paiements — الدفعات</h2><p>Suivi des paiements / تتبع الدفعات</p></div>
+      <div class="section-head"><div><h2>Paiements</h2><p>Suivi des paiements</p></div>
         <button class="btn btn-lime" onclick="openPaymentModal()"> ＋ Nouveau paiement </button>
       </div>
       <div class="card">
         <div class="card-head"><h3>Historique des paiements</h3></div>
         <div class="table-wrap">
-          <table><thead><tr><th>Date</th><th>Client</th><th>Produit</th><th>Montant</th><th>Note</th><th>Actions</th></tr></thead><tbody id="paymentsTable"></tbody></table>
+          <table><thead><tr><th>Date</th><th>Client</th><th>App / Note</th><th>Montant</th><th>Note</th><th>Actions</th></tr></thead><tbody id="paymentsTable"></tbody></table>
         </div>
       </div>
     </div>
 
     <!-- HISTORY PAGE -->
     <div class="page" id="history">
-      <div class="section-head"><div><h2>Historique — السجل</h2><p>Toutes les opérations / جميع العمليات</p></div></div>
+      <div class="section-head"><div><h2>Historique</h2><p>Toutes les opérations</p></div></div>
       <div class="card"><div class="card-head"><h3>Activité récente</h3></div><div class="card-body"><div class="history-list" id="historyList"></div></div></div>
     </div>
 
     <!-- ACTIVATION PAGE -->
     <div class="page" id="activation">
-      <div class="section-head"><div><h2>Activation — التفعيل</h2><p>Activation Playlist / تفعيل Playlist</p></div></div>
+      <div class="section-head"><div><h2>Activation</h2><p>Activation Playlist</p></div></div>
       <div class="card" style="margin-bottom:14px;">
         <div class="card-head"><h3>Nouvelle activation</h3></div>
         <div class="card-body">
           <div class="form-grid">
-            <div class="form-group full"><label>Client — العميل</label><select id="activationClient"><option value="">Sélectionner un client</option></select></div>
-            <div class="form-group"><label>Nom client — اسم العميل</label><input class="input" id="activationName" placeholder="Nom du client"></div>
-            <div class="form-group"><label>WhatsApp / رقم الواتساب</label><input class="input" id="activationPhone" placeholder="+212 6XXXXXXXX"></div>
-            <div class="form-group"><label>MAC Address</label><input class="input" id="activationMac" placeholder="00:11:22:33:44:55" maxlength="17"></div>
+            <div class="form-group full"><label>Client</label><select id="activationClient"><option value="">Sélectionner un client</option></select></div>
+            <div class="form-group"><label>Nom du client</label><input class="input" id="activationName" placeholder="Nom du client"></div>
+            <div class="form-group"><label>WhatsApp</label><input class="input" id="activationPhone" placeholder="+212 6XXXXXXXX"></div>
+            <div class="form-group"><label>MAC Address</label><input class="input" id="activationMac" placeholder="00:11:22:33:44:55"></div>
+            
             <div class="form-group">
-              <label>Application — التطبيق / المنتج</label>
-              <select id="activationApp">
-                <option value="">Sélectionner une application</option>
-                <option value="Hot Player">Hot Player</option>
-                <option value="Lamyar Web">Lamyar Web</option>
-                <option value="Ultra VIP">Ultra VIP</option>
-                <option value="Pipo Player">Pipo Player</option>
-                <option value="IBO Pro">IBO Pro</option>
-                <option value="Box">Box</option>
-                <option value="Autre">Autre</option>
-              </select>
+              <label>Application</label>
+              <div class="custom-select-wrapper" id="wrapper_activationApp">
+                <div class="custom-select-trigger" onclick="toggleCustomSelect('activationApp')">
+                  <span id="trigger_activationApp"><div class="none-icon">N</div> None</span>
+                  <span>▼</span>
+                </div>
+                <div class="custom-options" id="options_activationApp">
+                  <div class="custom-option" onclick="selectCustomOption('activationApp', 'None', '')"><div class="none-icon">N</div> None</div>
+                  <div class="custom-option" onclick="selectCustomOption('activationApp', 'Hot IPTV', 'https://i.ibb.co/m5CRtrtV/939e65a3-917f-48a1-915e-3d77f2904537-1000x1000-BUu-BOu-M6s78-PKC3y7lv-RUrdb-TYB6r-Sb-Pj-Thw8f-Ah-1.webp')"><img src="https://i.ibb.co/m5CRtrtV/939e65a3-917f-48a1-915e-3d77f2904537-1000x1000-BUu-BOu-M6s78-PKC3y7lv-RUrdb-TYB6r-Sb-Pj-Thw8f-Ah-1.webp"> Hot IPTV</div>
+                  <div class="custom-option" onclick="selectCustomOption('activationApp', 'Ibo pro', 'https://i.ibb.co/DfxxWqWr/logo-512.webp')"><img src="https://i.ibb.co/DfxxWqWr/logo-512.webp"> Ibo pro</div>
+                  <div class="custom-option" onclick="selectCustomOption('activationApp', 'Ultra VIP', 'https://i.ibb.co/x8dMyqKd/IMG-20261101-200309.jpg')"><img src="https://i.ibb.co/x8dMyqKd/IMG-20261101-200309.jpg"> Ultra VIP</div>
+                </div>
+                <input type="hidden" id="activationApp" value="None">
+              </div>
             </div>
-            <div class="form-group"><label>Durée — المدة</label><select id="activationDuration"><option value="12 mois">12 mois — 12 شهر</option><option value="Lifetime">Lifetime — مدى الحياة</option></select></div>
-            <div class="form-group"><label>📆 Date début — تاريخ التفعيل</label><input class="input" type="date" id="activationStart"></div>
-            <div class="form-group"><label>Prix / الثمن (DH)</label><input class="input" type="number" id="activationPrice" placeholder="0.00"></div>
-            <div class="form-group full"><label>📝 Note — ملاحظة (تظهر في الفاتورة)</label><input class="input" id="activationNote" placeholder="Note facultative / تفاصيل إضافية تظهر بالفاتورة"></div>
-            <div class="form-group full"><button class="btn btn-lime" onclick="createActivation()">⚡ Activer Playlist — تفعيل وإصدار الفاتورة</button></div>
+
+            <div class="form-group"><label>Durée</label><select id="activationDuration"><option value="12 mois">12 mois</option><option value="Lifetime">Lifetime</option></select></div>
+            <div class="form-group"><label>📆 Date début</label><input class="input" type="date" id="activationStart"></div>
+            <div class="form-group"><label>Prix (DH)</label><input class="input" type="number" id="activationPrice" placeholder="0.00"></div>
+            <div class="form-group full"><label>📝 Note / Remarque</label><input class="input" id="activationNote" placeholder="Note facultative"></div>
+            <div class="form-group full"><button class="btn btn-lime" onclick="createActivation()">⚡ Activer la playlist</button></div>
           </div>
           <div class="result-box" id="activationResult" style="margin-top:8px;"></div>
         </div>
       </div>
       <div class="card">
-        <div class="card-head"><h3>Activations — التفعيلات</h3><span class="badge badge-lime" id="activationCount">0</span></div>
+        <div class="card-head"><h3>Activations</h3><span class="badge badge-lime" id="activationCount">0</span></div>
         <div class="table-wrap">
           <table><thead><tr><th>Date</th><th>Client</th><th>WhatsApp</th><th>MAC / App</th><th>Durée / Expiration</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="activationTable"></tbody></table>
         </div>
@@ -629,18 +970,18 @@ select {
 
     <!-- SETTINGS PAGE -->
     <div class="page" id="settings">
-      <div class="section-head"><div><h2>Paramètres — الإعدادات</h2><p>Configuration du panel / إعدادات اللوحة</p></div></div>
+      <div class="section-head"><div><h2>Paramètres</h2><p>Configuration du panel</p></div></div>
       <div class="card">
-        <div class="card-head"><h3>Données du panel — بيانات اللوحة</h3></div>
+        <div class="card-head"><h3>Données du panel</h3></div>
         <div class="card-body">
           <div class="quick-actions" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
             <button class="lux-action-btn" onclick="exportData()">
               <div class="lux-btn-top">📥 Exporter les données</div>
-              <span class="lux-btn-sub">تصدير وحفظ نسخة الاحتياطية للبيانات</span>
+              <span class="lux-btn-sub">Sauvegarder une copie de secours</span>
             </button>
             <button class="lux-action-btn" onclick="document.getElementById('importFile').click()">
               <div class="lux-btn-top" style="color:var(--blue);">📤 Importer les données</div>
-              <span class="lux-btn-sub">استيراد البيانات من ملف سابق</span>
+              <span class="lux-btn-sub">Restaurer depuis un fichier JSON</span>
             </button>
           </div>
           <input type="file" id="importFile" accept=".json" style="display:none">
@@ -651,76 +992,102 @@ select {
 </div>
 
 <!-- MODALS -->
-<div class="modal" id="clientModal"><div class="modal-box"><div class="modal-head"><h3 id="clientModalTitle">Nouveau client — عميل جديد</h3><button class="close" onclick="closeModal('clientModal')">×</button></div><div class="modal-body"><input type="hidden" id="editClientId"><div class="form-grid"><div class="form-group full"><label>Nom / Prénom — الاسم</label><input class="input" id="clientName" placeholder="Nom du client"></div><div class="form-group"><label>WhatsApp / رقم الواتساب</label><input class="input" id="clientPhone" placeholder="+212 6XXXXXXXX"></div><div class="form-group"><label>Année / عام الدخول</label><input class="input" id="clientYear" value="2026"></div><div class="form-group full"><label>Username / Compte</label><input class="input" id="clientAccount" placeholder="Username"></div></div></div><div class="modal-foot"><button class="btn btn-dark" onclick="closeModal('clientModal')">Annuler</button><button class="btn btn-danger" id="deleteClientModalBtn" onclick="deleteCurrentClient()" style="display:none">Supprimer</button><button class="btn btn-lime" onclick="saveClient()">Enregistrer — حفظ</button></div></div></div>
+<div class="modal" id="clientModal"><div class="modal-box"><div class="modal-head"><h3 id="clientModalTitle">Nouveau client</h3><button class="close" onclick="closeModal('clientModal')">×</button></div><div class="modal-body"><input type="hidden" id="editClientId"><div class="form-grid"><div class="form-group full"><label>Nom / Prénom</label><input class="input" id="clientName" placeholder="Nom du client"></div><div class="form-group"><label>WhatsApp</label><input class="input" id="clientPhone" placeholder="+212 6XXXXXXXX"></div><div class="form-group"><label>Année</label><input class="input" id="clientYear" value="2026"></div><div class="form-group full"><label>Username / Compte</label><input class="input" id="clientAccount" placeholder="Username"></div></div></div><div class="modal-foot"><button class="btn btn-dark" onclick="closeModal('clientModal')">Annuler</button><button class="btn btn-danger" id="deleteClientModalBtn" onclick="deleteCurrentClient()" style="display:none">Supprimer</button><button class="btn btn-lime" onclick="saveClient()">Enregistrer</button></div></div></div>
 
-<!-- DEBT / ADD AMOUNT MODAL -->
 <div class="modal" id="debtModal">
   <div class="modal-box">
     <div class="modal-head">
-      <h3>Ajouter montant — إضافة مبلغ</h3>
+      <h3>Ajouter montant</h3>
       <button class="close" onclick="closeModal('debtModal')">×</button>
     </div>
     <div class="modal-body">
       <input type="hidden" id="debtClientId">
       <div class="form-grid">
         <div class="form-group">
-          <label>Montant DH — المبلغ</label>
+          <label>Montant (DH)</label>
           <input class="input" type="number" min="0" step="0.01" id="debtAmount" placeholder="0.00">
         </div>
-        <div class="form-group">
-          <label>Produit / Service — المنتج</label>
-          <input class="input" id="debtProduct" placeholder="Ex: Box, Abonnement...">
-        </div>
+
         <div class="form-group full">
-          <label>Note — ملاحظة (تظهر في الفاتورة)</label>
-          <input class="input" id="debtNote" placeholder="Ex: Abonnement / ملاحظة">
+          <label>Application</label>
+          <div class="custom-select-wrapper" id="wrapper_debtProduct">
+            <div class="custom-select-trigger" onclick="toggleCustomSelect('debtProduct')">
+              <span id="trigger_debtProduct"><div class="none-icon">N</div> None</span>
+              <span>▼</span>
+            </div>
+            <div class="custom-options" id="options_debtProduct">
+              <div class="custom-option" onclick="selectCustomOption('debtProduct', 'None', '')"><div class="none-icon">N</div> None</div>
+              <div class="custom-option" onclick="selectCustomOption('debtProduct', 'Hot IPTV', 'https://i.ibb.co/m5CRtrtV/939e65a3-917f-48a1-915e-3d77f2904537-1000x1000-BUu-BOu-M6s78-PKC3y7lv-RUrdb-TYB6r-Sb-Pj-Thw8f-Ah-1.webp')"><img src="https://i.ibb.co/m5CRtrtV/939e65a3-917f-48a1-915e-3d77f2904537-1000x1000-BUu-BOu-M6s78-PKC3y7lv-RUrdb-TYB6r-Sb-Pj-Thw8f-Ah-1.webp"> Hot IPTV</div>
+              <div class="custom-option" onclick="selectCustomOption('debtProduct', 'Ibo pro', 'https://i.ibb.co/DfxxWqWr/logo-512.webp')"><img src="https://i.ibb.co/DfxxWqWr/logo-512.webp"> Ibo pro</div>
+              <div class="custom-option" onclick="selectCustomOption('debtProduct', 'Ultra VIP', 'https://i.ibb.co/x8dMyqKd/IMG-20261101-200309.jpg')"><img src="https://i.ibb.co/x8dMyqKd/IMG-20261101-200309.jpg"> Ultra VIP</div>
+            </div>
+            <input type="hidden" id="debtProduct" value="None">
+          </div>
+        </div>
+
+        <div class="form-group full">
+          <label>Note / Remarque</label>
+          <input class="input" id="debtNote" placeholder="Ex: Abonnement...">
         </div>
       </div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-dark" onclick="closeModal('debtModal')">Annuler</button>
-      <button class="btn btn-lime" onclick="saveDebt()">Ajouter & Facturer — إضافة وإصدار الفاتورة</button>
+      <button class="btn btn-lime" onclick="saveDebt()">Ajouter & Facturer</button>
     </div>
   </div>
 </div>
 
-<!-- PAYMENT MODAL -->
 <div class="modal" id="paymentModal">
   <div class="modal-box">
     <div class="modal-head">
-      <h3>Paiement — الدفعة</h3>
+      <h3>Paiement</h3>
       <button class="close" onclick="closeModal('paymentModal')">×</button>
     </div>
     <div class="modal-body">
       <input type="hidden" id="paymentClientId">
       <div class="form-grid">
         <div class="form-group full">
-          <label>Client — العميل</label>
+          <label>Client</label>
           <select id="paymentClient"><option value="">Sélectionner un client</option></select>
         </div>
         <div class="form-group">
-          <label>Montant DH — المبلغ</label>
+          <label>Montant (DH)</label>
           <input class="input" type="number" min="0" step="0.01" id="paymentAmount" placeholder="0.00">
         </div>
-        <div class="form-group">
-          <label>Produit / Service — المنتج / الخدمة</label>
-          <input class="input" id="paymentProduct" placeholder="Ex: Box, Hot Player, IBO...">
-        </div>
+
         <div class="form-group full">
-          <label>Note — ملاحظة (تظهر في الفاتورة)</label>
-          <input class="input" id="paymentNote" placeholder="Note / تفاصيل الدفعة">
+          <label>Application</label>
+          <div class="custom-select-wrapper" id="wrapper_paymentProduct">
+            <div class="custom-select-trigger" onclick="toggleCustomSelect('paymentProduct')">
+              <span id="trigger_paymentProduct"><div class="none-icon">N</div> None</span>
+              <span>▼</span>
+            </div>
+            <div class="custom-options" id="options_paymentProduct">
+              <div class="custom-option" onclick="selectCustomOption('paymentProduct', 'None', '')"><div class="none-icon">N</div> None</div>
+              <div class="custom-option" onclick="selectCustomOption('paymentProduct', 'Hot IPTV', 'https://i.ibb.co/m5CRtrtV/939e65a3-917f-48a1-915e-3d77f2904537-1000x1000-BUu-BOu-M6s78-PKC3y7lv-RUrdb-TYB6r-Sb-Pj-Thw8f-Ah-1.webp')"><img src="https://i.ibb.co/m5CRtrtV/939e65a3-917f-48a1-915e-3d77f2904537-1000x1000-BUu-BOu-M6s78-PKC3y7lv-RUrdb-TYB6r-Sb-Pj-Thw8f-Ah-1.webp"> Hot IPTV</div>
+              <div class="custom-option" onclick="selectCustomOption('paymentProduct', 'Ibo pro', 'https://i.ibb.co/DfxxWqWr/logo-512.webp')"><img src="https://i.ibb.co/DfxxWqWr/logo-512.webp"> Ibo pro</div>
+              <div class="custom-option" onclick="selectCustomOption('paymentProduct', 'Ultra VIP', 'https://i.ibb.co/x8dMyqKd/IMG-20261101-200309.jpg')"><img src="https://i.ibb.co/x8dMyqKd/IMG-20261101-200309.jpg"> Ultra VIP</div>
+            </div>
+            <input type="hidden" id="paymentProduct" value="None">
+          </div>
+        </div>
+
+        <div class="form-group full">
+          <label>Note / Remarque</label>
+          <input class="input" id="paymentNote" placeholder="Détails du paiement...">
         </div>
       </div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-dark" onclick="closeModal('paymentModal')">Annuler</button>
-      <button class="btn btn-lime" onclick="savePayment()">Enregistrer & Facturer — حفظ وإصدار الفاتورة</button>
+      <button class="btn btn-lime" onclick="savePayment()">Enregistrer & Facturer</button>
     </div>
   </div>
 </div>
 
-<div class="modal" id="detailModal"><div class="modal-box" style="max-width:380px;"><div class="modal-head"><h3 id="clientDetailTitle">Dossier Client — ملف العميل</h3><button class="close" onclick="closeModal('detailModal')">×</button></div><div class="modal-body" id="detailBody"></div></div></div>
-<div class="modal" id="receiptModal"><div class="modal-box" style="max-width:380px;"><div class="modal-head"><h3>Reçu / Facture — فاتورة</h3><button class="close" onclick="closeModal('receiptModal')">×</button></div><div class="modal-body" id="receiptBody"></div><div class="modal-foot"><button class="btn btn-dark" onclick="closeModal('receiptModal')">Fermer</button><button class="btn btn-lime" onclick="window.print()">🖨 Imprimer</button></div></div></div>
+<div class="modal" id="detailModal"><div class="modal-box" style="max-width:380px;"><div class="modal-head"><h3 id="clientDetailTitle">Dossier Client</h3><button class="close" onclick="closeModal('detailModal')">×</button></div><div class="modal-body" id="detailBody"></div></div></div>
+<div class="modal" id="receiptModal"><div class="modal-box" style="max-width:380px;"><div class="modal-head"><h3>Reçu / Facture</h3><button class="close" onclick="closeModal('receiptModal')">×</button></div><div class="modal-body" id="receiptBody"></div><div class="modal-foot"><button class="btn btn-dark" onclick="closeModal('receiptModal')">Fermer</button><button class="btn btn-lime" onclick="window.print()">🖨 Imprimer</button></div></div></div>
 
 <div class="toast" id="toast"></div>
 
@@ -728,13 +1095,205 @@ select {
 const currentAgent = "Sofiane-shop";
 
 const appLogos = {
-  "Hot Player": "https://i.ibb.co/m5CRtrtV/939e65a3-917f-48a1-915e-3d77f2904537-1000x1000-BUu-BOu-M6s78-PKC3y7lv-RUrdb-TYB6r-Sb-Pj-Thw8f-Ah-1.webp",
-  "Lamyar Web": "https://i.ibb.co/39h05bvs/IMG-20261101-200354.jpg",
-  "Ultra VIP": "https://i.ibb.co/r21yxFRS/IMG-20261101-201122.jpg",
-  "Pipo Player": "https://i.ibb.co/DfxxWqWr/logo-512.webp",
-  "IBO Pro": "https://i.ibb.co/x8dMyqKd/IMG-20261101-200309.jpg",
-  "Box": "https://i.ibb.co/8gTWpVC2/IMG-20261028-WA0040.webp"
+  "None": "",
+  "Hot IPTV": "https://i.ibb.co/m5CRtrtV/939e65a3-917f-48a1-915e-3d77f2904537-1000x1000-BUu-BOu-M6s78-PKC3y7lv-RUrdb-TYB6r-Sb-Pj-Thw8f-Ah-1.webp",
+  "Ibo pro": "https://i.ibb.co/DfxxWqWr/logo-512.webp",
+  "Ultra VIP": "https://i.ibb.co/x8dMyqKd/IMG-20261101-200309.jpg"
 };
+
+const deviceCatalog = {
+  "Récepteur ECHOLINK ZEN PRO 6": { name: "Récepteur ECHOLINK ZEN PRO 6", img: "https://i.ibb.co/zhqqWBWz/IMG-20261105-WA0005.webp" },
+  "Recepteur ECHOLINK FENTO PRO 6": { name: "Recepteur ECHOLINK FENTO PRO 6", img: "https://i.ibb.co/6cKNGRnD/IMG-20261105-175602.webp" },
+  "Récepteur NEXT VISION ST-M26": { name: "Récepteur NEXT VISION ST-M26", img: "https://i.ibb.co/23jd2sYv/IMG-20261105-175700.webp" },
+  "BOX SENIC SC-301": { name: "BOX SENIC SC-301", img: "https://i.ibb.co/Tx8YcQRY/IMG-20261105-175500.webp" },
+  "BOX ECHOLINK enova-box": { name: "BOX ECHOLINK enova-box", img: "https://i.ibb.co/chZ8qSb5/IMG-20261105-175931.webp" },
+  "Router TP-Link": { name: "Router TP-Link", img: "https://i.ibb.co/VY7K7vvq/IMG-20261105-175835.webp" },
+  "Box KOBRA Z1": { name: "Box KOBRA Z1", img: "https://i.ibb.co/39Y8F9tP/IMG-20261105-182425.webp" },
+  "Box AIROX K360": { name: "Box AIROX K360", img: "https://i.ibb.co/jP1vYjBm/IMG-20261105-182703.webp" },
+  "Récepteur MORSAT MINI HD DIAMOND": { name: "Récepteur MORSAT MINI HD DIAMOND", img: "https://i.ibb.co/bRj1vJcT/IMG-20261105-182910.webp" },
+  "Box KOBRA X1": { name: "Box KOBRA X1", img: "https://i.ibb.co/Kz7k4hnk/IMG-20261105-182957.webp" },
+  "Récepteur ÉVOLUTION Galaxy ZE-H7": { name: "Récepteur ÉVOLUTION Galaxy ZE-H7", img: "https://i.ibb.co/xt6cMXxS/IMG-20261105-183037.webp" },
+  "TV LG SMART TV": { name: "TV LG SMART TV", img: "https://i.ibb.co/6cttJ4ZS/IMG-20261105-WA0007.webp" },
+  "TV Xiaomi TV A 2025": { name: "TV Xiaomi TV A 2025", img: "https://i.ibb.co/60JJX3p2/IMG-20261105-WA0008.webp" },
+  "TV SAMSUNG QN88D 2024": { name: "TV SAMSUNG QN88D 2024", img: "https://i.ibb.co/wFRsGHjL/IMG-20261105-WA0009.webp" }
+};
+
+function getLogo(name) { return appLogos[name] || ""; }
+
+function getDeviceLogo(name) {
+  if (!name || name === "None") return "";
+  let trimmedName = name.trim();
+  if (deviceCatalog[trimmedName]) return deviceCatalog[trimmedName].img;
+  for (let key in deviceCatalog) {
+    if (trimmedName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(trimmedName.toLowerCase())) {
+      return deviceCatalog[key].img;
+    }
+  }
+  return "";
+}
+
+let selectedDevices = [];
+
+function renderDeviceCatalogGrid() {
+  const grid = document.getElementById("multiDeviceGrid");
+  if(!grid) return;
+  let html = "";
+  for(let key in deviceCatalog) {
+    let dev = deviceCatalog[key];
+    html += `
+      <div class="device-select-card" id="dev_card_${key.replace(/\s+/g, '_')}" onclick="toggleMultiDevice('${key}')">
+        <div class="checkbox-mark" id="chk_${key.replace(/\s+/g, '_')}">✓</div>
+        <img src="${dev.img}" alt="${dev.name}" onerror="this.src='https://via.placeholder.com/75?text=Device'">
+        <div class="dev-title">${dev.name}</div>
+      </div>
+    `;
+  }
+  grid.innerHTML = html;
+}
+
+function toggleMultiDevice(deviceName) {
+  const index = selectedDevices.indexOf(deviceName);
+  const cardId = `dev_card_${deviceName.replace(/\s+/g, '_')}`;
+  const card = document.getElementById(cardId);
+  
+  if(index > -1) {
+    selectedDevices.splice(index, 1);
+    if(card) card.classList.remove('selected');
+  } else {
+    selectedDevices.push(deviceName);
+    if(card) card.classList.add('selected');
+  }
+  
+  recalcUnifiedTotal();
+}
+
+function recalcUnifiedTotal() {
+  const customPriceInput = document.getElementById("unified_price_input");
+  let total = Number(customPriceInput ? customPriceInput.value : 0) || 0;
+  
+  document.getElementById("unified_total_display").textContent = money(total);
+  
+  const method = document.getElementById("unified_payment_method").value;
+  if(method === "Espèces") {
+    const input = document.getElementById("unified_dynamic_payment_detail");
+    if(input && !input.dataset.userEdited) input.value = total;
+  }
+}
+
+function fillDeviceClientDropdowns() {
+  const sel = document.getElementById("unified_client_select");
+  if(!sel) return;
+  const current = sel.value;
+  sel.innerHTML = `<option value="">-- None --</option>` + clients.map(c => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join("");
+  if(current) sel.value = current;
+}
+
+function onPaymentMethodChange() {
+  const method = document.getElementById("unified_payment_method").value;
+  const label = document.getElementById("dynamic_field_label");
+  const input = document.getElementById("unified_dynamic_payment_detail");
+  const price = Number(document.getElementById("unified_price_input").value || 0);
+  
+  input.dataset.userEdited = "";
+  if(method === "Espèces") {
+    label.textContent = "Montant payé (Espèces)";
+    input.placeholder = "Entrer le montant...";
+    input.type = "number";
+    input.value = price;
+  } else if(method === "Virement") {
+    label.textContent = "N° de virement / Référence";
+    input.placeholder = "Entrer la référence...";
+    input.type = "text";
+    input.value = "";
+  }
+}
+
+const dynInput = document.getElementById("unified_dynamic_payment_detail");
+if(dynInput) {
+  dynInput.addEventListener("input", function(){ this.dataset.userEdited = "true"; });
+}
+
+function checkoutUnifiedDevice() {
+  const clientId = document.getElementById("unified_client_select").value;
+  const paymentMethod = document.getElementById("unified_payment_method").value;
+  const paymentDetailInput = document.getElementById("unified_dynamic_payment_detail").value.trim();
+  const c = getClient(clientId);
+
+  if(selectedDevices.length === 0) { toast("Veuillez sélectionner au moins un appareil"); return; }
+
+  const price = Number(document.getElementById("unified_price_input").value || 0);
+  if(price <= 0) { toast("Veuillez entrer le montant"); return; }
+
+  let paidAmount = price;
+  if(paymentMethod === "Espèces") {
+    paidAmount = Number(paymentDetailInput || price);
+  } else {
+    paidAmount = price;
+  }
+
+  const deviceNamesStr = selectedDevices.join(" + ");
+  let clientNameFinal = c ? c.name : "None";
+
+  if(c) {
+    c.totalDue = Number(c.totalDue || 0) + price;
+    c.totalPaid = Number(c.totalPaid || 0) + paidAmount;
+  }
+
+  let paymentInfoFormatted = paymentMethod;
+  if(paymentMethod === "Espèces") {
+    paymentInfoFormatted = `Espèces (Montant payé: ${paidAmount} DH)`;
+  } else if(paymentMethod === "Virement") {
+    paymentInfoFormatted = `Virement (Réf: ${paymentDetailInput || 'N/A'})`;
+  }
+
+  const transObj = {
+    id: makeId(),
+    clientId: c ? c.id : "",
+    name: clientNameFinal,
+    type: "Appareil",
+    amount: price,
+    paidAmount: paidAmount,
+    device: deviceNamesStr,
+    product: "None",
+    paymentMethod: paymentInfoFormatted,
+    note: `Achat: ${deviceNamesStr} | Paiement: ${paymentInfoFormatted}`,
+    date: now(),
+    agent: currentAgent
+  };
+
+  transactions.unshift(transObj);
+  addHistory("Appareil Vendu", `${clientNameFinal} • ${deviceNamesStr} • ${money(price)} (${paymentMethod})`);
+  saveData();
+  renderAll();
+  toast("Facture émise avec succès");
+  
+  openDebtReceipt(transObj.id);
+}
+
+function toggleCustomSelect(id) {
+  const options = document.getElementById('options_' + id);
+  document.querySelectorAll('.custom-options').forEach(o => {
+    if(o.id !== 'options_' + id) o.classList.remove('open');
+  });
+  options.classList.toggle('open');
+}
+
+function selectCustomOption(id, val, img) {
+  document.getElementById(id).value = val;
+  const trigger = document.getElementById('trigger_' + id);
+  if(val === 'None' || !img) {
+    trigger.innerHTML = `<div class="none-icon">N</div> ${val}`;
+  } else {
+    trigger.innerHTML = `<img src="${img}"> ${val}`;
+  }
+  document.getElementById('options_' + id).classList.remove('open');
+}
+
+window.addEventListener('click', function(e) {
+  if (!e.target.closest('.custom-select-wrapper')) {
+    document.querySelectorAll('.custom-options').forEach(o => o.classList.remove('open'));
+  }
+});
 
 const KEYS={ clients:"credits_panel_clients", payments:"credits_panel_payments", history:"credits_panel_history", transactions:"credits_panel_transactions", activations:"credits_panel_activations", abonnements:"credits_panel_abonnements" }; 
 let clients=load(KEYS.clients,[]); 
@@ -755,7 +1314,7 @@ function escapeHtml(value){ return String(value??"").replace(/&/g,"&amp;").repla
 function initials(name){ return String(name||"?").split(" ").filter(Boolean).slice(0,2).map(x=>x[0]).join("").toUpperCase(); } 
 function getClient(id){ return clients.find(c=>c.id===id); } 
 
-const titles={ dashboard:"Dashboard", clients:"Clients", abonnements:"Abonnements", payments:"Paiements", history:"Historique", activation:"Activation", settings:"Paramètres" }; 
+const titles={ dashboard:"Dashboard", devices:"Appareils", clients:"Clients", abonnements:"Abonnements", payments:"Paiements", history:"Historique", activation:"Activation", settings:"Paramètres" }; 
 
 document.querySelectorAll(".nav-item").forEach(item=>{ 
   item.addEventListener("click",function(){ 
@@ -805,7 +1364,7 @@ function clientStatus(client){
 function renderDashboard(){ 
   const body=document.getElementById("dashboardTable"); 
   const recent=[...clients].sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,5); 
-  if(!recent.length){ body.innerHTML=`<tr><td colspan="4"><div class="empty">Aucun client / لا يوجد عملاء</div></td></tr>`; return; } 
+  if(!recent.length){ body.innerHTML=`<tr><td colspan="4"><div class="empty">Aucun client</div></td></tr>`; return; } 
   body.innerHTML=recent.map(client=>{ 
     const status=clientStatus(client); 
     const remain=Math.max(0,Number(client.totalDue||0)-Number(client.totalPaid||0)); 
@@ -818,13 +1377,13 @@ function renderClients(){
   const list=clients.filter(c=>String(c.name||"").toLowerCase().includes(search)||String(c.account||"").toLowerCase().includes(search)||String(c.phone||"").toLowerCase().includes(search)); 
   document.getElementById("clientCountText").textContent=clients.length+" clients"; 
   const body=document.getElementById("clientsTable"); 
-  if(!list.length){ body.innerHTML=`<tr><td colspan="9"><div class="empty">Aucun client trouvé / لم يتم العثور على عميل</div></td></tr>`; return; } 
+  if(!list.length){ body.innerHTML=`<tr><td colspan="9"><div class="empty">Aucun client trouvé</div></td></tr>`; return; } 
   body.innerHTML=list.map(c=>{ 
     const due=Number(c.totalDue||0); 
     const paid=Number(c.totalPaid||0); 
     const remain=Math.max(0,due-paid); 
     const status=clientStatus(c); 
-    return`<tr><td><div class="client-cell"><span class="avatar">${c.avatar?`<img src="${c.avatar}">`:escapeHtml(initials(c.name))}</span><strong>${escapeHtml(c.name)}</strong></div></td><td>${escapeHtml(c.account||"-")}</td><td><span class="badge badge-blue">${escapeHtml(c.year||currentYear())}</span></td><td><code>${escapeHtml(c.phone||"-")}</code></td><td>${money(due)}</td><td>${money(paid)}</td><td>${money(remain)}</td><td><span class="badge ${status.cls}">${status.text}</span></td><td><div class="actions"><button class="btn btn-dark btn-small" onclick="viewClient('${c.id}')">👁</button><button class="btn btn-blue btn-small" onclick="openDebtModal('${c.id}')">＋</button><button class="btn btn-lime btn-small" onclick="openPaymentModal('${c.id}')">💳</button><button class="btn btn-dark btn-small" onclick="editClient('${c.id}')">✎</button><button class="btn btn-dark btn-small" onclick="openClientInvoice('${c.id}')">🧾</button><button class="btn btn-danger btn-small" onclick="deleteClientDirect('${c.id}')">🗑</button></div></td></tr>`; 
+    return`<tr><td><div class="client-cell"><span class="avatar">${c.avatar?`<img src="${c.avatar}">`:escapeHtml(initials(c.name))}</span><strong>${escapeHtml(c.name)}</strong></div></td><td>${escapeHtml(c.account||"-")}</td><td><span class="badge badge-blue">${escapeHtml(c.year||currentYear())}</span></td><td><code>${escapeHtml(c.phone||"+212000000000")}</code></td><td>${money(due)}</td><td>${money(paid)}</td><td>${money(remain)}</td><td><span class="badge ${status.cls}">${status.text}</span></td><td><div class="actions"><button class="btn btn-dark btn-small" onclick="viewClient('${c.id}')">👁</button><button class="btn btn-blue btn-small" onclick="openDebtModal('${c.id}')">＋</button><button class="btn btn-lime btn-small" onclick="openPaymentModal('${c.id}')">💳</button><button class="btn btn-dark btn-small" onclick="editClient('${c.id}')">✎</button><button class="btn btn-dark btn-small" onclick="openClientInvoice('${c.id}')">🧾</button><button class="btn btn-danger btn-small" onclick="deleteClientDirect('${c.id}')">🗑</button></div></td></tr>`; 
   }).join(""); 
 } 
 
@@ -834,7 +1393,7 @@ function openClientModal(){
   document.getElementById("clientPhone").value=""; 
   document.getElementById("clientYear").value=currentYear(); 
   document.getElementById("clientAccount").value=""; 
-  document.getElementById("clientModalTitle").textContent="Nouveau client — عميل جديد"; 
+  document.getElementById("clientModalTitle").textContent="Nouveau client"; 
   document.getElementById("deleteClientModalBtn").style.display="none"; 
   openModal("clientModal"); 
 } 
@@ -847,7 +1406,7 @@ function editClient(clientId){
   document.getElementById("clientPhone").value=client.phone||""; 
   document.getElementById("clientYear").value=client.year||currentYear(); 
   document.getElementById("clientAccount").value=client.account||""; 
-  document.getElementById("clientModalTitle").textContent="Modifier client — تعديل العميل"; 
+  document.getElementById("clientModalTitle").textContent="Modifier le client"; 
   document.getElementById("deleteClientModalBtn").style.display="inline-flex"; 
   openModal("clientModal"); 
 } 
@@ -855,7 +1414,8 @@ function editClient(clientId){
 function saveClient(){ 
   const editId=document.getElementById("editClientId").value; 
   const name=document.getElementById("clientName").value.trim(); 
-  const phone=document.getElementById("clientPhone").value.trim(); 
+  let phone=document.getElementById("clientPhone").value.trim(); 
+  if(!phone) { phone = "+212000000000"; }
   const year=document.getElementById("clientYear").value.trim()||currentYear(); 
   const account=document.getElementById("clientAccount").value.trim(); 
   if(!name){ toast("Veuillez entrer le nom du client"); return; } 
@@ -865,7 +1425,7 @@ function saveClient(){
     addHistory("Client modifié",`${name}`); 
     toast("Client modifié avec succès"); 
   }else{ 
-    const client={id:makeId(),name,phone,year,account,totalDue:0,totalPaid:0,date:dateOnly(), agent:currentAgent}; 
+    const client={id:makeId(),name,phone,year,account,totalDue:0,totalPaid:0,date:now(), agent:currentAgent}; 
     clients.unshift(client); 
     addHistory("Nouveau client",`${name}`); 
     toast("Client ajouté avec succès"); 
@@ -878,7 +1438,7 @@ function saveClient(){
 function deleteClientDirect(id){
   const client=getClient(id);
   if(!client)return;
-  if(!confirm(`Supprimer le client "${client.name}" ?\n\nحذف العميل "${client.name}" وجميع بياناته؟`))return;
+  if(!confirm(`Supprimer le client "${client.name}" ?`))return;
   clients=clients.filter(c=>c.id!==id); 
   payments=payments.filter(p=>p.clientId!==id); 
   transactions=transactions.filter(t=>t.clientId!==id); 
@@ -888,7 +1448,7 @@ function deleteClientDirect(id){
   saveData(); 
   renderAll(); 
   toast("Client supprimé");
-}
+} 
 
 function deleteCurrentClient(){ 
   const id=document.getElementById("editClientId").value; 
@@ -904,59 +1464,68 @@ function viewClient(id){
   
   const clientAbonnements = abonnements.filter(a => a.clientId === id);
   const clientActivations = activations.filter(act => act.clientId === id);
-  const clientPayments = payments.filter(p => p.clientId === id);
 
-  document.getElementById("clientDetailTitle").textContent = `ملف العميل: ${c.name}`;
+  document.getElementById("clientDetailTitle").textContent = `Dossier: ${c.name}`;
   
   let html = `
     <div class="form-grid" style="margin-bottom:10px;">
-      <div class="form-group"><label>Nom / الاسم</label><div class="input" style="padding:7px 9px;">${escapeHtml(c.name)}</div></div>
-      <div class="form-group"><label>WhatsApp / الواتساب</label><div class="input" style="padding:7px 9px;">${escapeHtml(c.phone||"-")}</div></div>
-      <div class="form-group"><label>Année / العام</label><div class="input" style="padding:7px 9px;">${escapeHtml(c.year||currentYear())}</div></div>
+      <div class="form-group"><label>Nom</label><div class="input" style="padding:7px 9px;">${escapeHtml(c.name)}</div></div>
+      <div class="form-group"><label>WhatsApp</label><div class="input" style="padding:7px 9px;">${escapeHtml(c.phone||"+212000000000")}</div></div>
+      <div class="form-group"><label>Année</label><div class="input" style="padding:7px 9px;">${escapeHtml(c.year||currentYear())}</div></div>
       <div class="form-group"><label>Compte / Username</label><div class="input" style="padding:7px 9px;">${escapeHtml(c.account||"-")}</div></div>
       <div class="form-group"><label>Total Facturé</label><div class="input" style="color:var(--orange); padding:7px 9px;">${money(c.totalDue)}</div></div>
       <div class="form-group"><label>Total Payé</label><div class="input" style="color:var(--green); padding:7px 9px;">${money(c.totalPaid)}</div></div>
-      <div class="form-group full"><label>Reste / الباقي</label><div class="input" style="color:var(--danger); font-weight:bold; padding:7px 9px;">${money(remain)}</div></div>
+      <div class="form-group full"><label>Reste</label><div class="input" style="color:var(--danger); font-weight:bold; padding:7px 9px;">${money(remain)}</div></div>
     </div>
 
     <div style="margin-top:10px; padding-top:8px;">
-      <h4 style="color:var(--lime); font-size:11px; margin-bottom:5px;">📡 الاشتراكات (Abonnements)</h4>
+      <h4 style="color:var(--lime); font-size:11px; margin-bottom:5px;">📡 Abonnements</h4>
   `;
 
   if(clientAbonnements.length > 0) {
-    html += `<div class="table-wrap"><table class="client-detail-table"><thead><tr><th>التاريخ</th><th>التطبيق</th><th>Server / User</th><th>الانتهاء</th></tr></thead><tbody>`;
+    html += `<div class="table-wrap"><table class="client-detail-table"><thead><tr><th>Date</th><th>App</th><th>Server / User</th><th>Expiration</th></tr></thead><tbody>`;
     clientAbonnements.forEach(ab => {
-      html += `<tr><td>${escapeHtml(ab.date)}</td><td><span class="badge badge-lime">${escapeHtml(ab.app)}</span></td><td>${escapeHtml(ab.server)}<br><small>${escapeHtml(ab.username)}</small></td><td><span style="color:var(--orange);">${escapeHtml(ab.expiration)}</span></td></tr>`;
+      let logoUrl = getLogo(ab.app);
+      let appIconHtml = ab.app && ab.app !== 'None' ? `<span class="avatar"><img src="${logoUrl}"></span>` : '';
+      html += `<tr><td>${escapeHtml(ab.date)}</td><td><div class="client-cell">${appIconHtml}<span class="badge badge-lime">${escapeHtml(ab.app||'None')}</span></div></td><td>${escapeHtml(ab.server)}<br><small>${escapeHtml(ab.username)}</small></td><td><span style="color:var(--orange);">${escapeHtml(ab.expiration)}</span></td></tr>`;
     });
     html += `</tbody></table></div>`;
   } else {
-    html += `<div style="color:var(--muted); font-size:10px;">لا توجد اشتراكات مسجلة.</div>`;
+    html += `<div style="color:var(--muted); font-size:10px;">Aucun abonnement enregistré.</div>`;
   }
 
   html += `</div><div style="margin-top:10px; padding-top:8px;">
-      <h4 style="color:var(--blue); font-size:11px; margin-bottom:5px;">⚡ التفعيلات (Activations)</h4>`;
+      <h4 style="color:var(--blue); font-size:11px; margin-bottom:5px;">⚡ Activations</h4>`;
 
   if(clientActivations.length > 0) {
-    html += `<div class="table-wrap"><table class="client-detail-table"><thead><tr><th>التاريخ</th><th>التطبيق</th><th>MAC Address</th><th>الثمن</th></tr></thead><tbody>`;
+    html += `<div class="table-wrap"><table class="client-detail-table"><thead><tr><th>Date</th><th>App</th><th>MAC Address</th><th>Prix</th></tr></thead><tbody>`;
     clientActivations.forEach(act => {
-      html += `<tr><td>${escapeHtml(act.date)}</td><td><span class="badge badge-blue">${escapeHtml(act.app)}</span></td><td><code>${escapeHtml(act.mac)}</code></td><td><strong style="color:var(--green);">${money(act.price)}</strong></td></tr>`;
+      let logoUrl = getLogo(act.app);
+      let appIconHtml = act.app && act.app !== 'None' ? `<span class="avatar"><img src="${logoUrl}"></span>` : '';
+      html += `<tr><td>${escapeHtml(act.date)}</td><td><div class="client-cell">${appIconHtml}<span class="badge badge-blue">${escapeHtml(act.app||'None')}</span></div></td><td><code>${escapeHtml(act.mac)}</code></td><td><strong style="color:var(--green);">${money(act.price)}</strong></td></tr>`;
     });
     html += `</tbody></table></div>`;
   } else {
-    html += `<div style="color:var(--muted); font-size:10px;">لا توجد تفعيلات مسجلة.</div>`;
+    html += `<div style="color:var(--muted); font-size:10px;">Aucune activation enregistrée.</div>`;
   }
 
   html += `</div><div style="margin-top:10px; padding-top:8px;">
-      <h4 style="color:var(--green); font-size:11px; margin-bottom:5px;">💳 الدفعات المالية (Paiements)</h4>`;
+      <h4 style="color:var(--green); font-size:11px; margin-bottom:5px;">💳 Paiements / Transactions</h4>`;
 
-  if(clientPayments.length > 0) {
-    html += `<div class="table-wrap"><table class="client-detail-table"><thead><tr><th>التاريخ</th><th>المنتج</th><th>المبلغ</th><th>ملاحظة</th></tr></thead><tbody>`;
-    clientPayments.forEach(p => {
-      html += `<tr><td>${escapeHtml(p.date)}</td><td><span class="badge badge-lime">${escapeHtml(p.product||'Paiement')}</span></td><td><span class="badge badge-green">+${money(p.amount)}</span></td><td>${escapeHtml(p.note||"-")}</td></tr>`;
+  let clientTrans = transactions.filter(t => t.clientId === id);
+  if(clientTrans.length > 0) {
+    html += `<div class="table-wrap"><table class="client-detail-table"><thead><tr><th>Date</th><th>Type</th><th>Appareil / App</th><th>Montant</th></tr></thead><tbody>`;
+    clientTrans.forEach(tr => {
+      let devLogo = getDeviceLogo(tr.device);
+      let logoUrl = getLogo(tr.product);
+      let devIconHtml = tr.device && tr.device !== 'None' ? `<span class="avatar"><img src="${devLogo}" style="background:#fff;"></span>` : '';
+      let appIconHtml = tr.product && tr.product !== 'None' ? `<span class="avatar"><img src="${logoUrl}"></span>` : '';
+      let displayParts = [tr.device && tr.device !== 'None' ? tr.device : '', tr.product && tr.product !== 'None' ? tr.product : ''].filter(Boolean).join(' / ') || 'None';
+      html += `<tr><td>${escapeHtml(tr.date)}</td><td>${escapeHtml(tr.type)}</td><td><div class="client-cell">${devIconHtml}${appIconHtml}<span class="badge badge-lime">${escapeHtml(displayParts)}</span></div></td><td><strong>${money(tr.amount)}</strong></td></tr>`;
     });
     html += `</tbody></table></div>`;
   } else {
-    html += `<div style="color:var(--muted); font-size:10px;">لا توجد دفعات مالية مسجلة.</div>`;
+    html += `<div style="color:var(--muted); font-size:10px;">Aucune transaction enregistrée.</div>`;
   }
 
   html += `</div>`;
@@ -970,7 +1539,7 @@ function openDebtModal(id){
   if(!c)return; 
   document.getElementById("debtClientId").value=id; 
   document.getElementById("debtAmount").value=""; 
-  document.getElementById("debtProduct").value="Box"; 
+  selectCustomOption('debtProduct', 'None', '');
   document.getElementById("debtNote").value=""; 
   openModal("debtModal"); 
 } 
@@ -978,19 +1547,19 @@ function openDebtModal(id){
 function saveDebt(){ 
   const id=document.getElementById("debtClientId").value; 
   const amount=Number(document.getElementById("debtAmount").value); 
-  const product=document.getElementById("debtProduct").value.trim()||"Box"; 
+  const product=document.getElementById("debtProduct").value.trim()||"None"; 
   const note=document.getElementById("debtNote").value.trim(); 
   const c=getClient(id); 
   if(!c||amount<=0){ toast("Montant invalide"); return; } 
   c.totalDue=Number(c.totalDue||0)+amount; 
-  
-  const transObj = {id:makeId(), clientId:id, name:c.name, type:"Dette", amount, product, note, date:now(), agent:currentAgent};
+
+  const transObj = {id:makeId(), clientId:id, name:c.name, type:"Dette", amount, paidAmount:0, device:"None", product, note, date:now(), agent:currentAgent};
   transactions.unshift(transObj); 
-  addHistory("Montant ajouté",`${c.name} • ${product} • ${money(amount)}`); 
+  addHistory("Montant ajouté",`${c.name} • ${product !== 'None' ? product : ''} • ${money(amount)}`); 
   saveData(); 
   closeModal("debtModal"); 
   renderAll(); 
-  toast("Montant ajouté & Facturé"); 
+  toast("Montant ajouté & Facturée"); 
   
   openDebtReceipt(transObj.id);
 } 
@@ -1001,7 +1570,7 @@ function openPaymentModal(clientId=""){
   select.value=clientId||""; 
   document.getElementById("paymentClientId").value=clientId||""; 
   document.getElementById("paymentAmount").value=""; 
-  document.getElementById("paymentProduct").value="Box"; 
+  selectCustomOption('paymentProduct', 'None', '');
   document.getElementById("paymentNote").value=""; 
   openModal("paymentModal"); 
 } 
@@ -1011,7 +1580,7 @@ document.getElementById("paymentClient").addEventListener("change",function(){ d
 function savePayment(){ 
   const id=document.getElementById("paymentClient").value; 
   const amount=Number(document.getElementById("paymentAmount").value); 
-  const product=document.getElementById("paymentProduct").value.trim()||"Box"; 
+  const product=document.getElementById("paymentProduct").value.trim()||"None"; 
   const note=document.getElementById("paymentNote").value.trim(); 
   const c=getClient(id); 
   if(!c){ toast("Sélectionnez un client"); return; } 
@@ -1019,11 +1588,11 @@ function savePayment(){
   const remain=Math.max(0,Number(c.totalDue||0)-Number(c.totalPaid||0)); 
   if(remain>0&&amount>remain){ toast("Le paiement dépasse le reste : "+money(remain)); return; } 
   c.totalPaid=Number(c.totalPaid||0)+amount; 
-  
-  const paymentObj = {id:makeId(), clientId:id, name:c.name, amount, product, note, date:now(), agent:currentAgent};
+
+  const paymentObj = {id:makeId(), clientId:id, name:c.name, amount, device:"None", product, note, date:now(), agent:currentAgent};
   payments.unshift(paymentObj); 
-  transactions.unshift({id:makeId(), clientId:id, type:"Paiement", amount, product, note:`${product} - ${note}`, date:now(), agent:currentAgent}); 
-  addHistory("Paiement reçu",`${c.name} • ${money(amount)} • ${product}`); 
+  transactions.unshift({id:makeId(), clientId:id, type:"Paiement", amount, paidAmount:amount, device:"None", product, note:`${product !== 'None' ? product : ''} - ${note}`, date:now(), agent:currentAgent}); 
+  addHistory("Paiement reçu",`${c.name} • ${money(amount)}`); 
   saveData(); 
   closeModal("paymentModal"); 
   renderAll(); 
@@ -1034,8 +1603,12 @@ function savePayment(){
 
 function renderPayments(){ 
   const body=document.getElementById("paymentsTable"); 
-  if(!payments.length){ body.innerHTML=`<tr><td colspan="6"><div class="empty">Aucun paiement / لا توجد دفعات</div></td></tr>`; return; } 
-  body.innerHTML=payments.map(p=>`<tr><td>${escapeHtml(p.date)}</td><td><strong>${escapeHtml(p.name)}</strong></td><td><span class="badge badge-lime">${escapeHtml(p.product||"Box")}</span></td><td><span class="badge badge-green">+${money(p.amount)}</span></td><td>${escapeHtml(p.note||"-")}</td><td><button class="btn btn-dark btn-small" onclick="openPaymentReceipt('${p.id}')">🧾 فاتورة</button></td></tr>`).join(""); 
+  if(!payments.length){ body.innerHTML=`<tr><td colspan="6"><div class="empty">Aucun paiement</div></td></tr>`; return; } 
+  body.innerHTML=payments.map(p=>{
+    let logoUrl = getLogo(p.product);
+    let appIconHtml = p.product && p.product !== 'None' ? `<span class="avatar"><img src="${logoUrl}"></span>` : '';
+    return `<tr><td>${escapeHtml(p.date)}</td><td><strong>${escapeHtml(p.name)}</strong></td><td><div class="client-cell">${appIconHtml}<span class="badge badge-lime">${escapeHtml(p.product||'None')}</span></div></td><td><span class="badge badge-green">+${money(p.amount)}</span></td><td>${escapeHtml(p.note||"-")}</td><td><button class="btn btn-dark btn-small" onclick="openPaymentReceipt('${p.id}')">🧾 Reçu</button></td></tr>`;
+  }).join(""); 
 } 
 
 function addHistory(title,details){ 
@@ -1045,7 +1618,7 @@ function addHistory(title,details){
 
 function renderHistory(){ 
   const box=document.getElementById("historyList"); 
-  if(!historyData.length){ box.innerHTML=`<div class="empty">Aucun historique / لا يوجد سجل</div>`; return; } 
+  if(!historyData.length){ box.innerHTML=`<div class="empty">Aucun historique</div>`; return; } 
   box.innerHTML=historyData.map(h=>`<div class="history-item"><div class="history-dot">✓</div><div class="history-info"><strong>${escapeHtml(h.title)}</strong><span>${escapeHtml(h.details||"")} • ${escapeHtml(h.date)}</span></div></div>`).join(""); 
 } 
 
@@ -1056,7 +1629,7 @@ function abonnementToday(){
 
 function calcExpiration(startDate,duration){ 
   if(!startDate) startDate = abonnementToday();
-  if(duration==="Lifetime") return "Lifetime (مدى الحياة)";
+  if(duration==="Lifetime") return "Lifetime";
   const d=new Date(startDate+"T00:00:00"); 
   if(duration==="1 mois") d.setMonth(d.getMonth()+1); 
   if(duration==="12 mois") d.setFullYear(d.getFullYear()+1); 
@@ -1097,7 +1670,7 @@ function autoConvertM3U(showMessage=false){
       document.getElementById("abonnementPassword").value=password; 
       status.className="m3u-status m3u-success"; 
       status.innerHTML=`✓ M3U détecté — Xtream extrait.<br>🌐 Server : ${escapeHtml(server)}`; 
-      if(showMessage){ document.getElementById("abonnementResult").innerHTML=`<strong style="color:var(--green)">✓ Conversion M3U → Xtream réussie</strong>`; } 
+      if(showMessage){ document.getElementById("abonnementResult").innerHTML=`<strong style="color:var(--green)">✓ Conversion M3U réussie</strong>`; } 
       return true; 
     } 
     status.className="m3u-status m3u-warning"; 
@@ -1123,7 +1696,7 @@ function createAbonnement(){
   } 
   const clientId=document.getElementById("abonnementClient").value; 
   const name=document.getElementById("abonnementName").value.trim(); 
-  const app=document.getElementById("abonnementApp").value; 
+  const app=document.getElementById("abonnementApp").value||"None"; 
   const server=document.getElementById("abonnementServer").value.trim(); 
   const username=document.getElementById("abonnementUsername").value.trim(); 
   const password=document.getElementById("abonnementPassword").value.trim(); 
@@ -1136,7 +1709,6 @@ function createAbonnement(){
   if(!server){ toast("Entrez le Server Xtream"); return; } 
   if(!username){ toast("Entrez le Username Xtream"); return; } 
   if(!password){ toast("Entrez le Password Xtream"); return; } 
-  if(!app){ toast("Sélectionnez une application"); return; } 
 
   const expiration=calcExpiration(startDate,duration); 
 
@@ -1146,7 +1718,7 @@ function createAbonnement(){
     if(existingClient){
       finalClientId=existingClient.id;
     }else{
-      let newC={id:makeId(), name, phone:"", year:currentYear(), account:username, totalDue:0, totalPaid:0, date:dateOnly(), agent:currentAgent};
+      let newC={id:makeId(), name, phone:"+212000000000", year:currentYear(), account:username, totalDue:0, totalPaid:0, date:now(), agent:currentAgent};
       clients.unshift(newC);
       finalClientId=newC.id;
     }
@@ -1156,12 +1728,13 @@ function createAbonnement(){
     let clientObj=getClient(finalClientId);
     if(clientObj){
       clientObj.totalDue=Number(clientObj.totalDue||0)+price;
-      transactions.unshift({id:makeId(), clientId:finalClientId, type:"Abonnement", amount:price, product:app, note:`Xtream (${app})`, date:now(), agent:currentAgent});
+      clientObj.totalPaid=Number(clientObj.totalPaid||0)+price;
+      transactions.unshift({id:makeId(), clientId:finalclientId, type:"Abonnement", amount:price, paidAmount:price, device:"None", product:app, note:`Xtream - Début: ${startDate} - Fin: ${expiration} ${note?'- '+note:''}`, date:now(), agent:currentAgent});
     }
   }
 
   const client=getClient(finalClientId); 
-  const abonnement={ id:makeId(), date:dateOnly(), createdAt:now(), clientId:finalClientId||"", name, account:client?client.account||username: username, app, type:"Xtream", server, username, password, m3uUrl, duration, startDate, expiration, price, note, status:"Actif", agent:currentAgent }; 
+  const abonnement={ id:makeId(), date:now(), createdAt:now(), clientId:finalClientId||"", name, account:client?client.account||username: username, app, type:"Xtream", server, username, password, m3uUrl, duration, startDate, expiration, price, note, status:"Actif", agent:currentAgent }; 
   abonnements.unshift(abonnement); 
   addHistory(m3uUrl?"Nouveau Abonnement M3U → Xtream":"Nouveau Abonnement Xtream", `${name} • ${app}`); 
   saveData(); 
@@ -1177,26 +1750,47 @@ function createAbonnement(){
   renderClients();
   renderStats();
   toast("Abonnement créé avec succès"); 
+  
+  openAbonnementReceipt(abonnement.id);
 } 
 
 function renderAbonnements(){ 
   document.getElementById("abonnementCount").textContent=abonnements.length; 
   const body=document.getElementById("abonnementTable"); 
-  if(!abonnements.length){ body.innerHTML=`<tr><td colspan="7"><div class="empty">Aucun abonnement Xtream / لا توجد اشتراكات</div></td></tr>`; return; } 
-  body.innerHTML=abonnements.map(a=>`<tr><td>${escapeHtml(a.date||"-")}</td><td><div class="client-cell"><span class="avatar">${escapeHtml(initials(a.name))}</span><strong>${escapeHtml(a.name)}</strong></div></td><td><span class="badge badge-lime">${escapeHtml(a.app||"-")}</span></td><td><span class="badge badge-blue">📡 Xtream</span>${a.m3uUrl?`<span class="badge badge-green" style="margin-left:2px">M3U</span>`:""}<br><small style="color:var(--muted);font-size:8px;">${escapeHtml(a.username||"-")}</small></td><td><span class="badge badge-lime">${escapeHtml(a.duration||"-")}</span></td><td><span class="badge badge-orange">${escapeHtml(a.expiration||"-")}</span></td><td><div class="actions"><button class="btn btn-blue btn-small" onclick="viewAbonnement('${a.id}')">👁</button>${a.clientId?`<button class="btn btn-blue btn-small" onclick="openDebtModal('${a.clientId}')">＋</button><button class="btn btn-lime btn-small" onclick="openPaymentModal('${a.clientId}')">💳</button>`:``}<button class="btn btn-dark btn-small" onclick="openAbonnementReceipt('${a.id}')">🧾</button><button class="btn btn-lime btn-small" onclick="copyXtream('${a.id}')">📋</button><button class="btn btn-danger btn-small" onclick="deleteAbonnement('${a.id}')">🗑</button></div></td></tr>`).join(""); 
+  if(!abonnements.length){ body.innerHTML=`<tr><td colspan="7"><div class="empty">Aucun abonnement Xtream</div></td></tr>`; return; } 
+  body.innerHTML=abonnements.map(a=>{
+    let logoUrl = getLogo(a.app);
+    let appIconHtml = a.app && a.app !== 'None' ? `<span class="avatar"><img src="${logoUrl}"></span>` : '';
+    return `<tr><td>${escapeHtml(a.date||"-")}</td><td><div class="client-cell"><span class="avatar">${escapeHtml(initials(a.name))}</span><strong>${escapeHtml(a.name)}</strong></div></td><td><div class="client-cell">${appIconHtml}<span class="badge badge-lime">${escapeHtml(a.app||'None')}</span></div></td><td><span class="badge badge-blue">📡 Xtream</span>${a.m3uUrl?`<span class="badge badge-green" style="margin-left:2px">M3U</span>`:""}<br><small style="color:var(--muted);font-size:8px;">${escapeHtml(a.username||"-")}</small></td><td><span class="badge badge-lime">${escapeHtml(a.duration||"-")}</span></td><td><span class="badge badge-orange">${escapeHtml(a.expiration||"-")}</span></td><td><div class="actions"><button class="btn btn-blue btn-small" onclick="viewAbonnement('${a.id}')">👁</button>${a.clientId?`<button class="btn btn-blue btn-small" onclick="openDebtModal('${a.clientId}')">＋</button><button class="btn btn-lime btn-small" onclick="openPaymentModal('${a.clientId}')">💳</button>`:``}<button class="btn btn-dark btn-small" onclick="openAbonnementReceipt('${a.id}')">🧾</button><button class="btn btn-lime btn-small" onclick="copyXtream('${a.id}')">📋</button><button class="btn btn-danger btn-small" onclick="deleteAbonnement('${a.id}')">🗑</button></div></td></tr>`;
+  }).join(""); 
 } 
 
 function viewAbonnement(id){ 
   const a=abonnements.find(x=>x.id===id); 
   if(!a) return; 
-  document.getElementById("detailBody").innerHTML=`<div class="xtream-box"><div class="xtream-title">📡 INFORMATIONS XTREAM</div><div class="xtream-line"><span class="xtream-label">Client</span><span class="xtream-value">${escapeHtml(a.name)}</span></div><div class="xtream-line"><span class="xtream-label">Application</span><span class="xtream-value">${escapeHtml(a.app||"-")}</span></div>${a.m3uUrl?`<div class="xtream-line"><span class="xtream-label">🔗 M3U URL</span><span class="xtream-value" style="color:var(--green)">${escapeHtml(a.m3uUrl)}</span></div>`:""}<div class="xtream-line"><span class="xtream-label">🌐 Server</span><span class="xtream-value">${escapeHtml(a.server||"-")}</span></div><div class="xtream-line"><span class="xtream-label">👤 Username</span><span class="xtream-value">${escapeHtml(a.username||"-")}</span></div><div class="xtream-line"><span class="xtream-label">🔑 Password</span><span class="xtream-value">${escapeHtml(a.password||"-")}</span></div><div class="xtream-line"><span class="xtream-label">📅 Durée</span><span class="xtream-value">${escapeHtml(a.duration||"-")}</span></div><div class="xtream-line"><span class="xtream-label">⏳ Expiration</span><span class="xtream-value" style="color:var(--lime)">${escapeHtml(a.expiration||"-")}</span></div>${a.note?`<div class="xtream-line"><span class="xtream-label">📝 Note</span><span class="xtream-value">${escapeHtml(a.note)}</span></div>`:""}</div>`; 
+  let logoUrl = getLogo(a.app);
+  let appIconHtml = a.app && a.app !== 'None' ? `<img src="${logoUrl}" style="width:22px;height:22px;object-fit:contain;margin-left:3px;">` : '';
+  
+  let linesHTML = `<div class="xtream-box"><div class="xtream-title">${appIconHtml} 📡 INFORMATIONS XTREAM</div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">Client</span><span class="xtream-value">${escapeHtml(a.name)}</span></div>`;
+  if(a.app && a.app !== 'None') linesHTML += `<div class="xtream-line"><span class="xtream-label">Application</span><span class="xtream-value">${escapeHtml(a.app)}</span></div>`;
+  if(a.m3uUrl) linesHTML += `<div class="xtream-line"><span class="xtream-label">🔗 M3U URL</span><span class="xtream-value" style="color:var(--green)">${escapeHtml(a.m3uUrl)}</span></div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">🌐 Server</span><span class="xtream-value">${escapeHtml(a.server||"-")}</span></div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">👤 Username</span><span class="xtream-value">${escapeHtml(a.username||"-")}</span></div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">🔑 Password</span><span class="xtream-value">${escapeHtml(a.password||"-")}</span></div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">📅 Durée</span><span class="xtream-value">${escapeHtml(a.duration||"-")}</span></div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">⏳ Expiration</span><span class="xtream-value" style="color:var(--lime)">${escapeHtml(a.expiration||"-")}</span></div>`;
+  if(a.note) linesHTML += `<div class="xtream-line"><span class="xtream-label">📝 Note</span><span class="xtream-value">${escapeHtml(a.note)}</span></div>`;
+  linesHTML += `</div>`;
+
+  document.getElementById("detailBody").innerHTML=linesHTML; 
   openModal("detailModal"); 
 } 
 
 function copyXtream(id){ 
   const a=abonnements.find(x=>x.id===id); 
   if(!a) return; 
-  const text=`XTREAM\nClient: ${a.name}\nServer: ${a.server}\nUsername: ${a.username}\nPassword: ${a.password}\nApplication: ${a.app}\nExpiration: ${a.expiration}`.trim(); 
+  const text=`XTREAM\nClient: ${a.name}\nApplication: ${a.app}\nServer: ${a.server}\nUsername: ${a.username}\nPassword: ${a.password}\nExpiration: ${a.expiration}`.trim(); 
   navigator.clipboard.writeText(text).then(()=>{ toast("Informations copiées"); }); 
 } 
 
@@ -1222,23 +1816,30 @@ document.getElementById("activationClient").addEventListener("change",function()
   const c=getClient(this.value); 
   if(c){ 
     document.getElementById("activationName").value=c.name||""; 
-    document.getElementById("activationPhone").value=c.phone||""; 
+    document.getElementById("activationPhone").value=c.phone||"+212000000000"; 
   } 
 }); 
 
-document.getElementById("activationMac").addEventListener("input",function(){ 
-  let value=this.value.replace(/[^a-fA-F0-9]/g,"").toUpperCase().slice(0,12); 
-  let parts=[]; 
-  for(let i=0; i<value.length; i+=2) parts.push(value.slice(i,i+2)); 
-  this.value=parts.join(":"); 
-}); 
+const macInput = document.getElementById("activationMac");
+if(macInput) {
+  macInput.addEventListener("input", function(){
+    let raw = this.value.trim().toUpperCase();
+    let cleaned = raw.replace(/[^A-F0-9:]/g, "");
+    if(cleaned.length === 12 && !cleaned.includes(":")) {
+      let parts = [];
+      for(let i=0; i<12; i+=2) parts.push(cleaned.slice(i, i+2));
+      this.value = parts.join(":");
+    }
+  });
+}
 
 function createActivation(){ 
   const clientId=document.getElementById("activationClient").value; 
   const name=document.getElementById("activationName").value.trim(); 
-  const phone=document.getElementById("activationPhone").value.trim(); 
+  let phone=document.getElementById("activationPhone").value.trim(); 
+  if(!phone) { phone = "+212000000000"; }
   const mac=document.getElementById("activationMac").value.trim(); 
-  const app=document.getElementById("activationApp").value; 
+  const app=document.getElementById("activationApp").value||"None"; 
   const duration=document.getElementById("activationDuration").value; 
   const startDate=document.getElementById("activationStart").value||abonnementToday(); 
   const price=Number(document.getElementById("activationPrice").value)||0; 
@@ -1246,7 +1847,6 @@ function createActivation(){
 
   if(!name){ toast("Entrez le nom du client"); return; } 
   if(!mac){ toast("Entrez la MAC Address"); return; } 
-  if(!app){ toast("Sélectionnez une application"); return; } 
 
   const expiration = calcExpiration(startDate, duration);
 
@@ -1256,7 +1856,7 @@ function createActivation(){
     if(existingClient){
       finalClientId=existingClient.id;
     }else{
-      let newC={id:makeId(), name, phone, year:currentYear(), account:"Activation", totalDue:0, totalPaid:0, date:dateOnly(), agent:currentAgent};
+      let newC={id:makeId(), name, phone, year:currentYear(), account:"Activation", totalDue:0, totalPaid:0, date:now(), agent:currentAgent};
       clients.unshift(newC);
       finalClientId=newC.id;
     }
@@ -1266,12 +1866,13 @@ function createActivation(){
     let clientObj=getClient(finalClientId);
     if(clientObj){
       clientObj.totalDue=Number(clientObj.totalDue||0)+price;
-      transactions.unshift({id:makeId(), clientId:finalClientId, type:"Activation", amount:price, product:app, note:`${app} (${mac})`, date:now(), agent:currentAgent});
+      clientObj.totalPaid=Number(clientObj.totalPaid||0)+price;
+      transactions.unshift({id:makeId(), clientId:finalClientId, type:"Activation", amount:price, paidAmount:price, device:"None", product:app, note:`MAC: ${mac} | Durée: ${duration} | Début: ${startDate} | Fin: ${expiration} ${note?'- '+note:''}`, date:now(), agent:currentAgent});
     }
   }
 
   const client=getClient(finalClientId); 
-  const activation={ id:makeId(), date:dateOnly(), startDate, expiration, createdAt:now(), clientId:finalClientId, name, phone, mac, app, duration, price, note, status:"Activé", agent:currentAgent }; 
+  const activation={ id:makeId(), date:now(), startDate, expiration, createdAt:now(), clientId:finalClientId, name, phone, mac, app, duration, price, note, status:"Activé", agent:currentAgent }; 
   activations.unshift(activation); 
   addHistory("Activation créée",`${name} • ${app} • ${mac}`); 
   saveData(); 
@@ -1280,23 +1881,40 @@ function createActivation(){
   renderClients(); 
   renderStats(); 
   toast("Activation créée avec succès"); 
+  
+  openActivationReceipt(activation.id);
 } 
 
 function renderActivations(){ 
   document.getElementById("activationCount").textContent=activations.length; 
   const body=document.getElementById("activationTable"); 
-  if(!activations.length){ body.innerHTML=`<tr><td colspan="7"><div class="empty">Aucune activation / لا توجد تفعيلات</div></td></tr>`; return; } 
+  if(!activations.length){ body.innerHTML=`<tr><td colspan="7"><div class="empty">Aucune activation</div></td></tr>`; return; } 
   body.innerHTML=activations.map(a=>{
-    const logoUrl = appLogos[a.app] || "https://i.ibb.co/8gTWpVC2/IMG-20261028-WA0040.webp";
-    return `<tr><td>${escapeHtml(a.date)}</td><td><strong>${escapeHtml(a.name)}</strong></td><td><code>${escapeHtml(a.phone||"-")}</code></td><td><div class="client-cell"><span class="avatar"><img src="${logoUrl}"></span><div><span class="badge badge-lime">${escapeHtml(a.app)}</span><br><small style="color:var(--muted)">${escapeHtml(a.mac)}</small></div></div></td><td><span class="badge badge-blue">Début: ${escapeHtml(a.startDate||"-")}</span><br><span class="badge badge-orange" style="margin-top:2px;">Fin: ${escapeHtml(a.expiration||"-")}</span></td><td><span class="badge badge-green">${escapeHtml(a.status)}</span></td><td><div class="actions"><button class="btn btn-dark btn-small" onclick="viewActivation('${a.id}')">👁</button>${a.clientId?`<button class="btn btn-blue btn-small" onclick="openDebtModal('${a.clientId}')">＋</button><button class="btn btn-lime btn-small" onclick="openPaymentModal('${a.clientId}')">💳</button>`:``}<button class="btn btn-lime btn-small" onclick="openActivationReceipt('${a.id}')">🧾</button><button class="btn btn-danger btn-small" onclick="deleteActivation('${a.id}')">🗑</button></div></td></tr>`;
+    let logoUrl = getLogo(a.app);
+    let appIconHtml = a.app && a.app !== 'None' ? `<span class="avatar"><img src="${logoUrl}"></span>` : '';
+    return `<tr><td>${escapeHtml(a.date)}</td><td><strong>${escapeHtml(a.name)}</strong></td><td><code>${escapeHtml(a.phone||"+212000000000")}</code></td><td><div class="client-cell">${appIconHtml}<div><span class="badge badge-lime">${escapeHtml(a.app||'None')}</span><br><small style="color:var(--muted)">${escapeHtml(a.mac)}</small></div></div></td><td><span class="badge badge-blue">Début: ${escapeHtml(a.startDate||"-")}</span><br><span class="badge badge-orange" style="margin-top:2px;">Fin: ${escapeHtml(a.expiration||"-")}</span></td><td><span class="badge badge-green">${escapeHtml(a.status)}</span></td><td><div class="actions"><button class="btn btn-dark btn-small" onclick="viewActivation('${a.id}')">👁</button>${a.clientId?`<button class="btn btn-blue btn-small" onclick="openDebtModal('${a.clientId}')">＋</button><button class="btn btn-lime btn-small" onclick="openPaymentModal('${a.clientId}')">💳</button>`:``}<button class="btn btn-lime btn-small" onclick="openActivationReceipt('${a.id}')">🧾</button><button class="btn btn-danger btn-small" onclick="deleteActivation('${a.id}')">🗑</button></div></td></tr>`;
   }).join(""); 
 } 
 
 function viewActivation(id){ 
   const a=activations.find(x=>x.id===id); 
   if(!a) return; 
-  const logoUrl = appLogos[a.app] || "https://i.ibb.co/8gTWpVC2/IMG-20261028-WA0040.webp";
-  document.getElementById("detailBody").innerHTML=`<div class="xtream-box"><div class="xtream-title"><img src="${logoUrl}" style="width:16px;height:16px;object-fit:contain;"> ⚡ DÉTAILS ACTIVATION</div><div class="xtream-line"><span class="xtream-label">Client</span><span class="xtream-value">${escapeHtml(a.name)}</span></div><div class="xtream-line"><span class="xtream-label">WhatsApp</span><span class="xtream-value">${escapeHtml(a.phone||"-")}</span></div><div class="xtream-line"><span class="xtream-label">MAC Address</span><span class="xtream-value" style="color:var(--lime)">${escapeHtml(a.mac)}</span></div><div class="xtream-line"><span class="xtream-label">Application</span><span class="xtream-value">${escapeHtml(a.app)}</span></div><div class="xtream-line"><span class="xtream-label">Durée</span><span class="xtream-value">${escapeHtml(a.duration)}</span></div><div class="xtream-line"><span class="xtream-label">Date Début</span><span class="xtream-value" style="color:var(--blue)">${escapeHtml(a.startDate||"-")}</span></div><div class="xtream-line"><span class="xtream-label">Date Expiration</span><span class="xtream-value" style="color:var(--orange)">${escapeHtml(a.expiration||"-")}</span></div><div class="xtream-line"><span class="xtream-label">Prix</span><span class="xtream-value" style="color:var(--green)">${money(a.price)}</span></div>${a.note?`<div class="xtream-line"><span class="xtream-label">Note</span><span class="xtream-value">${escapeHtml(a.note)}</span></div>`:""}</div>`; 
+  let logoUrl = getLogo(a.app);
+  let appIconHtml = a.app && a.app !== 'None' ? `<img src="${logoUrl}" style="width:22px;height:22px;object-fit:contain;margin-left:3px;">` : '';
+
+  let linesHTML = `<div class="xtream-box"><div class="xtream-title">${appIconHtml} ⚡ DÉTAILS ACTIVATION</div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">Client</span><span class="xtream-value">${escapeHtml(a.name)}</span></div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">WhatsApp</span><span class="xtream-value">${escapeHtml(a.phone||"+212000000000")}</span></div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">MAC Address</span><span class="xtream-value" style="color:var(--lime)">${escapeHtml(a.mac)}</span></div>`;
+  if(a.app && a.app !== 'None') linesHTML += `<div class="xtream-line"><span class="xtream-label">Application</span><span class="xtream-value">${escapeHtml(a.app)}</span></div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">Durée</span><span class="xtream-value">${escapeHtml(a.duration)}</span></div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">Date Début</span><span class="xtream-value" style="color:var(--blue)">${escapeHtml(a.startDate||"-")}</span></div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">Date Expiration</span><span class="xtream-value" style="color:var(--orange)">${escapeHtml(a.expiration||"-")}</span></div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">Prix</span><span class="xtream-value" style="color:var(--green)">${money(a.price)}</span></div>`;
+  if(a.note) linesHTML += `<div class="xtream-line"><span class="xtream-label">Note</span><span class="xtream-value">${escapeHtml(a.note)}</span></div>`;
+  linesHTML += `</div>`;
+
+  document.getElementById("detailBody").innerHTML=linesHTML; 
   openModal("detailModal"); 
 } 
 
@@ -1313,62 +1931,124 @@ function deleteActivation(id){
 
 function generateInvoiceHTML(itemType, itemData, clientData, priceVal) {
   let targetClientId = itemData.clientId || clientData.id;
-  let clientName = itemData.name || clientData.name || 'Test';
-  let clientPhone = itemData.phone || clientData.phone || '0650443149';
+  let clientName = itemData.name || clientData.name || 'None';
+  let clientPhone = itemData.phone || clientData.phone || '+212000000000';
   let invoiceId = "#" + (itemData.id || '9KPN0A').slice(-6).toUpperCase();
-  let invoiceDate = escapeHtml(itemData.startDate || itemData.date || dateOnly());
+  
+  let invoiceDate = escapeHtml(itemData.date || now());
+  let paymentMethodDisplay = itemData.paymentMethod || 'Espèces / Virement';
 
   let clientTransactions = targetClientId ? transactions.filter(t => t.clientId === targetClientId) : [];
   let clientObj = targetClientId ? getClient(targetClientId) : null;
 
-  let totalDueVal = clientObj ? Number(clientObj.totalDue || 0) : Number(priceVal || 0);
-  let totalPaidVal = clientObj ? Number(clientObj.totalPaid || 0) : 0;
+  let totalDueVal = 0;
+  let totalPaidVal = 0;
+
+  if (clientObj) {
+    totalDueVal = Number(clientObj.totalDue || 0);
+    totalPaidVal = Number(clientObj.totalPaid || 0);
+  } else {
+    totalDueVal = Number(priceVal || 0);
+    totalPaidVal = Number(itemData.paidAmount !== undefined ? itemData.paidAmount : priceVal);
+  }
+
   let resteVal = Math.max(0, totalDueVal - totalPaidVal);
+  let isFullyPaid = (totalDueVal > 0 && resteVal === 0);
 
   let rowsHTML = "";
-  if(clientTransactions.length > 0) {
+  
+  if(itemType === 'client' && clientTransactions.length > 0 && targetClientId) {
     clientTransactions.forEach((t) => {
-      let pName = t.product || t.type || 'Service';
-      let logoUrl = appLogos[pName] || "https://i.ibb.co/8gTWpVC2/IMG-20261028-WA0040.webp";
+      let pName = t.product || 'None';
+      let dName = t.device || 'None';
       let amt = Number(t.amount || 0);
-      let noteSub = t.note ? `<div style="font-size:7px; color:#64748b; font-style:italic;">📝 ${escapeHtml(t.note)}</div>` : '';
-      let dateSub = `<div style="font-size:7px; color:#2563eb;">📅 ${escapeHtml(t.date)}</div>`;
+      let detailsSub = t.note ? `<div style="font-size:7.5px; color:#1e40af; margin-top:2px; font-weight:bold;">📋 ${escapeHtml(t.note)}</div>` : '';
+      let dateSub = `<div style="font-size:7px; color:#64748b;">📅 ${escapeHtml(t.date)}</div>`;
+
+      let hasDev = dName && dName !== 'None';
+      let hasApp = pName && pName !== 'None';
+      let qty = (hasDev && hasApp) ? 2 : (hasDev || hasApp ? 1 : 1);
+
+      let devLogoHtml = "";
+      if (hasDev) {
+        let devParts = dName.split("+").map(s => s.trim());
+        devParts.forEach(dp => {
+          let imgUrl = getDeviceLogo(dp);
+          if (imgUrl) {
+            devLogoHtml += `<img src="${imgUrl}" alt="Device Logo" class="invoice-app-logo" onerror="this.style.display='none'">`;
+          }
+        });
+      }
+
+      let appLogoHtml = hasApp ? `<img src="${getLogo(pName)}" alt="App Logo" class="invoice-app-logo" onerror="this.style.display='none'">` : '';
+      let designationParts = [hasDev ? dName : '', hasApp ? pName : ''].filter(Boolean);
+      let designationText = designationParts.join(' / ') || (t.type || 'Opération');
 
       rowsHTML += `
         <tr>
           <td>
             <div class="invoice-app-cell">
-              <img src="${logoUrl}" alt="Logo" class="invoice-app-logo">
+              <div class="invoice-images-group">
+                ${devLogoHtml}
+                ${appLogoHtml}
+              </div>
               <div>
-                <span>${escapeHtml(pName)} (${escapeHtml(t.type || 'Opération')})</span>
+                <strong style="color:#1e40af; font-size:9px; display:block; line-height:1.2;">${escapeHtml(designationText)}</strong>
                 ${dateSub}
-                ${noteSub}
+                ${detailsSub}
               </div>
             </div>
           </td>
-          <td>1</td>
+          <td>${qty}</td>
           <td>${amt > 0 ? money(amt) : '-'}</td>
           <td>${amt > 0 ? money(amt) : '-'}</td>
         </tr>
       `;
     });
   } else {
-    let productName = itemData.product || itemData.app || itemData.productName || "Compte: -";
-    let logoUrl = appLogos[productName] || "https://i.ibb.co/8gTWpVC2/IMG-20261028-WA0040.webp";
-    let noteHtml = itemData.note && itemData.note.trim() !== "" ? `<div style="font-size:7.5px; color:#64748b; margin-top:2px; font-style:italic;">📝 Note: ${escapeHtml(itemData.note)}</div>` : "";
+    let productName = itemData.product || itemData.app || itemData.productName || "None";
+    let deviceName = itemData.device || "None";
+
+    let macInfo = itemData.mac ? `<div style="font-size:7.5px; color:#0f172a; font-weight:bold;">MAC: ${escapeHtml(itemData.mac)}</div>` : '';
+    let durationInfo = itemData.duration ? `<div style="font-size:7.5px; color:#047857; font-weight:bold;">Durée: ${escapeHtml(itemData.duration)}</div>` : '';
+    let noteHtml = itemData.note && itemData.note.trim() !== "" ? `<div style="font-size:7.5px; color:#64748b; font-style:italic;">Note: ${escapeHtml(itemData.note)}</div>` : "";
+
+    let hasDev = deviceName && deviceName !== 'None';
+    let hasApp = productName && productName !== 'None';
+    let qty = (hasDev && hasApp) ? 2 : 1;
+
+    let devLogoHtml = "";
+    if (hasDev) {
+      let devParts = deviceName.split("+").map(s => s.trim());
+      devParts.forEach(dp => {
+        let imgUrl = getDeviceLogo(dp);
+        if (imgUrl) {
+          devLogoHtml += `<img src="${imgUrl}" alt="Device Logo" class="invoice-app-logo" onerror="this.style.display='none'">`;
+        }
+      });
+    }
+
+    let appLogoHtml = hasApp ? `<img src="${getLogo(productName)}" alt="App Logo" class="invoice-app-logo" onerror="this.style.display='none'">` : '';
+    let designationParts = [hasDev ? deviceName : '', hasApp ? productName : ''].filter(Boolean);
+    let designationText = designationParts.join(' / ') || 'Opération';
 
     rowsHTML += `
       <tr>
         <td>
           <div class="invoice-app-cell">
-            <img src="${logoUrl}" alt="App Logo" class="invoice-app-logo">
+            <div class="invoice-images-group">
+              ${devLogoHtml}
+              ${appLogoHtml}
+            </div>
             <div>
-              <span>${escapeHtml(productName)} (Année: ${escapeHtml(clientData.year || currentYear())})</span>
+              <strong style="color:#1e40af; font-size:9px; display:block; line-height:1.2;">${escapeHtml(designationText)}</strong>
+              ${macInfo}
+              ${durationInfo}
               ${noteHtml}
             </div>
           </div>
         </td>
-        <td>1</td>
+        <td>${qty}</td>
         <td>${priceVal > 0 ? money(priceVal) : '-'}</td>
         <td>${priceVal > 0 ? money(priceVal) : '-'}</td>
       </tr>
@@ -1388,34 +2068,42 @@ function generateInvoiceHTML(itemType, itemData, clientData, priceVal) {
         <div class="sofiane-contacts-stack">
           <div class="sofiane-contact-pill">✉️ soufianshop65@gmail.com</div>
           <div class="sofiane-contact-pill">📍 حي المدرسي 310 تطوان</div>
-          <div class="sofiane-contact-pill">📞 06 58 50 05 55</div>
-          <div class="sofiane-contact-pill">📞 06 66 22 70 60</div>
+          <div class="sofiane-contact-pill" style="background: #0284c7;">📞 0658-500555</div>
+          <div class="whatsapp-glass-pill-top">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="whatsapp-mini-icon" alt="WA">
+            06 66 22 70 60
+          </div>
         </div>
       </div>
 
-      <div class="sofiane-title-bar">📄 FACTURE / فاتورة</div>
+      <div class="sofiane-title-bar">FACTURE</div>
 
       <table class="sofiane-meta-table">
         <tr>
           <td class="label-cell">N° facture :</td>
           <td class="val-cell">${invoiceId}</td>
           <td class="label-cell">Client :</td>
-          <td class="val-cell">${escapeHtml(clientName)}</td>
+          <td class="val-cell" style="font-weight:900; color:#1e40af;">${escapeHtml(clientName)}</td>
         </tr>
         <tr>
-          <td class="label-cell">Date :</td>
-          <td class="val-cell">${invoiceDate}</td>
+          <td class="label-cell">Date & Heure :</td>
+          <td class="val-cell" style="font-size:7.5px;">${invoiceDate}</td>
           <td class="label-cell">WhatsApp :</td>
-          <td class="val-cell">${escapeHtml(clientPhone)}</td>
+          <td class="val-cell">
+            <span class="whatsapp-glass-pill-top" style="padding:1px 5px; font-size:8px;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="whatsapp-mini-icon" alt="WA">
+              ${escapeHtml(clientPhone)}
+            </span>
+          </td>
         </tr>
       </table>
 
-      <div class="sofiane-title-bar" style="background:#1e40af; font-size:10.5px;">DÉSIGNATION / الوصف</div>
+      <div class="sofiane-title-bar" style="background:#1e40af; font-size:10.5px;">DÉSIGNATION</div>
 
       <table class="sofiane-table">
         <thead>
           <tr>
-            <th>Désignation / الوصف</th>
+            <th>Désignation</th>
             <th>Qté</th>
             <th>P.U</th>
             <th>Total</th>
@@ -1428,19 +2116,45 @@ function generateInvoiceHTML(itemType, itemData, clientData, priceVal) {
 
       <div class="sofiane-payment-box">
         <div class="sofiane-payment-title">💳 Paiement</div>
-        <div class="sofiane-payment-val">Espèces / Virement</div>
+        <div class="sofiane-payment-val">${escapeHtml(paymentMethodDisplay)}</div>
       </div>
 
       <div class="sofiane-summary-box">
         <div class="sofiane-sum-row"><span>Sous-total :</span> <span>${money(totalDueVal)}</span></div>
         <div class="sofiane-sum-row sofiane-sum-highlight"><span>Total (DH) :</span> <span>${money(totalDueVal)}</span></div>
-        <div class="sofiane-sum-row"><span>Payé :</span> <span>${money(totalPaidVal)}</span></div>
-        <div class="sofiane-sum-row"><span>Reste :</span> <span>${money(resteVal)}</span></div>
+        <div class="sofiane-sum-row"><span>Payé :</span> <span style="color:var(--green); font-weight:bold;">${money(totalPaidVal)}</span></div>
+        <div class="sofiane-sum-row"><span>Reste :</span> <span style="color:var(--danger); font-weight:bold;">${money(resteVal)}</span></div>
       </div>
 
-      <div class="sofiane-invoice-footer">
-        <div class="sofiane-footer-msg">
-          Merci pour votre confiance — شكرا لكم على ثقتكم
+      <div class="sofiane-footer-container">
+        <div class="sofiane-signature-box">
+          <div class="sofiane-thank-text">Merci pour votre confiance</div>
+          <div class="architect-signature-wrapper">
+            <svg class="architect-signature-svg" viewBox="0 0 145 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <text x="5" y="11" font-family="'Brush Script MT', 'Lucida Handwriting', cursive" font-size="12" font-weight="bold" fill="#1d4ed8" transform="rotate(-3)">Soufiane</text>
+              <path d="M6 27 C 14 13, 22 9, 30 24 C 36 13, 42 9, 50 22 C 56 13, 63 9, 70 20 C 76 11, 83 7, 90 18 L 138 9" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4 31 L 142 7" stroke="#1d4ed8" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="sofiane-sign-label">Direction / Signature</div>
+        </div>
+        
+        <div class="sofiane-official-seal">
+          <div class="seal-circle-inner">
+            <svg class="seal-svg-text" viewBox="0 0 100 100">
+              <defs>
+                <path id="circlePathTop" d="M 10,50 a 40,40 0 0,1 80,0"></path>
+                <path id="circlePathBottom" d="M 90,50 a 40,40 0 0,1 -80,0"></path>
+              </defs>
+              <text font-size="10" font-weight="900" fill="#1e40af" letter-spacing="1.5">
+                <textPath href="#circlePathTop" startOffset="50%" text-anchor="middle">★ OFFICIAL ★</textPath>
+              </text>
+              <text font-size="9" font-weight="900" fill="#1e40af" letter-spacing="1">
+                <textPath href="#circlePathBottom" startOffset="50%" text-anchor="middle">SOFIANE SHOP</textPath>
+              </text>
+            </svg>
+            <img src="https://i.ibb.co/LXWzbssm/IMG-20261104-145706.jpg" class="seal-center-img" alt="Shop Image">
+          </div>
         </div>
       </div>
     </div>
@@ -1476,7 +2190,7 @@ function openDebtReceipt(id){
   if(!t) return; 
   const priceVal = Number(t.amount||0);
   document.getElementById("receiptBody").innerHTML = generateInvoiceHTML('debt', t, {name: t.name, id: t.clientId}, priceVal);
-  openModal("receiptModal"); 
+  openModal("receiptModal");
 }
 
 function openClientInvoice(id){ 
@@ -1541,6 +2255,7 @@ const def_search = document.getElementById("clientSearch");
 if(def_search) def_search.addEventListener("input",renderClients); 
 
 function renderAll(){ 
+  renderDeviceCatalogGrid();
   renderStats(); 
   renderDashboard(); 
   renderClients(); 
@@ -1550,6 +2265,7 @@ function renderAll(){
   renderActivations(); 
   fillAbonnementClients(); 
   renderAbonnements(); 
+  fillDeviceClientDropdowns();
 } 
 
 const activationStart=document.getElementById("activationStart"); 
