@@ -734,6 +734,46 @@ textarea{ min-height:70px; resize:vertical; }
   z-index: 2;
 }
 
+/* ========================================== */
+/*     إعدادات الطابعة والهوامش (PRINT CSS)   */
+/* ========================================== */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  /* إخفاء القوائم، الأزرار، والواجهة بالكامل أثناء الطباعة */
+  .sidebar, .topbar, .modal-head, .modal-foot, .toast, .btn {
+    display: none !important;
+  }
+  /* إظهار محتوى نافذة الفاتورة وحدها لملء الورقة بدون هوامش ميديا */
+  .modal, .modal-box {
+    position: static !important;
+    inset: auto !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .modal.show {
+    display: block !important;
+  }
+  .sofiane-invoice {
+    max-width: 100% !important;
+    box-shadow: none !important;
+    margin: 0 auto !important;
+    padding: 5px !important;
+  }
+  @page {
+    size: auto;
+    margin: 5mm; /* تقليل هوامش الصفحة في الطابعة */
+  }
+}
+
 /* MOBILE OVERRIDE */
 @media(max-width:768px){
   .sidebar{ transform:translateX(-100%); }
@@ -2470,7 +2510,7 @@ function renderAll(){
 const activationStart=document.getElementById("activationStart"); 
 if(activationStart) activationStart.value=abonnementToday(); 
 
-const abonnementStart=document.getElementById("abonnementStart"); 
+The abonnementStart=document.getElementById("abonnementStart"); 
 if(abonnementStart) abonnementStart.value=abonnementToday(); 
 renderAll();
 </script>
