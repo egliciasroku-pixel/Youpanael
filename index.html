@@ -86,13 +86,44 @@ body{ background: radial-gradient(circle at 10% 0%,rgba(168,255,0,.05),transpare
 .btn-blue { background: rgba(85, 184, 255, 0.1) !important; color: var(--blue) !important; }
 .btn-small { padding: 5px 7px; font-size: 9.5px; border-radius: 7px; }
 
-/* MULTI-DEVICE SELECTION CARDS */
+/* LUXURY RESET / REFRESH CATALOG BUTTON */
+.btn-reset-catalog {
+  background: linear-gradient(135deg, rgba(85, 184, 255, 0.12), rgba(168, 255, 0, 0.08)) !important;
+  color: var(--lime2) !important;
+  border: 1px solid rgba(168, 255, 0, 0.3) !important;
+  box-shadow: 0 4px 20px rgba(168, 255, 0, 0.15) !important;
+  padding: 7px 12px;
+  border-radius: 9px;
+  font-weight: 900;
+  font-size: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.btn-reset-catalog:hover {
+  background: linear-gradient(135deg, rgba(85, 184, 255, 0.2), rgba(168, 255, 0, 0.18)) !important;
+  box-shadow: 0 6px 25px rgba(168, 255, 0, 0.3) !important;
+  transform: translateY(-2px);
+  color: #fff !important;
+}
+.btn-reset-catalog svg {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.4s ease;
+}
+.btn-reset-catalog:hover svg {
+  transform: rotate(-180deg);
+}
+
+/* MULTI-DEVICE SELECTION CARDS WITH QUANTITY */
 .multi-device-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   margin-bottom: 12px;
-  max-height: 440px;
+  max-height: 520px;
   overflow-y: auto;
   padding: 4px;
   direction: ltr;
@@ -104,61 +135,101 @@ body{ background: radial-gradient(circle at 10% 0%,rgba(168,255,0,.05),transpare
   background: var(--bg);
   box-shadow: inset 0 6px 12px rgba(0, 0, 0, 0.8), inset 0 -2px 5px rgba(255, 255, 255, 0.02), 0 2px 8px rgba(0, 0, 0, 0.3);
   border-radius: 12px;
-  padding: 12px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  cursor: pointer;
+  gap: 6px;
   transition: all 0.25s ease;
   position: relative;
   text-align: left;
 }
 .device-select-card:hover {
   box-shadow: inset 0 8px 16px rgba(0, 0, 0, 0.9), 0 4px 15px rgba(168, 255, 0, 0.1);
-  transform: translateY(-1px);
 }
 .device-select-card.selected {
   background: linear-gradient(145deg, #071012, #04090a);
   box-shadow: inset 0 8px 18px rgba(0, 0, 0, 0.95), 0 0 15px rgba(168,255,0,0.25);
-  border-color: rgba(168,255,0,0.5) !important;
+  border: 1px solid rgba(168,255,0,0.5) !important;
 }
 .device-select-card img {
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
   object-fit: contain;
   background: #ffffff;
   box-shadow: inset 0 4px 8px rgba(0,0,0,0.2);
   border-radius: 8px;
   padding: 4px;
+  cursor: pointer;
 }
 .device-select-card .dev-title {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
   color: var(--text);
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.2;
+  cursor: pointer;
+  height: 26px;
+  overflow: hidden;
 }
-.device-select-card .checkbox-mark {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 16px;
-  height: 16px;
-  border-radius: 4px;
+
+/* QUANTITY & PRICE CONTROLS ROW */
+.device-qty-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  padding: 4px 8px;
+  border-radius: 7px;
+  margin-top: 2px;
+}
+.qty-btn {
+  background: var(--panel3);
+  color: var(--lime);
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg);
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
-  color: transparent;
-  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s;
+}
+.qty-btn:hover { background: var(--lime); color: #000; }
+.qty-display {
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--lime2);
+}
+
+.device-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: rgba(8, 23, 25, 0.8);
+  padding: 4px 8px;
+  border-radius: 7px;
+  margin-top: 2px;
+}
+.device-price-row label {
+  font-size: 8.5px;
+  color: var(--muted);
   font-weight: bold;
 }
-.device-select-card.selected .checkbox-mark {
-  background: var(--lime);
-  color: #050807;
-  box-shadow: 0 0 6px var(--lime);
+.device-card-price-input {
+  background: #0d1719 !important;
+  color: var(--lime) !important;
+  font-size: 10.5px !important;
+  font-weight: 900 !important;
+  width: 65px !important;
+  padding: 3px 6px !important;
+  border-radius: 5px !important;
+  text-align: right;
+  outline: none;
 }
 
 /* SINGLE DEVICE CARD */
@@ -557,37 +628,49 @@ textarea{ min-height:70px; resize:vertical; }
   border-top: 1px dashed #e2e8f0;
 }
 
-.sofiane-signature-box {
+.sofiane-thank-luxury {
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  align-items: flex-start;
+  justify-content: center;
   flex: 1;
+  padding-right: 8px;
 }
-.sofiane-thank-text {
-  font-weight: 800;
+.sofiane-thank-banner {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border-left: 3px solid #2563eb;
+  padding: 8px 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+}
+.sofiane-thank-title {
+  font-weight: 900;
   color: #1e40af;
-  font-size: 7.5px;
-  letter-spacing: 0.3px;
-  margin-bottom: 1px;
-}
-.architect-signature-wrapper {
-  position: relative;
-  display: inline-block;
-  padding: 0;
-}
-.architect-signature-svg {
-  width: 135px;
-  height: 38px;
-  overflow: visible;
-  filter: drop-shadow(0.5px 0.5px 1px rgba(29,78,216,0.3));
-}
-.sofiane-sign-label {
-  font-size: 6.5px;
-  color: #64748b;
-  font-weight: bold;
+  font-size: 9px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
-  margin-top: 1px;
+  margin-bottom: 2px;
+}
+.sofiane-thank-subtext {
+  font-size: 7.5px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.sofiane-right-signature-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.sofiane-sign-label-top {
+  font-size: 7px;
+  color: #1e40af;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1px;
+  text-align: center;
 }
 
 .sofiane-official-seal {
@@ -620,13 +703,24 @@ textarea{ min-height:70px; resize:vertical; }
 }
 
 .seal-center-img {
-  width: 30px;
-  height: 30px;
+  width: 44px;
+  height: 44px;
   object-fit: cover;
   border-radius: 50%;
   border: 1px solid #2563eb;
   box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-  z-index: 2;
+  z-index: 1;
+  position: absolute;
+  opacity: 0.2;
+}
+
+.seal-signature-overlay {
+  position: absolute;
+  width: 76px;
+  height: 30px;
+  z-index: 4;
+  transform: rotate(-6deg);
+  filter: drop-shadow(1px 1px 1.5px rgba(29,78,216,0.55));
 }
 
 .seal-svg-text {
@@ -637,6 +731,7 @@ textarea{ min-height:70px; resize:vertical; }
   left: 0;
   pointer-events: none;
   overflow: visible;
+  z-index: 2;
 }
 
 /* MOBILE OVERRIDE */
@@ -699,7 +794,7 @@ textarea{ min-height:70px; resize:vertical; }
         <div class="nav-label"><span class="nav-fr">Activation</span></div>
       </button>
       <button class="nav-item" data-page="settings">
-        <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5v.1h-2.6v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H4.4v-2.6h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5v-.1h2.6v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l-.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.1v2.6h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg></div>
+        <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5v.1h-2.6v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H4.4v-2.6h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5v-.1h2.6v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l-.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.1v2.6h-.1a1.7 1.7 0 0 0-1.5 1 z"></path></svg></div>
         <div class="nav-label"><span class="nav-fr">Paramètres</span></div>
       </button>
     </div>
@@ -766,20 +861,23 @@ textarea{ min-height:70px; resize:vertical; }
       <div class="section-head">
         <div>
           <h2>Appareils Électroniques</h2>
-          <p>Catalogue des appareils et point de vente</p>
+          <p>Catalogue des appareils avec gestion précise des prix et quantités</p>
         </div>
-        <span class="badge badge-lime">Sofiane Shop Store</span>
+        <button class="btn-reset-catalog" onclick="resetCatalogData()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+          <span>Réinitialiser / Nouveau</span>
+        </button>
       </div>
       <div class="card">
         <div class="card-head">
-          <h3>Point de Vente des Appareils</h3>
+          <h3>Point de Vente & Prix Unitaires</h3>
           <span class="badge badge-blue">Catalogue Interactif</span>
         </div>
         <div class="card-body">
           
           <div class="single-device-card">
             <div class="device-input-group full">
-              <label>Choisir les appareils (2 par ligne)</label>
+              <label>Sélectionnez les appareils, quantités et définissez le prix unitaire :</label>
               <div class="multi-device-grid" id="multiDeviceGrid"></div>
             </div>
 
@@ -803,16 +901,11 @@ textarea{ min-height:70px; resize:vertical; }
                 <label id="dynamic_field_label">Montant payé (Espèces)</label>
                 <input type="text" class="device-num-input" id="unified_dynamic_payment_detail" placeholder="Entrer le montant...">
               </div>
-
-              <div class="device-input-group">
-                <label>Prix Total (DH)</label>
-                <input type="number" class="device-num-input" id="unified_price_input" value="0" min="0" oninput="recalcUnifiedTotal()">
-              </div>
             </div>
 
             <div class="single-device-footer">
               <div class="total-badge-container">
-                <small>Total :</small>
+                <small>Total Général :</small>
                 <span id="unified_total_display">0 DH</span>
               </div>
               <button class="btn btn-lime" onclick="checkoutUnifiedDevice()">🧾 Émettre la facture</button>
@@ -911,7 +1004,7 @@ textarea{ min-height:70px; resize:vertical; }
       <div class="card">
         <div class="card-head"><h3>Historique des paiements</h3></div>
         <div class="table-wrap">
-          <table><thead><tr><th>Date</th><th>Client</th><th>App / Note</th><th>Montant</th><th>Note</th><th>Actions</th></tr></thead><tbody id="paymentsTable"></tbody></table>
+          <table><thead><tr><th>Date & Heure</th><th>Client</th><th>App / Note</th><th>Montant</th><th>Note</th><th>Actions</th></tr></thead><tbody id="paymentsTable"></tbody></table>
         </div>
       </div>
     </div>
@@ -963,7 +1056,7 @@ textarea{ min-height:70px; resize:vertical; }
       <div class="card">
         <div class="card-head"><h3>Activations</h3><span class="badge badge-lime" id="activationCount">0</span></div>
         <div class="table-wrap">
-          <table><thead><tr><th>Date</th><th>Client</th><th>WhatsApp</th><th>MAC / App</th><th>Durée / Expiration</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="activationTable"></tbody></table>
+          <table><thead><tr><th>Date & Heure</th><th>Client</th><th>WhatsApp</th><th>MAC / App</th><th>Durée / Expiration</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="activationTable"></tbody></table>
         </div>
       </div>
     </div>
@@ -1132,7 +1225,29 @@ function getDeviceLogo(name) {
   return "";
 }
 
-let selectedDevices = [];
+let selectedDevicesQuantities = {};
+let selectedDevicesPrices = {};
+
+function resetCatalogData() {
+  selectedDevicesQuantities = {};
+  selectedDevicesPrices = {};
+  const clientSel = document.getElementById("unified_client_select");
+  if(clientSel) clientSel.value = "";
+  
+  const paymentMethodSel = document.getElementById("unified_payment_method");
+  if(paymentMethodSel) paymentMethodSel.value = "Espèces";
+
+  const dynamicInput = document.getElementById("unified_dynamic_payment_detail");
+  if(dynamicInput) {
+    dynamicInput.value = "";
+    delete dynamicInput.dataset.userEdited;
+  }
+
+  onPaymentMethodChange();
+  renderDeviceCatalogGrid();
+  recalcUnifiedTotal();
+  toast("✨ Catalogue réinitialisé : prêt pour une nouvelle opération");
+}
 
 function renderDeviceCatalogGrid() {
   const grid = document.getElementById("multiDeviceGrid");
@@ -1140,36 +1255,63 @@ function renderDeviceCatalogGrid() {
   let html = "";
   for(let key in deviceCatalog) {
     let dev = deviceCatalog[key];
+    let qty = selectedDevicesQuantities[key] || 0;
+    let price = selectedDevicesPrices[key] !== undefined ? selectedDevicesPrices[key] : "";
+    let isSelected = qty > 0;
+    
     html += `
-      <div class="device-select-card" id="dev_card_${key.replace(/\s+/g, '_')}" onclick="toggleMultiDevice('${key}')">
-        <div class="checkbox-mark" id="chk_${key.replace(/\s+/g, '_')}">✓</div>
-        <img src="${dev.img}" alt="${dev.name}" onerror="this.src='https://via.placeholder.com/75?text=Device'">
-        <div class="dev-title">${dev.name}</div>
+      <div class="device-select-card ${isSelected ? 'selected' : ''}" id="dev_card_${key.replace(/\s+/g, '_')}">
+        <img src="${dev.img}" alt="${dev.name}" onclick="adjustDeviceQty('${key}', 1)" onerror="this.src='https://via.placeholder.com/60?text=Device'">
+        <div class="dev-title" onclick="adjustDeviceQty('${key}', 1)" title="${dev.name}">${dev.name}</div>
+        <div class="device-qty-row">
+          <div class="qty-btn" onclick="adjustDeviceQty('${key}', -1)">-</div>
+          <div class="qty-display" id="qty_txt_${key.replace(/\s+/g, '_')}">${qty}</div>
+          <div class="qty-btn" onclick="adjustDeviceQty('${key}', 1)">+</div>
+        </div>
+        <div class="device-price-row">
+          <label>Prix (DH):</label>
+          <input type="number" class="device-card-price-input" id="price_inp_${key.replace(/\s+/g, '_')}" value="${price}" placeholder="0" oninput="updateDevicePrice('${key}', this.value)">
+        </div>
       </div>
     `;
   }
   grid.innerHTML = html;
 }
 
-function toggleMultiDevice(deviceName) {
-  const index = selectedDevices.indexOf(deviceName);
-  const cardId = `dev_card_${deviceName.replace(/\s+/g, '_')}`;
-  const card = document.getElementById(cardId);
+function adjustDeviceQty(deviceName, delta) {
+  let current = selectedDevicesQuantities[deviceName] || 0;
+  let updated = current + delta;
+  if(updated < 0) updated = 0;
   
-  if(index > -1) {
-    selectedDevices.splice(index, 1);
-    if(card) card.classList.remove('selected');
+  if(updated === 0) {
+    delete selectedDevicesQuantities[deviceName];
+    delete selectedDevicesPrices[deviceName];
   } else {
-    selectedDevices.push(deviceName);
-    if(card) card.classList.add('selected');
+    selectedDevicesQuantities[deviceName] = updated;
+    if(selectedDevicesPrices[deviceName] === undefined) {
+      selectedDevicesPrices[deviceName] = "";
+    }
   }
   
+  renderDeviceCatalogGrid();
+  recalcUnifiedTotal();
+}
+
+function updateDevicePrice(deviceName, val) {
+  selectedDevicesPrices[deviceName] = val;
+  if (val !== "" && (!selectedDevicesQuantities[deviceName] || selectedDevicesQuantities[deviceName] <= 0)) {
+    selectedDevicesQuantities[deviceName] = 1;
+  }
   recalcUnifiedTotal();
 }
 
 function recalcUnifiedTotal() {
-  const customPriceInput = document.getElementById("unified_price_input");
-  let total = Number(customPriceInput ? customPriceInput.value : 0) || 0;
+  let total = 0;
+  for(let key in selectedDevicesQuantities) {
+    let q = selectedDevicesQuantities[key] || 0;
+    let p = Number(selectedDevicesPrices[key]) || 0;
+    total += q * p;
+  }
   
   document.getElementById("unified_total_display").textContent = money(total);
   
@@ -1192,14 +1334,18 @@ function onPaymentMethodChange() {
   const method = document.getElementById("unified_payment_method").value;
   const label = document.getElementById("dynamic_field_label");
   const input = document.getElementById("unified_dynamic_payment_detail");
-  const price = Number(document.getElementById("unified_price_input").value || 0);
+  
+  let total = 0;
+  for(let key in selectedDevicesQuantities) {
+    total += (selectedDevicesQuantities[key] || 0) * (Number(selectedDevicesPrices[key]) || 0);
+  }
   
   input.dataset.userEdited = "";
   if(method === "Espèces") {
     label.textContent = "Montant payé (Espèces)";
     input.placeholder = "Entrer le montant...";
     input.type = "number";
-    input.value = price;
+    input.value = total;
   } else if(method === "Virement") {
     label.textContent = "N° de virement / Référence";
     input.placeholder = "Entrer la référence...";
@@ -1219,50 +1365,51 @@ function checkoutUnifiedDevice() {
   const paymentDetailInput = document.getElementById("unified_dynamic_payment_detail").value.trim();
   const c = getClient(clientId);
 
-  if(selectedDevices.length === 0) { toast("Veuillez sélectionner au moins un appareil"); return; }
+  let deviceKeys = Object.keys(selectedDevicesQuantities);
+  if(deviceKeys.length === 0) { toast("Veuillez sélectionner au moins un appareil et sa quantité"); return; }
 
-  const price = Number(document.getElementById("unified_price_input").value || 0);
-  if(price <= 0) { toast("Veuillez entrer le montant"); return; }
+  let totalPrice = 0;
+  let parsedPrices = {};
+  deviceKeys.forEach(k => {
+    let pVal = Number(selectedDevicesPrices[k]) || 0;
+    parsedPrices[k] = pVal;
+    totalPrice += (selectedDevicesQuantities[k] || 0) * pVal;
+  });
 
-  let paidAmount = price;
-  if(paymentMethod === "Espèces") {
-    paidAmount = Number(paymentDetailInput || price);
-  } else {
-    paidAmount = price;
-  }
+  if(totalPrice <= 0) { toast("Veuillez entrer les prix unitaires des appareils"); return; }
 
-  const deviceNamesStr = selectedDevices.join(" + ");
+  let paidAmount = paymentMethod === "Espèces" ? Number(paymentDetailInput || totalPrice) : totalPrice;
+
+  let deviceItemsSummary = deviceKeys.map(k => `${k} (x${selectedDevicesQuantities[k]} - ${parsedPrices[k]}DH)`).join(" + ");
   let clientNameFinal = c ? c.name : "None";
 
   if(c) {
-    c.totalDue = Number(c.totalDue || 0) + price;
+    c.totalDue = Number(c.totalDue || 0) + totalPrice;
     c.totalPaid = Number(c.totalPaid || 0) + paidAmount;
   }
 
-  let paymentInfoFormatted = paymentMethod;
-  if(paymentMethod === "Espèces") {
-    paymentInfoFormatted = `Espèces (Montant payé: ${paidAmount} DH)`;
-  } else if(paymentMethod === "Virement") {
-    paymentInfoFormatted = `Virement (Réf: ${paymentDetailInput || 'N/A'})`;
-  }
+  let paymentInfoFormatted = paymentMethod === "Espèces" ? `Espèces (Montant payé: ${paidAmount} DH)` : `Virement (Réf: ${paymentDetailInput || 'N/A'})`;
+  let currentDateTime = now();
 
   const transObj = {
     id: makeId(),
     clientId: c ? c.id : "",
     name: clientNameFinal,
     type: "Appareil",
-    amount: price,
+    amount: totalPrice,
     paidAmount: paidAmount,
-    device: deviceNamesStr,
+    device: deviceItemsSummary,
+    deviceQuantities: {...selectedDevicesQuantities},
+    devicePrices: parsedPrices,
     product: "None",
     paymentMethod: paymentInfoFormatted,
-    note: `Achat: ${deviceNamesStr} | Paiement: ${paymentInfoFormatted}`,
-    date: now(),
+    note: `Achat: ${deviceItemsSummary} | Paiement: ${paymentInfoFormatted}`,
+    date: currentDateTime,
     agent: currentAgent
   };
 
   transactions.unshift(transObj);
-  addHistory("Appareil Vendu", `${clientNameFinal} • ${deviceNamesStr} • ${money(price)} (${paymentMethod})`);
+  addHistory("Appareil Vendu", `${clientNameFinal} • ${deviceItemsSummary} • ${money(totalPrice)} (${paymentMethod}) at ${currentDateTime}`);
   saveData();
   renderAll();
   toast("Facture émise avec succès");
@@ -1483,7 +1630,7 @@ function viewClient(id){
   `;
 
   if(clientAbonnements.length > 0) {
-    html += `<div class="table-wrap"><table class="client-detail-table"><thead><tr><th>Date</th><th>App</th><th>Server / User</th><th>Expiration</th></tr></thead><tbody>`;
+    html += `<div class="table-wrap"><table class="client-detail-table"><thead><tr><th>Date & Heure</th><th>App</th><th>Server / User</th><th>Expiration</th></tr></thead><tbody>`;
     clientAbonnements.forEach(ab => {
       let logoUrl = getLogo(ab.app);
       let appIconHtml = ab.app && ab.app !== 'None' ? `<span class="avatar"><img src="${logoUrl}"></span>` : '';
@@ -1498,7 +1645,7 @@ function viewClient(id){
       <h4 style="color:var(--blue); font-size:11px; margin-bottom:5px;">⚡ Activations</h4>`;
 
   if(clientActivations.length > 0) {
-    html += `<div class="table-wrap"><table class="client-detail-table"><thead><tr><th>Date</th><th>App</th><th>MAC Address</th><th>Prix</th></tr></thead><tbody>`;
+    html += `<div class="table-wrap"><table class="client-detail-table"><thead><tr><th>Date & Heure</th><th>App</th><th>MAC Address</th><th>Prix</th></tr></thead><tbody>`;
     clientActivations.forEach(act => {
       let logoUrl = getLogo(act.app);
       let appIconHtml = act.app && act.app !== 'None' ? `<span class="avatar"><img src="${logoUrl}"></span>` : '';
@@ -1514,7 +1661,7 @@ function viewClient(id){
 
   let clientTrans = transactions.filter(t => t.clientId === id);
   if(clientTrans.length > 0) {
-    html += `<div class="table-wrap"><table class="client-detail-table"><thead><tr><th>Date</th><th>Type</th><th>Appareil / App</th><th>Montant</th></tr></thead><tbody>`;
+    html += `<div class="table-wrap"><table class="client-detail-table"><thead><tr><th>Date & Heure</th><th>Type</th><th>Appareil / App</th><th>Montant</th></tr></thead><tbody>`;
     clientTrans.forEach(tr => {
       let devLogo = getDeviceLogo(tr.device);
       let logoUrl = getLogo(tr.product);
@@ -1553,9 +1700,10 @@ function saveDebt(){
   if(!c||amount<=0){ toast("Montant invalide"); return; } 
   c.totalDue=Number(c.totalDue||0)+amount; 
 
-  const transObj = {id:makeId(), clientId:id, name:c.name, type:"Dette", amount, paidAmount:0, device:"None", product, note, date:now(), agent:currentAgent};
+  let currentDateTime = now();
+  const transObj = {id:makeId(), clientId:id, name:c.name, type:"Dette", amount, paidAmount:0, device:"None", product, note, date:currentDateTime, agent:currentAgent};
   transactions.unshift(transObj); 
-  addHistory("Montant ajouté",`${c.name} • ${product !== 'None' ? product : ''} • ${money(amount)}`); 
+  addHistory("Montant ajouté",`${c.name} • ${product !== 'None' ? product : ''} • ${money(amount)} at ${currentDateTime}`); 
   saveData(); 
   closeModal("debtModal"); 
   renderAll(); 
@@ -1589,10 +1737,11 @@ function savePayment(){
   if(remain>0&&amount>remain){ toast("Le paiement dépasse le reste : "+money(remain)); return; } 
   c.totalPaid=Number(c.totalPaid||0)+amount; 
 
-  const paymentObj = {id:makeId(), clientId:id, name:c.name, amount, device:"None", product, note, date:now(), agent:currentAgent};
+  let currentDateTime = now();
+  const paymentObj = {id:makeId(), clientId:id, name:c.name, amount, device:"None", product, note, date:currentDateTime, agent:currentAgent};
   payments.unshift(paymentObj); 
-  transactions.unshift({id:makeId(), clientId:id, type:"Paiement", amount, paidAmount:amount, device:"None", product, note:`${product !== 'None' ? product : ''} - ${note}`, date:now(), agent:currentAgent}); 
-  addHistory("Paiement reçu",`${c.name} • ${money(amount)}`); 
+  transactions.unshift({id:makeId(), clientId:id, type:"Paiement", amount, paidAmount:amount, device:"None", product, note:`${product !== 'None' ? product : ''} - ${note}`, date:currentDateTime, agent:currentAgent}); 
+  addHistory("Paiement reçu",`${c.name} • ${money(amount)} at ${currentDateTime}`); 
   saveData(); 
   closeModal("paymentModal"); 
   renderAll(); 
@@ -1724,19 +1873,20 @@ function createAbonnement(){
     }
   }
 
+  let currentDateTime = now();
   if(price>0){
     let clientObj=getClient(finalClientId);
     if(clientObj){
       clientObj.totalDue=Number(clientObj.totalDue||0)+price;
       clientObj.totalPaid=Number(clientObj.totalPaid||0)+price;
-      transactions.unshift({id:makeId(), clientId:finalclientId, type:"Abonnement", amount:price, paidAmount:price, device:"None", product:app, note:`Xtream - Début: ${startDate} - Fin: ${expiration} ${note?'- '+note:''}`, date:now(), agent:currentAgent});
+      transactions.unshift({id:makeId(), clientId:finalClientId, type:"Abonnement", amount:price, paidAmount:price, device:"None", product:app, note:`Xtream - Début: ${startDate} - Fin: ${expiration} ${note?'- '+note:''}`, date:currentDateTime, agent:currentAgent});
     }
   }
 
   const client=getClient(finalClientId); 
-  const abonnement={ id:makeId(), date:now(), createdAt:now(), clientId:finalClientId||"", name, account:client?client.account||username: username, app, type:"Xtream", server, username, password, m3uUrl, duration, startDate, expiration, price, note, status:"Actif", agent:currentAgent }; 
+  const abonnement={ id:makeId(), date:currentDateTime, createdAt:currentDateTime, clientId:finalClientId||"", name, account:client?client.account||username: username, app, type:"Xtream", server, username, password, m3uUrl, duration, startDate, expiration, price, note, status:"Actif", agent:currentAgent }; 
   abonnements.unshift(abonnement); 
-  addHistory(m3uUrl?"Nouveau Abonnement M3U → Xtream":"Nouveau Abonnement Xtream", `${name} • ${app}`); 
+  addHistory(m3uUrl?"Nouveau Abonnement M3U → Xtream":"Nouveau Abonnement Xtream", `${name} • ${app} at ${currentDateTime}`); 
   saveData(); 
   document.getElementById("abonnementResult").innerHTML=`<strong style="color:var(--lime)">✓ Abonnement créé avec succès</strong>`; 
   document.getElementById("abonnementM3U").value=""; 
@@ -1772,6 +1922,7 @@ function viewAbonnement(id){
   let appIconHtml = a.app && a.app !== 'None' ? `<img src="${logoUrl}" style="width:22px;height:22px;object-fit:contain;margin-left:3px;">` : '';
   
   let linesHTML = `<div class="xtream-box"><div class="xtream-title">${appIconHtml} 📡 INFORMATIONS XTREAM</div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">Date & Heure</span><span class="xtream-value" style="color:var(--blue)">${escapeHtml(a.date)}</span></div>`;
   linesHTML += `<div class="xtream-line"><span class="xtream-label">Client</span><span class="xtream-value">${escapeHtml(a.name)}</span></div>`;
   if(a.app && a.app !== 'None') linesHTML += `<div class="xtream-line"><span class="xtream-label">Application</span><span class="xtream-value">${escapeHtml(a.app)}</span></div>`;
   if(a.m3uUrl) linesHTML += `<div class="xtream-line"><span class="xtream-label">🔗 M3U URL</span><span class="xtream-value" style="color:var(--green)">${escapeHtml(a.m3uUrl)}</span></div>`;
@@ -1790,7 +1941,7 @@ function viewAbonnement(id){
 function copyXtream(id){ 
   const a=abonnements.find(x=>x.id===id); 
   if(!a) return; 
-  const text=`XTREAM\nClient: ${a.name}\nApplication: ${a.app}\nServer: ${a.server}\nUsername: ${a.username}\nPassword: ${a.password}\nExpiration: ${a.expiration}`.trim(); 
+  const text=`XTREAM\nDate: ${a.date}\nClient: ${a.name}\nApplication: ${a.app}\nServer: ${a.server}\nUsername: ${a.username}\nPassword: ${a.password}\nExpiration: ${a.expiration}`.trim(); 
   navigator.clipboard.writeText(text).then(()=>{ toast("Informations copiées"); }); 
 } 
 
@@ -1862,19 +2013,20 @@ function createActivation(){
     }
   }
 
+  let currentDateTime = now();
   if(price>0){
     let clientObj=getClient(finalClientId);
     if(clientObj){
       clientObj.totalDue=Number(clientObj.totalDue||0)+price;
       clientObj.totalPaid=Number(clientObj.totalPaid||0)+price;
-      transactions.unshift({id:makeId(), clientId:finalClientId, type:"Activation", amount:price, paidAmount:price, device:"None", product:app, note:`MAC: ${mac} | Durée: ${duration} | Début: ${startDate} | Fin: ${expiration} ${note?'- '+note:''}`, date:now(), agent:currentAgent});
+      transactions.unshift({id:makeId(), clientId:finalClientId, type:"Activation", amount:price, paidAmount:price, device:"None", product:app, note:`MAC: ${mac} | Durée: ${duration} | Début: ${startDate} | Fin: ${expiration} ${note?'- '+note:''}`, date:currentDateTime, agent:currentAgent});
     }
   }
 
   const client=getClient(finalClientId); 
-  const activation={ id:makeId(), date:now(), startDate, expiration, createdAt:now(), clientId:finalClientId, name, phone, mac, app, duration, price, note, status:"Activé", agent:currentAgent }; 
+  const activation={ id:makeId(), date:currentDateTime, startDate, expiration, createdAt:currentDateTime, clientId:finalClientId, name, phone, mac, app, duration, price, note, status:"Activé", agent:currentAgent }; 
   activations.unshift(activation); 
-  addHistory("Activation créée",`${name} • ${app} • ${mac}`); 
+  addHistory("Activation créée",`${name} • ${app} • ${mac} at ${currentDateTime}`); 
   saveData(); 
   document.getElementById("activationResult").innerHTML=`<strong style="color:var(--lime)">✓ Activation réussie & Facturée</strong>`; 
   renderActivations(); 
@@ -1903,12 +2055,13 @@ function viewActivation(id){
   let appIconHtml = a.app && a.app !== 'None' ? `<img src="${logoUrl}" style="width:22px;height:22px;object-fit:contain;margin-left:3px;">` : '';
 
   let linesHTML = `<div class="xtream-box"><div class="xtream-title">${appIconHtml} ⚡ DÉTAILS ACTIVATION</div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">Date & Heure</span><span class="xtream-value" style="color:var(--blue)">${escapeHtml(a.date)}</span></div>`;
   linesHTML += `<div class="xtream-line"><span class="xtream-label">Client</span><span class="xtream-value">${escapeHtml(a.name)}</span></div>`;
   linesHTML += `<div class="xtream-line"><span class="xtream-label">WhatsApp</span><span class="xtream-value">${escapeHtml(a.phone||"+212000000000")}</span></div>`;
   linesHTML += `<div class="xtream-line"><span class="xtream-label">MAC Address</span><span class="xtream-value" style="color:var(--lime)">${escapeHtml(a.mac)}</span></div>`;
   if(a.app && a.app !== 'None') linesHTML += `<div class="xtream-line"><span class="xtream-label">Application</span><span class="xtream-value">${escapeHtml(a.app)}</span></div>`;
   linesHTML += `<div class="xtream-line"><span class="xtream-label">Durée</span><span class="xtream-value">${escapeHtml(a.duration)}</span></div>`;
-  linesHTML += `<div class="xtream-line"><span class="xtream-label">Date Début</span><span class="xtream-value" style="color:var(--blue)">${escapeHtml(a.startDate||"-")}</span></div>`;
+  linesHTML += `<div class="xtream-line"><span class="xtream-label">Date Début</span><span class="xtream-value">${escapeHtml(a.startDate||"-")}</span></div>`;
   linesHTML += `<div class="xtream-line"><span class="xtream-label">Date Expiration</span><span class="xtream-value" style="color:var(--orange)">${escapeHtml(a.expiration||"-")}</span></div>`;
   linesHTML += `<div class="xtream-line"><span class="xtream-label">Prix</span><span class="xtream-value" style="color:var(--green)">${money(a.price)}</span></div>`;
   if(a.note) linesHTML += `<div class="xtream-line"><span class="xtream-label">Note</span><span class="xtream-value">${escapeHtml(a.note)}</span></div>`;
@@ -1953,7 +2106,6 @@ function generateInvoiceHTML(itemType, itemData, clientData, priceVal) {
   }
 
   let resteVal = Math.max(0, totalDueVal - totalPaidVal);
-  let isFullyPaid = (totalDueVal > 0 && resteVal === 0);
 
   let rowsHTML = "";
   
@@ -1962,97 +2114,141 @@ function generateInvoiceHTML(itemType, itemData, clientData, priceVal) {
       let pName = t.product || 'None';
       let dName = t.device || 'None';
       let amt = Number(t.amount || 0);
-      let detailsSub = t.note ? `<div style="font-size:7.5px; color:#1e40af; margin-top:2px; font-weight:bold;">📋 ${escapeHtml(t.note)}</div>` : '';
-      let dateSub = `<div style="font-size:7px; color:#64748b;">📅 ${escapeHtml(t.date)}</div>`;
+      let opDate = t.date || invoiceDate;
+
+      let dateSub = `
+        <div style="display: inline-flex; align-items: center; gap: 4px; background: #e0f2fe; color: #0369a1; padding: 2px 7px; border-radius: 4px; font-size: 7.5px; font-weight: 800; margin-top: 4px; border: 1px solid #bae6fd;">
+          <span>🕒</span> <span>${escapeHtml(opDate)}</span>
+        </div>`;
+      let detailsSub = t.note ? `<div style="font-size:7.5px; color:#64748b; margin-top:3px;">📋 ${escapeHtml(t.note)}</div>` : '';
 
       let hasDev = dName && dName !== 'None';
       let hasApp = pName && pName !== 'None';
-      let qty = (hasDev && hasApp) ? 2 : (hasDev || hasApp ? 1 : 1);
 
-      let devLogoHtml = "";
-      if (hasDev) {
-        let devParts = dName.split("+").map(s => s.trim());
-        devParts.forEach(dp => {
-          let imgUrl = getDeviceLogo(dp);
-          if (imgUrl) {
-            devLogoHtml += `<img src="${imgUrl}" alt="Device Logo" class="invoice-app-logo" onerror="this.style.display='none'">`;
-          }
-        });
+      if (hasDev && t.deviceQuantities && t.devicePrices) {
+        for(let devName in t.deviceQuantities) {
+          let q = t.deviceQuantities[devName] || 1;
+          let p = Number(t.devicePrices[devName]) || 0;
+          let lineTotal = q * p;
+          let imgUrl = getDeviceLogo(devName);
+          let devLogoHtml = imgUrl ? `<img src="${imgUrl}" alt="Device Logo" class="invoice-app-logo" onerror="this.style.display='none'">` : '';
+
+          rowsHTML += `
+            <tr>
+              <td>
+                <div class="invoice-app-cell">
+                  <div class="invoice-images-group">
+                    ${devLogoHtml}
+                  </div>
+                  <div>
+                    <strong style="color:#1e40af; font-size:9.5px; display:block; line-height:1.2;">${escapeHtml(devName)}</strong>
+                    ${dateSub}
+                    ${detailsSub}
+                  </div>
+                </div>
+              </td>
+              <td>${q}</td>
+              <td>${p > 0 ? money(p) : '-'}</td>
+              <td>${lineTotal > 0 ? money(lineTotal) : '-'}</td>
+            </tr>
+          `;
+        }
+      } else {
+        let appLogoHtml = hasApp ? `<img src="${getLogo(pName)}" alt="App Logo" class="invoice-app-logo" onerror="this.style.display='none'">` : '';
+        let designationText = dName !== 'None' ? dName : (pName !== 'None' ? pName : (t.type || 'Opération'));
+
+        rowsHTML += `
+          <tr>
+            <td>
+              <div class="invoice-app-cell">
+                <div class="invoice-images-group">
+                  ${appLogoHtml}
+                </div>
+                <div>
+                  <strong style="color:#1e40af; font-size:9.5px; display:block; line-height:1.2;">${escapeHtml(designationText)}</strong>
+                  ${dateSub}
+                  ${detailsSub}
+                </div>
+              </div>
+            </td>
+            <td>1</td>
+            <td>${amt > 0 ? money(amt) : '-'}</td>
+            <td>${amt > 0 ? money(amt) : '-'}</td>
+          </tr>
+        `;
       }
+    });
+  } else {
+    let productName = itemData.product || itemData.app || itemData.productName || "None";
+    let deviceName = itemData.device || "None";
+    let opDate = itemData.date || invoiceDate;
 
-      let appLogoHtml = hasApp ? `<img src="${getLogo(pName)}" alt="App Logo" class="invoice-app-logo" onerror="this.style.display='none'">` : '';
-      let designationParts = [hasDev ? dName : '', hasApp ? pName : ''].filter(Boolean);
-      let designationText = designationParts.join(' / ') || (t.type || 'Opération');
+    let dateSub = `
+      <div style="display: inline-flex; align-items: center; gap: 4px; background: #e0f2fe; color: #0369a1; padding: 2px 7px; border-radius: 4px; font-size: 7.5px; font-weight: 800; margin-top: 4px; border: 1px solid #bae6fd;">
+        <span>🕒</span> <span>${escapeHtml(opDate)}</span>
+      </div>`;
+    let macInfo = itemData.mac ? `<div style="font-size:7.5px; color:#0f172a; font-weight:bold; margin-top:2px;">MAC: ${escapeHtml(itemData.mac)}</div>` : '';
+    let durationInfo = itemData.duration ? `<div style="font-size:7.5px; color:#047857; font-weight:bold; margin-top:2px;">Durée: ${escapeHtml(itemData.duration)}</div>` : '';
+    let noteHtml = itemData.note && itemData.note.trim() !== "" ? `<div style="font-size:7.5px; color:#64748b; font-style:italic; margin-top:2px;">Note: ${escapeHtml(itemData.note)}</div>` : "";
+
+    let hasDev = deviceName && deviceName !== 'None';
+    let hasApp = productName && productName !== 'None';
+
+    if (hasDev && itemData.deviceQuantities && itemData.devicePrices) {
+      for(let devName in itemData.deviceQuantities) {
+        let q = itemData.deviceQuantities[devName] || 1;
+        let p = Number(itemData.devicePrices[devName]) || 0;
+        let lineTotal = q * p;
+        let imgUrl = getDeviceLogo(devName);
+        let devLogoHtml = imgUrl ? `<img src="${imgUrl}" alt="Device Logo" class="invoice-app-logo" onerror="this.style.display='none'">` : '';
+
+        rowsHTML += `
+          <tr>
+            <td>
+              <div class="invoice-app-cell">
+                <div class="invoice-images-group">
+                  ${devLogoHtml}
+                </div>
+                <div>
+                  <strong style="color:#1e40af; font-size:9.5px; display:block; line-height:1.2;">${escapeHtml(devName)}</strong>
+                  ${dateSub}
+                </div>
+              </div>
+            </td>
+            <td>${q}</td>
+            <td>${p > 0 ? money(p) : '-'}</td>
+            <td>${lineTotal > 0 ? money(lineTotal) : '-'}</td>
+          </tr>
+        `;
+      }
+    } else {
+      let singleQty = 1;
+      let appLogoHtml = hasApp ? `<img src="${getLogo(productName)}" alt="App Logo" class="invoice-app-logo" onerror="this.style.display='none'">` : '';
+      let designationText = deviceName !== 'None' ? deviceName : (productName !== 'None' ? productName : 'Opération');
+      let unitPrice = priceVal;
 
       rowsHTML += `
         <tr>
           <td>
             <div class="invoice-app-cell">
               <div class="invoice-images-group">
-                ${devLogoHtml}
                 ${appLogoHtml}
               </div>
               <div>
-                <strong style="color:#1e40af; font-size:9px; display:block; line-height:1.2;">${escapeHtml(designationText)}</strong>
+                <strong style="color:#1e40af; font-size:9.5px; display:block; line-height:1.2;">${escapeHtml(designationText)}</strong>
                 ${dateSub}
-                ${detailsSub}
+                ${macInfo}
+                ${durationInfo}
+                ${noteHtml}
               </div>
             </div>
           </td>
-          <td>${qty}</td>
-          <td>${amt > 0 ? money(amt) : '-'}</td>
-          <td>${amt > 0 ? money(amt) : '-'}</td>
+          <td>${singleQty}</td>
+          <td>${unitPrice > 0 ? money(unitPrice) : '-'}</td>
+          <td>${priceVal > 0 ? money(priceVal) : '-'}</td>
         </tr>
       `;
-    });
-  } else {
-    let productName = itemData.product || itemData.app || itemData.productName || "None";
-    let deviceName = itemData.device || "None";
-
-    let macInfo = itemData.mac ? `<div style="font-size:7.5px; color:#0f172a; font-weight:bold;">MAC: ${escapeHtml(itemData.mac)}</div>` : '';
-    let durationInfo = itemData.duration ? `<div style="font-size:7.5px; color:#047857; font-weight:bold;">Durée: ${escapeHtml(itemData.duration)}</div>` : '';
-    let noteHtml = itemData.note && itemData.note.trim() !== "" ? `<div style="font-size:7.5px; color:#64748b; font-style:italic;">Note: ${escapeHtml(itemData.note)}</div>` : "";
-
-    let hasDev = deviceName && deviceName !== 'None';
-    let hasApp = productName && productName !== 'None';
-    let qty = (hasDev && hasApp) ? 2 : 1;
-
-    let devLogoHtml = "";
-    if (hasDev) {
-      let devParts = deviceName.split("+").map(s => s.trim());
-      devParts.forEach(dp => {
-        let imgUrl = getDeviceLogo(dp);
-        if (imgUrl) {
-          devLogoHtml += `<img src="${imgUrl}" alt="Device Logo" class="invoice-app-logo" onerror="this.style.display='none'">`;
-        }
-      });
     }
-
-    let appLogoHtml = hasApp ? `<img src="${getLogo(productName)}" alt="App Logo" class="invoice-app-logo" onerror="this.style.display='none'">` : '';
-    let designationParts = [hasDev ? deviceName : '', hasApp ? productName : ''].filter(Boolean);
-    let designationText = designationParts.join(' / ') || 'Opération';
-
-    rowsHTML += `
-      <tr>
-        <td>
-          <div class="invoice-app-cell">
-            <div class="invoice-images-group">
-              ${devLogoHtml}
-              ${appLogoHtml}
-            </div>
-            <div>
-              <strong style="color:#1e40af; font-size:9px; display:block; line-height:1.2;">${escapeHtml(designationText)}</strong>
-              ${macInfo}
-              ${durationInfo}
-              ${noteHtml}
-            </div>
-          </div>
-        </td>
-        <td>${qty}</td>
-        <td>${priceVal > 0 ? money(priceVal) : '-'}</td>
-        <td>${priceVal > 0 ? money(priceVal) : '-'}</td>
-      </tr>
-    `;
   }
 
   return `
@@ -2087,7 +2283,7 @@ function generateInvoiceHTML(itemType, itemData, clientData, priceVal) {
         </tr>
         <tr>
           <td class="label-cell">Date & Heure :</td>
-          <td class="val-cell" style="font-size:7.5px;">${invoiceDate}</td>
+          <td class="val-cell" style="font-size:7.5px; font-weight:bold; color:#1e40af;">${invoiceDate}</td>
           <td class="label-cell">WhatsApp :</td>
           <td class="val-cell">
             <span class="whatsapp-glass-pill-top" style="padding:1px 5px; font-size:8px;">
@@ -2098,12 +2294,12 @@ function generateInvoiceHTML(itemType, itemData, clientData, priceVal) {
         </tr>
       </table>
 
-      <div class="sofiane-title-bar" style="background:#1e40af; font-size:10.5px;">DÉSIGNATION</div>
+      <div class="sofiane-title-bar" style="background:#1e40af; font-size:10.5px;">DÉSIGNATION & QUANTITÉS</div>
 
       <table class="sofiane-table">
         <thead>
           <tr>
-            <th>Désignation</th>
+            <th>Désignation & Détails</th>
             <th>Qté</th>
             <th>P.U</th>
             <th>Total</th>
@@ -2127,33 +2323,36 @@ function generateInvoiceHTML(itemType, itemData, clientData, priceVal) {
       </div>
 
       <div class="sofiane-footer-container">
-        <div class="sofiane-signature-box">
-          <div class="sofiane-thank-text">Merci pour votre confiance</div>
-          <div class="architect-signature-wrapper">
-            <svg class="architect-signature-svg" viewBox="0 0 145 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <text x="5" y="11" font-family="'Brush Script MT', 'Lucida Handwriting', cursive" font-size="12" font-weight="bold" fill="#1d4ed8" transform="rotate(-3)">Soufiane</text>
-              <path d="M6 27 C 14 13, 22 9, 30 24 C 36 13, 42 9, 50 22 C 56 13, 63 9, 70 20 C 76 11, 83 7, 90 18 L 138 9" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M4 31 L 142 7" stroke="#1d4ed8" stroke-width="1.6" stroke-linecap="round"/>
-            </svg>
+        <div class="sofiane-thank-luxury">
+          <div class="sofiane-thank-banner">
+            <div class="sofiane-thank-title">★ Merci pour votre confiance ★</div>
+            <div class="sofiane-thank-subtext">Au plaisir de vous servir à nouveau.</div>
           </div>
-          <div class="sofiane-sign-label">Direction / Signature</div>
         </div>
         
-        <div class="sofiane-official-seal">
-          <div class="seal-circle-inner">
-            <svg class="seal-svg-text" viewBox="0 0 100 100">
-              <defs>
-                <path id="circlePathTop" d="M 10,50 a 40,40 0 0,1 80,0"></path>
-                <path id="circlePathBottom" d="M 90,50 a 40,40 0 0,1 -80,0"></path>
-              </defs>
-              <text font-size="10" font-weight="900" fill="#1e40af" letter-spacing="1.5">
-                <textPath href="#circlePathTop" startOffset="50%" text-anchor="middle">★ OFFICIAL ★</textPath>
-              </text>
-              <text font-size="9" font-weight="900" fill="#1e40af" letter-spacing="1">
-                <textPath href="#circlePathBottom" startOffset="50%" text-anchor="middle">SOFIANE SHOP</textPath>
-              </text>
-            </svg>
-            <img src="https://i.ibb.co/LXWzbssm/IMG-20261104-145706.jpg" class="seal-center-img" alt="Shop Image">
+        <div class="sofiane-right-signature-block">
+          <div class="sofiane-sign-label-top">DIRECTION / SIGNATURE</div>
+          <div class="sofiane-official-seal">
+            <div class="seal-circle-inner">
+              <svg class="seal-svg-text" viewBox="0 0 100 100">
+                <defs>
+                  <path id="circlePathTop" d="M 10,50 a 40,40 0 0,1 80,0"></path>
+                  <path id="circlePathBottom" d="M 90,50 a 40,40 0 0,1 -80,0"></path>
+                </defs>
+                <text font-size="10" font-weight="900" fill="#1e40af" letter-spacing="1.5">
+                  <textPath href="#circlePathTop" startOffset="50%" text-anchor="middle">★ OFFICIAL ★</textPath>
+                </text>
+                <text font-size="9" font-weight="900" fill="#1e40af" letter-spacing="1">
+                  <textPath href="#circlePathBottom" startOffset="50%" text-anchor="middle">SOFIANE SHOP</textPath>
+                </text>
+              </svg>
+              <img src="https://i.ibb.co/LXWzbssm/IMG-20261104-145706.jpg" class="seal-center-img" alt="Shop Image">
+              <svg class="seal-signature-overlay" viewBox="0 0 145 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <text x="6" y="14" font-family="'Brush Script MT', 'Lucida Handwriting', cursive" font-size="16" font-weight="bold" fill="#1d4ed8" transform="rotate(-4)">Soufiane</text>
+                <path d="M6 30 C 16 15, 25 10, 35 27 C 42 14, 49 10, 58 24 C 65 14, 72 10, 80 22 C 87 12, 94 8, 102 20 L 140 10" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4 35 L 142 8" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
